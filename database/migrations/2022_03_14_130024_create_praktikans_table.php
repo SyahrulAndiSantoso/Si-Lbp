@@ -19,6 +19,7 @@ class CreatePraktikansTable extends Migration
             $table->string('notelp',20);
             $table->string('npm',40);
             $table->string('email',100)->unique();
+            $table->foreignId('kode_praktikum');
             $table->timestamps();
         });
     }

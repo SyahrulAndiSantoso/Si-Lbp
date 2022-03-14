@@ -16,7 +16,6 @@ class CreatePanduansTable extends Migration
         Schema::create('panduans', function (Blueprint $table) {
             $table->id('id_panduan');
             $table->string('isi_panduan');
-            $table->foreignId('kode_praktikum');
             $table->timestamps();
         });
     }

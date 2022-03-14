@@ -16,6 +16,7 @@ class CreatePraktikumsTable extends Migration
         Schema::create('praktikums', function (Blueprint $table) {
             $table->id('id_praktikum');
             $table->string('nama_praktikum',100);
+            $table->foreignId('kode_panduan');
             $table->timestamps();
         });
     }
