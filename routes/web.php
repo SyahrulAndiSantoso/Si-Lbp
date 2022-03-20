@@ -6,6 +6,7 @@ use App\Http\Controllers\MateriController;
 use App\Http\Controllers\LatihanController;
 use App\Http\Controllers\PelajaranController;
 use App\Http\Controllers\PraktikanController;
+use App\Http\Controllers\PraktikumController;
 
 /*
 |--------------------------------------------------------------------------
@@ -94,13 +95,22 @@ Route::get('/admin/materi', function () {
         "judul" => "Materi"
     ]);
 });
-Route::get('/admin/praktikan', function () {
-    return view('admin.praktikan', [
-        "judul" => "Praktikan"
-    ]);
-});
-Route::get('/admin/pelajaran', function () {
-    return view('admin.pelajaran', [
-        'judul' => 'Pelajaran'
-    ]);
-});
+
+Route::get('/admin/praktikan', [PraktikanController::class, 'index']);
+Route::post('/admin/praktikan/create', [PraktikanController::class, 'store']);
+Route::delete('/admin/pratikan/delete/{number}', [PraktikanController::class, 'destroy']);
+Route::put('/admin/praktikan/edit/{number}', [PraktikanController::class, 'update']);
+// Route::get('/admin/praktikan', function () {
+//     return view('admin.praktikan', [
+//         "judul" => "Praktikan"
+//     ]);
+// });
+
+Route::get('/admin/pelajaran', [PraktikumController::class, 'index']);
+Route::post('/admin/pelajaran/create', [PraktikumController::class, 'store']);
+Route::delete('/admin/pelajaran/delete/{number}', [PraktikumController::class, 'destroy']);
+// Route::get('/admin/pelajaran', function () {
+//     return view('admin.pelajaran', [
+//         'judul' => 'Pelajaran'
+//     ]);
+// });

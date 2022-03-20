@@ -15,10 +15,10 @@ class CreatePraktikansTable extends Migration
     {
         Schema::create('praktikans', function (Blueprint $table) {
             $table->id('id_praktikan');
-            $table->string('nama_praktikan',100);
-            $table->string('notelp',20);
-            $table->string('npm',40);
-            $table->string('email',100)->unique();
+            $table->string('nama_praktikan', 100);
+            $table->string('notelp', 20);
+            $table->string('npm', 40);
+            $table->string('email', 100)->unique();
             $table->foreignId('kode_praktikum');
             $table->timestamps();
         });

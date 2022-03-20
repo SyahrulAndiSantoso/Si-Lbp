@@ -2,7 +2,6 @@
 
 @section('konten')
 
-
 <!-- Modal Tambah -->
 <div class="modal fade modal-fullscreen" id="modalTambah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -14,7 +13,8 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="" method="POST">
+        <form action="/admin/pelajaran/create" method="POST">
+          @csrf
           <div class="mb-3">
             <label class="form-label">Nama Pelajaran</label>
             <input type="text" class="form-control" id="pelajaran1" name="pelajaran1">
@@ -89,20 +89,26 @@
                 </tr>
               </thead>
               <tbody>
+                @php
+                    $no=1;
+                @endphp
+                @foreach ($praktikum as $p)
                 <tr>
-                  <td>1</td>
-                  <td>Pemrograman Terstruktur</td>
-                  <td>Pada Praktikum Pemrograman 
-                    Terstruktur membahas tentang 
-                    tipe data, operator, pengkondisian, 
-                    looping  array, operasi string, 
-                    dan function</td>
+                  <td>{{ $no++ }}</td>
+                  <td>{{ $p['nama_praktikum'] }}</td>
+                  <td>{{ $p['deskripsi']}}</td>
                   <td><img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}" width="90"></td>
                   <td>
-                      <a href="#" id="hapus" class="btn btn-danger">Hapus</a>
+                    <form action="/admin/pelajaran/delete/{{ $p['id_praktikum'] }}" method="POST" class="d-inline">
+                      @csrf
+                      @method('delete')
+                      <button id="hapus" class="btn btn-danger mb-1">Hapus</button>
+                    </form>
+                      {{-- <a href="" id="hapus" class="btn btn-danger">Hapus</a> --}}
                       <a data-toggle="modal" data-target="#modalEdit" class="btn btn-warning text-white">Edit</a>
                 </td>
                 </tr>
+                @endforeach
               </tbody>
               </table>
             </div>
