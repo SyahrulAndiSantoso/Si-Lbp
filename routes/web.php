@@ -112,7 +112,32 @@ Route::delete('/admin/pelajaran/delete/{number}', [PraktikumController::class, '
 
 
 // ----------------  MATERI ------------------
-Route::get('/admin/materi',[MateriController::class,'index'])->name('viewMateri');
-Route::post('/materi/store',[MateriController::class,'store']);
-Route::post('/materi/update',[MateriController::class,'update']);
-Route::get('/materi/delete/{id}',[MateriController::class,"delete"]);
+Route::get('/admin/materi', [MateriController::class, 'index'])->name('viewMateri');
+Route::post('/materi/store', [MateriController::class, 'store']);
+Route::post('/materi/update', [MateriController::class, 'update']);
+Route::get('/materi/delete/{id}', [MateriController::class, "delete"]);
+
+// EDIT DATA
+Route::get('/admin/edit-latihan', function () {
+    return view('admin.edit.edit-latihan', [
+        "judul" => "Edit Latihan"
+    ]);
+});
+
+Route::get('/admin/edit-materi', function () {
+    return view('admin.edit.edit-materi', [
+        "judul" => "Edit Materi"
+    ]);
+});
+
+Route::get('/admin/edit-praktikan', function () {
+    return view('admin.edit.edit-praktikan', [
+        "judul" => "Edit Praktikan"
+    ]);
+});
+
+Route::get('/admin/edit-pelajaran', function () {
+    return view('admin.edit.edit-pelajaran', [
+        "judul" => "Edit Pelajaran"
+    ]);
+});
