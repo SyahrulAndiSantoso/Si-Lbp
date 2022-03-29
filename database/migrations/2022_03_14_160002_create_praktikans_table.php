@@ -14,13 +14,14 @@ class CreatePraktikansTable extends Migration
     public function up()
     {
         Schema::create('praktikans', function (Blueprint $table) {
-            $table->id('id_praktikan');
+            $table->bigIncrements('id_praktikan');
+            $table->unsignedBigInteger('praktikum_id');
+            $table->string('npm', 40);
             $table->string('nama_praktikan', 100);
             $table->string('notelp', 20);
-            $table->string('npm', 40);
             $table->string('email', 100)->unique();
-            $table->foreignId('kode_praktikum');
             $table->timestamps();
+            $table->foreign('praktikum_id')->references('id_praktikum')->on('praktikums')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

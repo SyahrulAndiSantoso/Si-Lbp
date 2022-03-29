@@ -90,11 +90,6 @@ Route::get('/admin/latihan', function () {
         "judul" => "Latihan"
     ]);
 });
-Route::get('/admin/materi', function () {
-    return view('admin.materi', [
-        "judul" => "Materi"
-    ]);
-});
 
 Route::get('/admin/praktikan', [PraktikanController::class, 'index']);
 Route::post('/admin/praktikan/create', [PraktikanController::class, 'store']);
@@ -114,3 +109,10 @@ Route::delete('/admin/pelajaran/delete/{number}', [PraktikumController::class, '
 //         'judul' => 'Pelajaran'
 //     ]);
 // });
+
+
+// ----------------  MATERI ------------------
+Route::get('/admin/materi',[MateriController::class,'index'])->name('viewMateri');
+Route::post('/materi/store',[MateriController::class,'store']);
+Route::post('/materi/update',[MateriController::class,'update']);
+Route::get('/materi/delete/{id}',[MateriController::class,"delete"]);

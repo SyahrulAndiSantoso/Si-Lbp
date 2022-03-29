@@ -14,13 +14,12 @@ class CreateMaterisTable extends Migration
     public function up()
     {
         Schema::create('materis', function (Blueprint $table) {
-            $table->id('id_materi');
+            $table->bigIncrements('id_materi');
+            $table->unsignedBigInteger('praktikum_id');
             $table->string('nama_materi',100);
             $table->text('isi_materi');
-            $table->string('video',100);
-            $table->foreignId('kode_praktikum');
-            $table->foreignId('kode_gambar');
             $table->timestamps();
+            $table->foreign('praktikum_id')->references('id_praktikum')->on('praktikums')->onDelete('cascade')->cascadeOnUpdate('cascade');
         });
     }
 

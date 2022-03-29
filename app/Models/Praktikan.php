@@ -11,6 +11,10 @@ class Praktikan extends Model
     protected $primaryKey = 'id_praktikan';
     protected $guarded = ['id_praktikan'];
 
+    public function praktikum(){
+        return $this->belongsTo(Praktikum::class,'praktikum_id','id_praktikum');
+    }
+
     public function getAll()
     {
         return Praktikan::all();
@@ -25,4 +29,6 @@ class Praktikan extends Model
     {
         Praktikan::destroy($id);
     }
+
+    
 }

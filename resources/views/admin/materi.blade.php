@@ -12,19 +12,21 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="" method="POST">
+        <form action="/materi/store" method="POST">
+        <input type="hidden" class="form-control" value="1" id="kode_praktikum" name="praktikum_id">
+        @csrf
           <div class="mb-3">
             <label class="form-label">Nama Materi</label>
-            <input type="text" class="form-control" id="namaMateri1" name="namaMateri1">
+            <input type="text" class="form-control" id="namaMateri1" name="nama_materi">
           </div>
           <div class="mb-3">
             <label class="form-label">Isi Materi</label>
-            <textarea class="form-control" name="isiMateri1" id="editor" style="height: 100px"></textarea>
+            <textarea class="form-control" name="isi_materi" id="editor" style="height: 100px"> </textarea>
           </div>
-          <div class="mb-3">
-            <label class="form-label">Pelajaran</label>
-            <input type="text" class="form-control" id="pelajaran1" name="pelajaran1">
-          </div>
+          {{-- <div class="mb-3"> --}}
+            {{-- <label class="form-label">Pelajaran</label> --}}
+            {{-- <input type="text" class="form-control" id="pelajaran1" name="pelajaran1"> --}}
+          {{-- </div> --}}
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
@@ -43,19 +45,23 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form action="/materi/update" method="post">
+        @csrf
+        <input type="hidden" class="form-control" id="edit-id" name="id_materi" >
           <div class="mb-3">
             <label class="form-label">Nama Materi</label>
-            <input type="text" class="form-control" id="namaMateri" name="namaMateri">
+            <input type="text" class="form-control" id="edit-namaMateri" name="nama_materi">
           </div>
           <div class="mb-3">
             <label class="form-label">Isi Materi</label>
-            <textarea class="form-control" name="isiMateri" id="editor1" style="height: 100px"></textarea>
+            <textarea class="form-control" name="isi_materi" id="editor1" style="height: 100px">
+  
+            </textarea>
           </div>
-          <div class="mb-3">
-            <label class="form-label">Pelajaran</label>
-            <input type="text" class="form-control" id="pelajaran" name="pelajaran">
-          </div>
+          {{-- <div class="mb-3"> --}}
+            {{-- <label class="form-label">Pelajaran</label> --}}
+            {{-- <input type="text" class="form-control" id="pelajaran" name="pelajaran"> --}}
+          {{-- </div> --}}
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
@@ -73,7 +79,7 @@
         <div class="card">
           <div class="card-header">
               <h4 class="text-dark">Materi</h4>
-              <a data-toggle="modal" data-target="#modalTambah" class="btn btn-success text-white ml-auto">Tambah</a>
+              <a data-toggle="modal" data-target="#modalTambah" class="btn btn-success text-white ml-auto" style="cursor:pointer">Tambah</a>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -83,27 +89,24 @@
                     <th>No</th>
                     <th>Nama Materi</th>
                     <th>Isi Materi</th>
-                    <th>Pelajaran</th>
+                    {{-- <th>Pelajaran</th> --}}
                     <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
+                @foreach($data as $row)
                   <tr>
                     <td>1</td>
-                    <td>variable</td>
-                    <td>Lorem ipsum dolor sit amet, consectetur
-                        adipisicing elit, sed do eiusmod
-                       tempor 
-                       incididunt ut labore et dolore magna 
-                       aliqua. Ut enim ad minim veniam,
-                       quis 
-                       nostrud exercitation </td>
-                    <td>Pemrograman Terstruktur</td>
+                    <td>{{ $row->nama_materi }}</td>
+                    <td>{!! $row->isi_materi !!}</td>
+                    {{-- <td>Pemrograman Terstruktur</td> --}}
                     <td>
-                        <a href="#" id="hapus" class="btn btn-danger">Hapus</a>
-                        <a data-toggle="modal" data-target="#modalEdit" class="btn btn-warning text-white">Edit</a>
+                        <a href="/materi/delete/{{$row->id_materi}}" id="hapus" class="btn btn-danger">Hapus</a>
+                        <button data-toggle="modal" data-target="#modalEdit" style="cursor:pointer" class="btn btn-warning text-white tombol-edit-materi"
+                        data-id="{{$row->id_materi}}" data-materi="{{ $row->nama_materi }}" data-isi_materi="{{$row->isi_materi}}">Edit</button>
                   </td>
                   </tr>
+                @endforeach
                 </tbody>
                 </table>
               </div>
@@ -119,6 +122,21 @@
   </div>
 </div>
 </section>
+
+
+  <script>
+    $('.tombol-edit-materi').on('click',function (){
+      let id_materi = $(this).data('id');
+      let materi = $(this).data('materi');
+      let isi = $(this).data('isi_materi');
+
+      $('#edit-id').val(id_materi);
+      $('#edit-namaMateri').val(materi);
+      $('#editor1').val(isi);
+      
+    });
+  </script>
+
 @endsection
 
 @section('ckeditor1')
@@ -127,3 +145,4 @@
 @section('ckeditor2')
     @include('partials.ckeditorEdit')
 @endsection
+
