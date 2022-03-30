@@ -20,55 +20,25 @@
             <input type="text" class="form-control" id="namaMateri1" name="nama_materi">
           </div>
           <div class="mb-3">
+            <label class="form-label">Praktikum</label>
+            <select class="form-control" id="praktikum" name="praktikum_id">
+             <optgroup label="PRAKTIKUM">
+            @foreach($data_praktikum as $row)
+              <option value="{{$row->id_praktikum}}">{{$row->nama_praktikum}}</option>
+            @endforeach
+            </optgroup>
+            </select>
+          </div>
+          <div class="mb-3">
             <label class="form-label">Isi Materi</label>
             <textarea class="form-control" name="isi_materi" id="editor" style="height: 100px"> </textarea>
           </div>
-          {{-- <div class="mb-3"> --}}
-            {{-- <label class="form-label">Pelajaran</label> --}}
-            {{-- <input type="text" class="form-control" id="pelajaran1" name="pelajaran1"> --}}
-          {{-- </div> --}}
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
     </div>
   </div>
 </div>
-
-<!-- Modal Edit -->
-<div class="modal fade modal-fullscreen" id="modalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="/materi/update" method="post">
-        @csrf
-        <input type="hidden" class="form-control" id="edit-id" name="id_materi" >
-          <div class="mb-3">
-            <label class="form-label">Nama Materi</label>
-            <input type="text" class="form-control" id="edit-namaMateri" name="nama_materi">
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Isi Materi</label>
-            <textarea class="form-control" name="isi_materi" id="editor1" style="height: 100px">
-  
-            </textarea>
-          </div>
-          {{-- <div class="mb-3"> --}}
-            {{-- <label class="form-label">Pelajaran</label> --}}
-            {{-- <input type="text" class="form-control" id="pelajaran" name="pelajaran"> --}}
-          {{-- </div> --}}
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
 
 <section class="section">
   <div class="card" style="background-color: #FCFCFE;">
@@ -89,7 +59,7 @@
                     <th>No</th>
                     <th>Nama Materi</th>
                     <th>Isi Materi</th>
-                    {{-- <th>Pelajaran</th> --}}
+                    <th>Pelajaran</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
@@ -99,11 +69,10 @@
                     <td>1</td>
                     <td>{{ $row->nama_materi }}</td>
                     <td>{!! $row->isi_materi !!}</td>
-                    {{-- <td>Pemrograman Terstruktur</td> --}}
+                    <td>{{$row->praktikum->nama_praktikum}}</td>
                     <td>
                         <a href="/materi/delete/{{$row->id_materi}}" id="hapus" class="btn btn-danger">Hapus</a>
-                        <button data-toggle="modal" data-target="#modalEdit" style="cursor:pointer" class="btn btn-warning text-white tombol-edit-materi"
-                        data-id="{{$row->id_materi}}" data-materi="{{ $row->nama_materi }}" data-isi_materi="{{$row->isi_materi}}">Edit</button>
+                        <a href="/materi/view-edit/{{$row->id_materi}}" style="cursor:pointer" class="btn btn-warning text-white tombol-edit-materi">Edit</a>
                   </td>
                   </tr>
                 @endforeach

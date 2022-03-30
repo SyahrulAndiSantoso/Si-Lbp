@@ -15,7 +15,7 @@ class CreatePraktikansTable extends Migration
     {
         Schema::create('praktikans', function (Blueprint $table) {
             $table->bigIncrements('id_praktikan');
-            $table->unsignedBigInteger('praktikum_id');
+            $table->unsignedBigInteger('praktikum_id')->nullable();
             $table->string('npm', 40);
             $table->string('nama_praktikan', 100);
             $table->string('notelp', 20);

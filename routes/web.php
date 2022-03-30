@@ -91,24 +91,21 @@ Route::get('/admin/latihan', function () {
     ]);
 });
 
-Route::get('/admin/praktikan', [PraktikanController::class, 'index']);
-Route::post('/admin/praktikan/create', [PraktikanController::class, 'store']);
-Route::delete('/admin/pratikan/delete/{number}', [PraktikanController::class, 'destroy']);
-Route::put('/admin/praktikan/edit/{number}', [PraktikanController::class, 'update']);
-// Route::get('/admin/praktikan', function () {
-//     return view('admin.praktikan', [
-//         "judul" => "Praktikan"
-//     ]);
-// });
-
-Route::get('/admin/pelajaran', [PraktikumController::class, 'index']);
-Route::post('/admin/pelajaran/create', [PraktikumController::class, 'store']);
-Route::delete('/admin/pelajaran/delete/{number}', [PraktikumController::class, 'destroy']);
+Route::get('/admin/prakrikum', [PraktikumController::class, 'index']);
+Route::post('/admin/prakrikum/create', [PraktikumController::class, 'store']);
+Route::delete('/admin/prakrikum/delete/{number}', [PraktikumController::class, 'destroy']);
 // Route::get('/admin/pelajaran', function () {
 //     return view('admin.pelajaran', [
 //         'judul' => 'Pelajaran'
 //     ]);
 // });
+
+// ---------------- PRAKTIKAN ---------------
+Route::get('/admin/praktikan', [PraktikanController::class, 'index'])->name("viewPraktikan");
+Route::post('/praktikan/store', [PraktikanController::class, 'store']);
+Route::post('/praktikan/update', [PraktikanController::class, 'update']);
+Route::get('/praktikan/delete/{id}', [PraktikanController::class, 'delete']);
+Route::get('/praktikan/view-edit/{id}', [PraktikanController::class, 'viewEdit']);
 
 
 // ----------------  MATERI ------------------
@@ -116,6 +113,7 @@ Route::get('/admin/materi', [MateriController::class, 'index'])->name('viewMater
 Route::post('/materi/store', [MateriController::class, 'store']);
 Route::post('/materi/update', [MateriController::class, 'update']);
 Route::get('/materi/delete/{id}', [MateriController::class, "delete"]);
+Route::get('/materi/view-edit/{id}',[MateriController::class,"viewEdit"]);
 
 // EDIT DATA
 Route::get('/admin/edit-latihan', function () {
@@ -124,20 +122,8 @@ Route::get('/admin/edit-latihan', function () {
     ]);
 });
 
-Route::get('/admin/edit-materi', function () {
-    return view('admin.edit.edit-materi', [
-        "judul" => "Edit Materi"
-    ]);
-});
-
-Route::get('/admin/edit-praktikan', function () {
-    return view('admin.edit.edit-praktikan', [
-        "judul" => "Edit Praktikan"
-    ]);
-});
-
-Route::get('/admin/edit-pelajaran', function () {
-    return view('admin.edit.edit-pelajaran', [
-        "judul" => "Edit Pelajaran"
+Route::get('/admin/edit-praktikum', function () {
+    return view('admin.edit.edit-praktikum', [
+        "judul" => "Edit praktikum"
     ]);
 });

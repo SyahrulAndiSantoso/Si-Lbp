@@ -11,25 +11,24 @@
                                     <h4 class="text-dark">Edit Praktikan</h4>
                                 </div>
                                 <div class="card-body">
-                                    <form action="/admin/praktikan/edit" method="POST">
-                                        <input type="hidden" id="id_praktikan" name="id_praktikan">
+                                    <form action="/praktikan/update" method="POST">
+                                        <input type="hidden" id="id_praktikan" name="id_praktikan" value="{{$data->id_praktikan}}">
                                         @csrf
-                                        @method('put')
+                                        <div class="mb-3">
+                                            <label class="form-label">Npm</label>
+                                            <input type="text" class="form-control" id="npm" name="npm" value="{{$data->npm}}">
+                                        </div>
                                         <div class="mb-3">
                                             <label class="form-label">Nama</label>
-                                            <input type="text" class="form-control" id="nama2" name="nama_praktikan">
+                                            <input type="text" class="form-control" id="nama_praktikan" name="nama_praktikan" value="{{$data->nama_praktikan}}">
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Nomer Hp</label>
-                                            <input type="text" class="form-control" id="notelp2" name="notelp">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label class="form-label">Npm</label>
-                                            <input type="text" class="form-control" id="npm2" name="npm">
+                                            <input type="text" class="form-control" id="notelp" name="notelp" value="{{$data->notelp}}">
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Email</label>
-                                            <input type="text" class="form-control" id="email2" name="email">
+                                            <input type="text" class="form-control" id="email" name="email" value="{{$data->email}}">
                                         </div>
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </form>
