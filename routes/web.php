@@ -7,6 +7,7 @@ use App\Http\Controllers\LatihanController;
 use App\Http\Controllers\PelajaranController;
 use App\Http\Controllers\PraktikanController;
 use App\Http\Controllers\PraktikumController;
+use App\Models\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,11 +81,7 @@ Route::get('/penjelasan', function () {
         "judul" => "Penjelasan"
     ]);
 });
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard_admin', [
-        "judul" => "Dashboard"
-    ]);
-});
+
 Route::get('/admin/latihan', function () {
     return view('admin.latihan', [
         "judul" => "Latihan"
@@ -99,6 +96,9 @@ Route::delete('/admin/prakrikum/delete/{number}', [PraktikumController::class, '
 //         'judul' => 'Pelajaran'
 //     ]);
 // });
+
+// ---------------- DASHBOARD ---------------
+Route::get('/admin/dashboard',[DashboardController::class,'index'])->name("home");
 
 // ---------------- PRAKTIKAN ---------------
 Route::get('/admin/praktikan', [PraktikanController::class, 'index'])->name("viewPraktikan");
