@@ -68,9 +68,9 @@ Route::get('/pengaturan', function () {
 
 
 
-Route::get('/admin/prakrikum', [PraktikumController::class, 'index']);
-Route::post('/admin/prakrikum/create', [PraktikumController::class, 'store']);
-Route::delete('/admin/prakrikum/delete/{number}', [PraktikumController::class, 'destroy']);
+Route::get('/admin/praktikum', [PraktikumController::class, 'index']);
+Route::post('/admin/praktikum/create', [PraktikumController::class, 'store']);
+Route::delete('/admin/praktikum/delete/{number}', [PraktikumController::class, 'destroy']);
 // Route::get('/admin/pelajaran', function () {
 //     return view('admin.pelajaran', [
 //         'judul' => 'Pelajaran'

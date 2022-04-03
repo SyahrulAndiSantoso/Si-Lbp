@@ -67,7 +67,7 @@
           <ul class="sidebar-menu">
               <li class="menu-header">Halaman</li>
               <li class="{{ ($judul == "Dashboard") ? 'active' : '' }}"><a class="nav-link" href="/admin/dashboard"><i class="fa-brands fa-hotjar"></i><span>Dashboard</span></a></li>
-              <li class="{{ ($judul == "Pelajaran") ? 'active' : '' }}"><a class="nav-link" href="/admin/pelajaran"><i class="fa-solid fa-book"></i> <span>Pelajaran</span></a></li>
+              <li class="{{ ($judul == "Pelajaran") ? 'active' : '' }}"><a class="nav-link" href="/admin/praktikum"><i class="fa-solid fa-book"></i> <span>Pelajaran</span></a></li>
               <li class=" {{ ($judul == "Materi") ? 'active' : '' }}"><a class="nav-link" href="/admin/materi"><i class="fa-solid fa-file-code"></i> <span>Materi</span></a></li>
               <li class="{{ ($judul == "Latihan") ? 'active' : '' }}"><a class="nav-link" href="/admin/latihan"><i class="fa-solid fa-clipboard-list"></i> <span>Latihan</span></a></li>
               <li class="menu-header">Pengguna</li>
