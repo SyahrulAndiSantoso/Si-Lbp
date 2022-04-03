@@ -116,6 +116,7 @@ Route::post('/latihan/store', [LatihanController::class, 'store']);
 Route::get('/latihan/delete/{id}', [LatihanController::class, 'delete']);
 Route::get('/latihan/view-edit/{id}', [LatihanController::class, 'viewEdit']);
 Route::post('/latihan/update', [LatihanController::class, 'update']);
+
 // ---------------- Quiz ---------------------
 Route::get('/praktikum',[QuizController::class,'praktikum']);
 Route::get('/panduan-praktikum',[QuizController::class,'PanduanPraktikum']);
