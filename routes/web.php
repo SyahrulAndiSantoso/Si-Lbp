@@ -110,18 +110,12 @@ Route::post('/materi/update', [MateriController::class, 'update']);
 Route::get('/materi/delete/{id}', [MateriController::class, "delete"]);
 Route::get('/materi/view-edit/{id}', [MateriController::class, "viewEdit"]);
 
-<<<<<<< HEAD
-=======
 //  ----------------  LATIHAN ------------------
 Route::get('/admin/latihan', [LatihanController::class, 'index'])->name('viewLatihan');
 Route::post('/latihan/store', [LatihanController::class, 'store']);
 Route::get('/latihan/delete/{id}', [LatihanController::class, 'delete']);
 Route::get('/latihan/view-edit/{id}', [LatihanController::class, 'viewEdit']);
 Route::post('/latihan/update', [LatihanController::class, 'update']);
-// EDIT DATA
-
->>>>>>> ae0a78ea15d24e8c8234816eee46409334290524
-
 // ---------------- Quiz ---------------------
 Route::get('/praktikum',[QuizController::class,'praktikum']);
 Route::get('/panduan-praktikum',[QuizController::class,'PanduanPraktikum']);
