@@ -6,6 +6,7 @@ use App\Http\Controllers\MateriController;
 use App\Http\Controllers\PraktikanController;
 use App\Http\Controllers\PraktikumController;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\LatihanController;
 
 /*
 |--------------------------------------------------------------------------
