@@ -3,11 +3,9 @@
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MateriController;
-use App\Http\Controllers\LatihanController;
-use App\Http\Controllers\PelajaranController;
 use App\Http\Controllers\PraktikanController;
 use App\Http\Controllers\PraktikumController;
-use App\Models\Dashboard;
+use App\Http\Controllers\QuizController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,21 +28,16 @@ Route::get('/panduan', function () {
         'judul' => 'Panduan'
     ]);
 });
-Route::get('/panduan-pelajaran', function () {
-    return view('praktikan.panduan_pelajaran', [
-        'judul' => 'Panduan Pelajaran'
-    ]);
-});
 Route::get('/peringkat', function () {
     return view('praktikan.peringkat', [
         'judul' => 'Peringkat'
     ]);
 });
-Route::get('/pelajaran', function () {
-    return view('praktikan.pelajaran', [
-        'judul' => 'Pelajaran'
-    ]);
-});
+
+
+
+
+
 
 Route::get('/masuk', function () {
     return view('praktikan.login_praktikan', [
@@ -71,16 +64,6 @@ Route::get('/pengaturan', function () {
         "judul" => "Pengaturan Akun"
     ]);
 });
-Route::get('/pengerjaan-soal', function () {
-    return view('praktikan.pengerjaan_soal', [
-        "judul" => "Pengerjaan Soal"
-    ]);
-});
-Route::get('/penjelasan', function () {
-    return view('praktikan.penjelasan', [
-        "judul" => "Penjelasan"
-    ]);
-});
 
 Route::get('/admin/latihan', function () {
     return view('admin.latihan', [
@@ -96,6 +79,22 @@ Route::delete('/admin/prakrikum/delete/{number}', [PraktikumController::class, '
 //         'judul' => 'Pelajaran'
 //     ]);
 // });
+
+
+
+// EDIT DATA
+Route::get('/admin/edit-latihan', function () {
+    return view('admin.edit.edit-latihan', [
+        "judul" => "Edit Latihan"
+    ]);
+});
+
+Route::get('/admin/edit-praktikum', function () {
+    return view('admin.edit.edit-praktikum', [
+        "judul" => "Edit praktikum"
+    ]);
+});
+
 
 // ---------------- DASHBOARD ---------------
 Route::get('/admin/dashboard',[DashboardController::class,'index'])->name("home");
@@ -115,15 +114,16 @@ Route::post('/materi/update', [MateriController::class, 'update']);
 Route::get('/materi/delete/{id}', [MateriController::class, "delete"]);
 Route::get('/materi/view-edit/{id}',[MateriController::class,"viewEdit"]);
 
-// EDIT DATA
-Route::get('/admin/edit-latihan', function () {
-    return view('admin.edit.edit-latihan', [
-        "judul" => "Edit Latihan"
-    ]);
-});
 
-Route::get('/admin/edit-praktikum', function () {
-    return view('admin.edit.edit-praktikum', [
-        "judul" => "Edit praktikum"
-    ]);
-});
+// ---------------- Quiz ---------------------
+Route::get('/praktikum',[QuizController::class,'praktikum']);
+Route::get('/panduan-praktikum',[QuizController::class,'PanduanPraktikum']);
+Route::get('/penjelasan-praktikum',[QuizController::class,'PenjelasanPraktikum']);
+Route::get('/pengerjaan-soal',[QuizController::class,'PengerjaanSoal']);
+
+
+
+
+
+
+
