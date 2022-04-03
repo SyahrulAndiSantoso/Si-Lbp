@@ -14,12 +14,15 @@ class CreateLatihansTable extends Migration
     public function up()
     {
         Schema::create('latihans', function (Blueprint $table) {
-            $table->id('id_latihan');
+            $table->bigIncrements('id_latihan');
+            $table->unsignedBigInteger('praktikum_id');
+            $table->unsignedBigInteger('materi_id');
             $table->text('soal');
             $table->string('jawaban');
-            $table->foreignId('kode_materi');
-            $table->foreignId('kode_kisi_kisi');
+            $table->string('kisi_kisi');
             $table->timestamps();
+            $table->foreign('praktikum_id')->references('id_praktikum')->on('praktikums')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('materi_id')->references('id_materi')->on('materis')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

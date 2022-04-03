@@ -33,7 +33,7 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item ms-3">
-                        <a class="nav-link active fw-bolder" aria-current="page" href="/pelajaran">Pelajaran</a>
+                        <a class="nav-link active fw-bolder" aria-current="page" href="/praktikum">Praktikum</a>
                     </li>
                     <li class="nav-item ms-3">
                         <a class="nav-link active fw-bolder" href="/peringkat">Peringkat</a>

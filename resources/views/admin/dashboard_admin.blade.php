@@ -14,7 +14,7 @@
             <h4>Total Praktikan</h4>
           </div>
           <div class="card-body">
-            10
+            {{$praktikan}}
           </div>
         </div>
       </div>
@@ -29,7 +29,7 @@
             <h4>Total Pelajaran</h4>
           </div>
           <div class="card-body">
-            2
+            {{$materi}}
           </div>
         </div>
       </div>
@@ -44,7 +44,7 @@
             <h4>Total Latihan</h4>
           </div>
           <div class="card-body">
-            12
+            {{$latihan}}
           </div>
         </div>
       </div>

@@ -263,6 +263,7 @@
     $('#example').DataTable();
 } );
 </script>
+
 @yield('ckeditor1')
 @yield('ckeditor2')
   <!-- Page Specific JS File -->

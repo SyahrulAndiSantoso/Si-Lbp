@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Praktikan;
+use Database\Seeders\praktikan as SeedersPraktikan;
 use Illuminate\Http\Request;
 
 class PraktikanController extends Controller
@@ -15,58 +16,35 @@ class PraktikanController extends Controller
 
     public function index()
     {
-        return view('admin.praktikan', [
-            "judul" => "praktikan",
-            "praktikan" => $this->PraktikanModel->getAll()
-        ]);
-    }
-
-    public function create()
-    {
-        return view('admin.praktikan');
+        $praktikan = Praktikan::all()->sortBy('created_at');
+        $judul = "Praktikan";
+        return view('admin.praktikan',compact('praktikan','judul'));
     }
 
     public function store(Request $request)
     {
-        $this->PraktikanModel->nama_praktikan = $request->nama_praktikan;
-        $this->PraktikanModel->notelp = $request->nomerHp1;
-        $this->PraktikanModel->npm = $request->npm1;
-        $this->PraktikanModel->email = $request->email1;
-
-        $this->PraktikanModel->create();
-        return redirect('/admin/praktikan');
+        Praktikan::create($request->all());
+        return redirect()->route('viewPraktikan');
     }
 
-    public function show($id)
+    public function viewEdit($id)
     {
-        //
+        $judul = 'Edit Praktikan';
+        $data = Praktikan::find($id);
+        return view('admin.edit.edit-praktikan',compact('data','judul'));
     }
 
-    public function edit($id)
+    public function update(Request $request)
+    {
+        $data = Praktikan::find($request->id_praktikan);
+        $data->update($request->all());
+        return redirect()->route('viewPraktikan');
+    }
+
+    public function delete($id)
     {
         $data = Praktikan::find($id);
-        return view('admin.praktikan', [
-            "judul" => "praktikan",
-            "data" => $data
-        ]);
-    }
-
-    public function update(Request $request, $id)
-    {
-        $data = Praktikan::find($id);
-        // $data->id_praktikan = $request->id_praktikan;
-        // $data->nama_praktikan = $request->nama_praktikan;
-        // $data->notelp = $request->nomerHp1;
-        // $data->npm = $request->npm1;
-        // $data->email = $request->email1;
-
-        return dd($data);
-    }
-
-    public function destroy($id)
-    {
-        $this->PraktikanModel->hapus($id);
-        return redirect('/admin/praktikan');
-        // return dd($id);
+        $data->delete();
+        return redirect()->route('viewPraktikan');
     }
 }

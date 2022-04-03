@@ -12,18 +12,26 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="" method="POST">
+        <form action="/materi/store" method="POST">
+        <input type="hidden" class="form-control" value="1" id="kode_praktikum" name="praktikum_id">
+        @csrf
           <div class="mb-3">
             <label class="form-label">Nama Materi</label>
-            <input type="text" class="form-control" id="namaMateri1" name="namaMateri1">
+            <input type="text" class="form-control" id="namaMateri1" name="nama_materi">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Praktikum</label>
+            <select class="form-control" id="praktikum" name="praktikum_id">
+             <optgroup label="PRAKTIKUM">
+            @foreach($data_praktikum as $row)
+              <option value="{{$row->id_praktikum}}">{{$row->nama_praktikum}}</option>
+            @endforeach
+            </optgroup>
+            </select>
           </div>
           <div class="mb-3">
             <label class="form-label">Isi Materi</label>
-            <textarea class="form-control" name="isiMateri1" id="editor" style="height: 100px"></textarea>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Pelajaran</label>
-            <input type="text" class="form-control" id="pelajaran1" name="pelajaran1">
+            <textarea class="form-control" name="isi_materi" id="editor" style="height: 100px"> </textarea>
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
@@ -31,38 +39,6 @@
     </div>
   </div>
 </div>
-
-<!-- Modal Edit -->
-<div class="modal fade modal-fullscreen" id="modalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="mb-3">
-            <label class="form-label">Nama Materi</label>
-            <input type="text" class="form-control" id="namaMateri" name="namaMateri">
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Isi Materi</label>
-            <textarea class="form-control" name="isiMateri" id="editor1" style="height: 100px"></textarea>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Pelajaran</label>
-            <input type="text" class="form-control" id="pelajaran" name="pelajaran">
-          </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
 
 <section class="section">
   <div class="card" style="background-color: #FCFCFE;">
@@ -73,7 +49,7 @@
         <div class="card">
           <div class="card-header">
               <h4 class="text-dark">Materi</h4>
-              <a data-toggle="modal" data-target="#modalTambah" class="btn btn-success text-white ml-auto">Tambah</a>
+              <a data-toggle="modal" data-target="#modalTambah" class="btn btn-success text-white ml-auto" style="cursor:pointer">Tambah</a>
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -88,22 +64,18 @@
                   </tr>
                 </thead>
                 <tbody>
+                @foreach($data as $row)
                   <tr>
                     <td>1</td>
-                    <td>variable</td>
-                    <td>Lorem ipsum dolor sit amet, consectetur
-                        adipisicing elit, sed do eiusmod
-                       tempor 
-                       incididunt ut labore et dolore magna 
-                       aliqua. Ut enim ad minim veniam,
-                       quis 
-                       nostrud exercitation </td>
-                    <td>Pemrograman Terstruktur</td>
+                    <td>{{ $row->nama_materi }}</td>
+                    <td>{!! $row->isi_materi !!}</td>
+                    <td>{{$row->praktikum->nama_praktikum}}</td>
                     <td>
-                        <a href="#" id="hapus" class="btn btn-danger">Hapus</a>
-                        <a data-toggle="modal" data-target="#modalEdit" class="btn btn-warning text-white">Edit</a>
+                        <a href="/materi/delete/{{$row->id_materi}}" id="hapus" class="btn btn-danger">Hapus</a>
+                        <a href="/materi/view-edit/{{$row->id_materi}}" style="cursor:pointer" class="btn btn-warning text-white tombol-edit-materi">Edit</a>
                   </td>
                   </tr>
+                @endforeach
                 </tbody>
                 </table>
               </div>
@@ -119,6 +91,21 @@
   </div>
 </div>
 </section>
+
+
+  <script>
+    $('.tombol-edit-materi').on('click',function (){
+      let id_materi = $(this).data('id');
+      let materi = $(this).data('materi');
+      let isi = $(this).data('isi_materi');
+
+      $('#edit-id').val(id_materi);
+      $('#edit-namaMateri').val(materi);
+      $('#editor1').val(isi);
+      
+    });
+  </script>
+
 @endsection
 
 @section('ckeditor1')
@@ -127,3 +114,4 @@
 @section('ckeditor2')
     @include('partials.ckeditorEdit')
 @endsection
+

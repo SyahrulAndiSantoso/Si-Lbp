@@ -8,21 +8,36 @@ use Illuminate\Database\Eloquent\Model;
 class Praktikan extends Model
 {
     use HasFactory;
+    protected $table = "praktikans";
     protected $primaryKey = 'id_praktikan';
-    protected $guarded = ['id_praktikan'];
+    protected $fillable = [
+        'praktikum_id',
+        'npm',
+        'nama_praktikan',
+        'notelp',
+        'email',
+    ];
 
-    public function getAll()
-    {
-        return Praktikan::all();
+    public function praktikum(){
+        return $this->belongsTo(Praktikum::class,'praktikum_id','id_praktikum');
     }
 
-    public function create()
-    {
-        Praktikan::save();
-    }
-
-    public function hapus($id)
-    {
-        Praktikan::destroy($id);
-    }
+    
+// 
+    // public function getAll()
+    // {
+        // return Praktikan::all();
+    // }
+// 
+    // public function create()
+    // {
+        // Praktikan::save();
+    // }
+// 
+    // public function hapus($id)
+    // {
+        // Praktikan::destroy($id);
+    // }
+// 
+    
 }
