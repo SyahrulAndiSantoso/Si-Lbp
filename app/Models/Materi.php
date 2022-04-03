@@ -15,13 +15,15 @@ class Materi extends Model
         "praktikum_id",
         "nama_materi",
         "isi_materi",
-    ]; 
-    
-    public function praktikum(){
-        return $this->belongsTo(Praktikum::class,'praktikum_id','id_praktikum');
+    ];
+
+    public function praktikum()
+    {
+        return $this->belongsTo(Praktikum::class, 'praktikum_id', 'id_praktikum');
     }
 
-    public function latihan(){
-        return $this->hasOne(latihan::class,'materi_id','id_materi');
+    public function latihan()
+    {
+        return $this->hasMany(latihan::class, 'latihan_id', 'id_latihan');
     }
 }
