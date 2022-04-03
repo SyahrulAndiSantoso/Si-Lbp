@@ -1,7 +1,13 @@
 <script>
     ClassicEditor
-        .create( document.querySelector( '#editor1' ) )
-        .catch( error => {
-            console.error( error );
-        } );
+        .create(document.querySelector('#soal'))
+        .catch(error => {
+            console.error(error);
+        });
+    ClassicEditor
+        .create(document.querySelector('#jawaban'))
+        .catch(error => {
+            console.error(error);
+        });
+
 </script>

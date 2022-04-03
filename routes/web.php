@@ -65,11 +65,7 @@ Route::get('/pengaturan', function () {
     ]);
 });
 
-Route::get('/admin/latihan', function () {
-    return view('admin.latihan', [
-        "judul" => "Latihan"
-    ]);
-});
+
 
 Route::get('/admin/prakrikum', [PraktikumController::class, 'index']);
 Route::post('/admin/prakrikum/create', [PraktikumController::class, 'store']);
@@ -97,7 +93,7 @@ Route::get('/admin/edit-praktikum', function () {
 
 
 // ---------------- DASHBOARD ---------------
-Route::get('/admin/dashboard',[DashboardController::class,'index'])->name("home");
+Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name("home");
 
 // ---------------- PRAKTIKAN ---------------
 Route::get('/admin/praktikan', [PraktikanController::class, 'index'])->name("viewPraktikan");
@@ -112,8 +108,19 @@ Route::get('/admin/materi', [MateriController::class, 'index'])->name('viewMater
 Route::post('/materi/store', [MateriController::class, 'store']);
 Route::post('/materi/update', [MateriController::class, 'update']);
 Route::get('/materi/delete/{id}', [MateriController::class, "delete"]);
-Route::get('/materi/view-edit/{id}',[MateriController::class,"viewEdit"]);
+Route::get('/materi/view-edit/{id}', [MateriController::class, "viewEdit"]);
 
+<<<<<<< HEAD
+=======
+//  ----------------  LATIHAN ------------------
+Route::get('/admin/latihan', [LatihanController::class, 'index'])->name('viewLatihan');
+Route::post('/latihan/store', [LatihanController::class, 'store']);
+Route::get('/latihan/delete/{id}', [LatihanController::class, 'delete']);
+Route::get('/latihan/view-edit/{id}', [LatihanController::class, 'viewEdit']);
+Route::post('/latihan/update', [LatihanController::class, 'update']);
+// EDIT DATA
+
+>>>>>>> ae0a78ea15d24e8c8234816eee46409334290524
 
 // ---------------- Quiz ---------------------
 Route::get('/praktikum',[QuizController::class,'praktikum']);
