@@ -67,22 +67,6 @@
                     <div class="sidebar-brand">
                         <a href="index.html" class="text-primary">Admin</a>
                     </div>
-                    {{-- <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html" class="text-primary">ADM</a>
-          </div> --}}
-<<<<<<< HEAD
-          <ul class="sidebar-menu">
-              <li class="menu-header">Halaman</li>
-              <li class="{{ ($judul == "Dashboard") ? 'active' : '' }}"><a class="nav-link" href="/admin/dashboard"><i class="fa-brands fa-hotjar"></i><span>Dashboard</span></a></li>
-              <li class="{{ ($judul == "Pelajaran") ? 'active' : '' }}"><a class="nav-link" href="/admin/praktikum"><i class="fa-solid fa-book"></i> <span>Pelajaran</span></a></li>
-              <li class=" {{ ($judul == "Materi") ? 'active' : '' }}"><a class="nav-link" href="/admin/materi"><i class="fa-solid fa-file-code"></i> <span>Materi</span></a></li>
-              <li class="{{ ($judul == "Latihan") ? 'active' : '' }}"><a class="nav-link" href="/admin/latihan"><i class="fa-solid fa-clipboard-list"></i> <span>Latihan</span></a></li>
-              <li class="menu-header">Pengguna</li>
-              <li class="{{ ($judul == "Praktikan") ? 'active' : '' }}"><a class="nav-link" href="/admin/praktikan"><i class="fa-solid fa-users"></i> <span>Praktikan</span></a></li>
-            </ul>
-        </aside>
-      </div>
-=======
                     <ul class="sidebar-menu">
                         <li class="menu-header">Halaman</li>
                         <li class="{{ $judul == 'Dashboard' ? 'active' : '' }}"><a class="nav-link"
@@ -102,7 +86,7 @@
                     </ul>
                 </aside>
             </div>
->>>>>>> 7246795cf6a516e8c7d3763c9ab5485987f95161
+
 
             <!-- Main Content -->
             <div class="main-content">
@@ -139,6 +123,7 @@
                 </div>
 
                 @yield('konten')
+                
             </div>
             <footer class="main-footer">
                 <div class="d-flex justify-content-center">

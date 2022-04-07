@@ -13,7 +13,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="/materi/store" method="POST">
+                    <form action="/materi/store" method="POST" id="submitform">
                         <input type="hidden" class="form-control" value="1" id="kode_praktikum" name="praktikum_id">
                         @csrf
                         <div class="mb-3">
@@ -62,7 +62,7 @@
                                                 <tr>
                                                     <th>No</th>
                                                     <th>Nama Materi</th>
-                                                    <th>Isi Materi</th>
+                                                    <th>excerpt</th>
                                                     <th>Pelajaran</th>
                                                     <th>Aksi</th>
                                                 </tr>
@@ -72,7 +72,8 @@
                                                     <tr>
                                                         <td>1</td>
                                                         <td>{{ $row->nama_materi }}</td>
-                                                        <td>{!! $row->isi_materi !!}</td>
+                                                        {{-- <td>{!! $row->isi_materi !!}</td> --}}
+                                                        <td>{{'Excertp'}}</td>
                                                         <td>{{ $row->praktikum->nama_praktikum }}</td>
                                                         <td>
                                                             <a href="/materi/delete/{{ $row->id_materi }}" id="hapus"

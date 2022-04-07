@@ -31,7 +31,7 @@
                     </div>
 
                     <div class="d-flex justify-content-end m-3">
-                        <a class="btn bg-button text-white rounded" href="/penjelasan-praktikum">Mulai Sekarang</a>
+                        <a class="btn bg-button text-white rounded" href="/penjelasan-praktikum/1">Mulai Sekarang</a>
                     </div>
 
                 </div>

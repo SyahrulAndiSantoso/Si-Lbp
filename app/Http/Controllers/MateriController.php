@@ -20,6 +20,8 @@ class MateriController extends Controller
         $data = Materi::all();
         $data_praktikum = Praktikum::all();
         $judul = "Materi";
+       
+        
         return view('admin.materi', compact('data','judul','data_praktikum'));
     }
 

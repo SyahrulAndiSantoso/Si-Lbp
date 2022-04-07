@@ -18,7 +18,7 @@ class latihan extends Seeder
     {
         for($i=1; $i<=10;$i++):
             DB::table('latihans')->insert([
-                'praktikum_id' =>$i,
+                'praktikum_id' =>rand(1,2),
                 'materi_id' =>$i,
                 'soal' => "soal $i",
                 'jawaban' => 'hello world',

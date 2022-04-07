@@ -18,7 +18,7 @@ class praktikan extends Seeder
     {
         for($i=1; $i<=10;$i++):
             DB::table('praktikans')->insert([
-                'praktikum_id' =>$i,
+                'praktikum_id' =>rand(1,2),
                 'npm' => "$i",
                 'nama_praktikan' => "syahrul $i",
                 'notelp' => '081803600258'.$i,

@@ -18,7 +18,7 @@ class materi extends Seeder
     {
         for($i=1; $i<=10;$i++):
             DB::table('materis')->insert([
-                'praktikum_id' =>$i,
+                'praktikum_id' =>rand(1,2),
                 'nama_materi' => "coba materi $i",
                 'isi_materi' => "<p> isi materi $i </p>",
 

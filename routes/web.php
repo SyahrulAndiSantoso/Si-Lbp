@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CKeditorController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MateriController;
@@ -18,6 +19,7 @@ use App\Http\Controllers\LatihanController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 Route::get('/', function () {
     return view('praktikan.landing_page', [
@@ -121,9 +123,13 @@ Route::post('/latihan/update', [LatihanController::class, 'update']);
 // ---------------- Quiz ---------------------
 Route::get('/praktikum',[QuizController::class,'praktikum']);
 Route::get('/panduan-praktikum',[QuizController::class,'PanduanPraktikum']);
-Route::get('/penjelasan-praktikum',[QuizController::class,'PenjelasanPraktikum']);
-Route::get('/pengerjaan-soal',[QuizController::class,'PengerjaanSoal']);
+Route::get('/penjelasan-praktikum/{id}',[QuizController::class,'PenjelasanPraktikum']);
+Route::get('/pengerjaan-soal/{id}',[QuizController::class,'PengerjaanSoal']);
+Route::get('/cek-jawaban',[QuizController::class,'cekJawaban']);
 
+// --------- CKEditor ------------------------
+// route upload image
+Route::post('CKeditor/upload', [CKeditorController::class,'upload'])->name('Ckeditor.upload'); 
 
 
 

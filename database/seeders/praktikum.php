@@ -16,12 +16,16 @@ class praktikum extends Seeder
      */
     public function run()
     {
-        for($i=1; $i<=10;$i++):
+       
             DB::table('praktikums')->insert([
-                'nama_praktikum' =>"praktikum $i",
-                'panduan' => "panduan $i",
+                'nama_praktikum' =>"Pemrograman Terstruktur",
+                'panduan' => "panduan Pemrograman Terstruktur",
             ]);
-         endfor;
+            DB::table('praktikums')->insert([
+                'nama_praktikum' =>"Struktur Data",
+                'panduan' => "panduan Struktur Data",
+            ]);
+  
         
     }
 }
