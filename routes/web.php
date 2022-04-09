@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CKeditorController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MateriController;
 use App\Http\Controllers\PraktikanController;
@@ -46,12 +47,13 @@ Route::get('/masuk', function () {
     return view('praktikan.login_praktikan', [
         'judul' => 'Login'
     ]);
-});
-Route::get('/admin/login-admin', function () {
-    return view('admin.login_admin', [
-        'judul' => 'Login'
-    ]);
-});
+})->name('login')->middleware('guest');
+
+// Route::get('/admin/login-admin', function () {
+//     return view('admin.login_admin', [
+//         'judul' => 'Login'
+//     ]);
+// });
 Route::get('/daftar', function () {
     return view('praktikan.registrasi', [
         "judul" => "Registrasi"
@@ -62,6 +64,7 @@ Route::get('/dashboard', function () {
         "judul" => "Dashboard"
     ]);
 });
+
 Route::get('/pengaturan', function () {
     return view('praktikan.pengaturan', [
         "judul" => "Pengaturan Akun"
@@ -69,10 +72,6 @@ Route::get('/pengaturan', function () {
 });
 
 
-
-Route::get('/admin/praktikum', [PraktikumController::class, 'index']);
-Route::post('/admin/praktikum/create', [PraktikumController::class, 'store']);
-Route::delete('/admin/praktikum/delete/{number}', [PraktikumController::class, 'destroy']);
 // Route::get('/admin/pelajaran', function () {
 //     return view('admin.pelajaran', [
 //         'judul' => 'Pelajaran'
@@ -88,17 +87,33 @@ Route::get('/admin/edit-latihan', function () {
     ]);
 });
 
-Route::get('/admin/edit-praktikum', function () {
-    return view('admin.edit.edit-praktikum', [
-        "judul" => "Edit praktikum"
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard_admin', [
+        "judul" => "Dashboard Admin"
     ]);
 });
 
+// Route::get('/admin/edit-praktikum', function () {
+//     return view('admin.edit.edit-praktikum', [
+//         "judul" => "Edit praktikum"
+//     ]);
+// });
+
 
 // ---------------- DASHBOARD ---------------
-Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name("home");
+Route::get('/admin/login-admin', [AdminController::class, 'index']);
+// Route::get('/admin/login', [AdminController::class, 'index'])->name('login.admin');
+Route::post('/admin/login', [AdminController::class, 'prosesLogin'])->name("login");
+Route::post('/admin/logout', [AdminController::class, 'logout']);
+
+// Route::get('/admin', function () {
+//     return view('admin.login_admin');
+// })->middleware('auth:admin');
 
 // ---------------- PRAKTIKAN ---------------
+Route::post('/praktikan/login', [PraktikanController::class, 'loginPraktikan']);
+Route::get('/praktikan/logout', [PraktikanController::class, 'logout']);
+
 Route::get('/admin/praktikan', [PraktikanController::class, 'index'])->name("viewPraktikan");
 Route::post('/praktikan/store', [PraktikanController::class, 'store']);
 Route::post('/praktikan/update', [PraktikanController::class, 'update']);
@@ -121,18 +136,19 @@ Route::get('/latihan/view-edit/{id}', [LatihanController::class, 'viewEdit']);
 Route::post('/latihan/update', [LatihanController::class, 'update']);
 
 // ---------------- Quiz ---------------------
-Route::get('/praktikum',[QuizController::class,'praktikum']);
-Route::get('/panduan-praktikum',[QuizController::class,'PanduanPraktikum']);
-Route::get('/penjelasan-praktikum/{id}',[QuizController::class,'PenjelasanPraktikum']);
-Route::get('/pengerjaan-soal/{id}',[QuizController::class,'PengerjaanSoal']);
-Route::get('/cek-jawaban',[QuizController::class,'cekJawaban']);
+Route::get('/praktikum', [QuizController::class, 'praktikum']);
+Route::get('/panduan-praktikum', [QuizController::class, 'PanduanPraktikum']);
+Route::get('/penjelasan-praktikum/{id}', [QuizController::class, 'PenjelasanPraktikum']);
+Route::get('/pengerjaan-soal/{id}', [QuizController::class, 'PengerjaanSoal']);
+Route::get('/cek-jawaban', [QuizController::class, 'cekJawaban']);
+
+// ---------------- Praktikum ---------------------
+Route::get('/admin/praktikum', [PraktikumController::class, 'index'])->name("viewPraktikum");
+Route::post('/admin/praktikum/store', [PraktikumController::class, 'store']);
+Route::post('/admin/praktikum/update', [PraktikumController::class, 'update']);
+Route::delete('/admin/praktikum/delete/{number}', [PraktikumController::class, 'destroy']);
+Route::get('/admin/edit-praktikum/{id}', [PraktikumController::class, 'edit']);
 
 // --------- CKEditor ------------------------
 // route upload image
-Route::post('CKeditor/upload', [CKeditorController::class,'upload'])->name('Ckeditor.upload'); 
-
-
-
-
-
-
+Route::post('CKeditor/upload', [CKeditorController::class, 'upload'])->name('Ckeditor.upload');

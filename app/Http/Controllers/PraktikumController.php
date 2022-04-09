@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Praktikum;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PraktikumController extends Controller
 {
@@ -21,8 +22,8 @@ class PraktikumController extends Controller
      */
     public function index()
     {
-        return view('admin.pelajaran', [
-            'judul' => 'pelajaran',
+        return view('admin.praktikum', [
+            'judul' => 'praktikum',
             'praktikum' => Praktikum::all()
         ]);
     }
@@ -34,7 +35,7 @@ class PraktikumController extends Controller
      */
     public function create()
     {
-        return view('admin.pelajaran');
+        // return view('admin/praktikum');
     }
 
     /**
@@ -45,11 +46,14 @@ class PraktikumController extends Controller
      */
     public function store(Request $request)
     {
-        $this->PraktikumModel->nama_praktikum = $request->pelajaran1;
-        $this->PraktikumModel->deskripsi = strip_tags($request->deskripsi1);
+
+        // dd($request);
+        $this->PraktikumModel->nama_praktikum = $request->praktikum;
+        $this->PraktikumModel->deskripsi = strip_tags($request->deskripsi);
+        $this->PraktikumModel->gambar = $request->file('gambar')->store('image-storage');
 
         $this->PraktikumModel->save();
-        return redirect('/admin/pelajaran');
+        return redirect('/admin/praktikum');
     }
 
     /**
@@ -71,7 +75,11 @@ class PraktikumController extends Controller
      */
     public function edit($id)
     {
-        //
+        $praktikum = Praktikum::find($id);
+        return view('admin.edit.edit-praktikum', [
+            'judul' => 'edit-praktikum',
+            'praktikum' => $praktikum
+        ]);
     }
 
     /**
@@ -81,9 +89,23 @@ class PraktikumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        // dd($request->all());
+        $id_praktikum = $request->id_praktikum;
+        $praktikum = $this->PraktikumModel->FindOrFail($id_praktikum);
+        $praktikum->update([
+            'id_praktikum' => $id_praktikum,
+            'nama_praktikum' => $request->nama_praktikum,
+            'deskripsi' => strip_tags($request->deskripsi),
+            'gambar' => $request->file('gambar')->store('image-storage'),
+        ]);
+
+        if ($request->gambarLama) {
+            Storage::delete($request->gambarLama);
+        }
+
+        return redirect()->route('viewPraktikum');
     }
 
     /**
@@ -92,9 +114,12 @@ class PraktikumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $this->PraktikumModel->destroy($id);
-        return redirect('/admin/pelajaran');
+        if ($request->gambar) {
+            Storage::delete($request->gambar);
+        }
+        $this->PraktikumModel->find($id)->delete();
+        return redirect()->route('viewPraktikum');
     }
 }

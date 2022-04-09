@@ -13,31 +13,33 @@ class Praktikan extends Model
     protected $fillable = [
         'praktikum_id',
         'npm',
+        'password',
         'nama_praktikan',
         'notelp',
         'email',
     ];
 
-    public function praktikum(){
-        return $this->belongsTo(Praktikum::class,'praktikum_id','id_praktikum');
+    public function praktikum()
+    {
+        return $this->belongsTo(Praktikum::class, 'praktikum_id', 'id_praktikum');
     }
 
-    
-// 
+
+    // 
     // public function getAll()
     // {
-        // return Praktikan::all();
+    // return Praktikan::all();
     // }
-// 
+    // 
     // public function create()
     // {
-        // Praktikan::save();
+    // Praktikan::save();
     // }
-// 
+    // 
     // public function hapus($id)
     // {
-        // Praktikan::destroy($id);
+    // Praktikan::destroy($id);
     // }
-// 
-    
+    // 
+
 }
