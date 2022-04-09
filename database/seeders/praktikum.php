@@ -16,16 +16,16 @@ class praktikum extends Seeder
      */
     public function run()
     {
-       
-            DB::table('praktikums')->insert([
-                'nama_praktikum' =>"Pemrograman Terstruktur",
-                'panduan' => "panduan Pemrograman Terstruktur",
-            ]);
-            DB::table('praktikums')->insert([
-                'nama_praktikum' =>"Struktur Data",
-                'panduan' => "panduan Struktur Data",
-            ]);
-  
-        
+
+        DB::table('praktikums')->insert([
+            'nama_praktikum' => "Pemrograman Terstruktur",
+            'deskripsi' => "panduan Pemrograman Terstruktur",
+            'gambar' => "/image-storage/GfuGSkwZbUJjlQ2Tmq6GocYOXohwW95fPWOwWXXe.png"
+        ]);
+        DB::table('praktikums')->insert([
+            'nama_praktikum' => "Struktur Data",
+            'deskripsi' => "panduan Struktur Data",
+            'gambar' => "/image-storage/kApdvI6uP2Vij6P0w3toqXQ39XFLRpFWMKa07Uk9.png"
+        ]);
     }
 }

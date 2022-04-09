@@ -48,16 +48,22 @@
                             class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                             <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}"
                                 class="rounded-circle mr-1">
-                            <div class="d-sm-none d-lg-inline-block">Hi, Syahrul Riza</div>
+                            <div class="d-sm-none d-lg-inline-block">Hi, Admin</div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <a data-toggle="modal" data-target="#modalPengaturan" class="dropdown-item has-icon">
                                 <i class="fas fa-cog"></i> Pengaturan
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item has-icon text-danger">
+                            <form action="/admin/logout" method="POST">
+                                @csrf
+                                <button class="dropdown-item has-icon text-danger">
+                                    <i class="fas fa-sign-out-alt"> Keluar</i>
+                                </button>
+                            </form>
+                            {{-- <a href="/admin/logout" class="dropdown-item has-icon text-danger">
                                 <i class="fas fa-sign-out-alt"></i> Keluar
-                            </a>
+                            </a> --}}
                         </div>
                     </li>
                 </ul>
@@ -72,8 +78,8 @@
                         <li class="{{ $judul == 'Dashboard' ? 'active' : '' }}"><a class="nav-link"
                                 href="/admin/dashboard"><i class="fa-brands fa-hotjar"></i><span>Dashboard</span></a>
                         </li>
-                        <li class="{{ $judul == 'Pelajaran' ? 'active' : '' }}"><a class="nav-link"
-                                href="/admin/pelajaran"><i class="fa-solid fa-book"></i> <span>Pelajaran</span></a></li>
+                        <li class="{{ $judul == 'Praktikum' ? 'active' : '' }}"><a class="nav-link"
+                                href="/admin/praktikum"><i class="fa-solid fa-book"></i> <span>Pelajaran</span></a></li>
                         <li class=" {{ $judul == 'Materi' ? 'active' : '' }}"><a class="nav-link"
                                 href="/admin/materi"><i class="fa-solid fa-file-code"></i> <span>Materi</span></a></li>
                         <li class="{{ $judul == 'Latihan' ? 'active' : '' }}"><a class="nav-link"
@@ -123,7 +129,7 @@
                 </div>
 
                 @yield('konten')
-                
+
             </div>
             <footer class="main-footer">
                 <div class="d-flex justify-content-center">
@@ -277,7 +283,6 @@
                 }
             }
         });
-
     </script>
 
 
@@ -285,7 +290,6 @@
         $(document).ready(function() {
             $('#example').DataTable();
         });
-
     </script>
 
     @yield('ckeditor1')

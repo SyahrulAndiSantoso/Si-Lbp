@@ -16,7 +16,8 @@ class CreatePraktikansTable extends Migration
         Schema::create('praktikans', function (Blueprint $table) {
             $table->bigIncrements('id_praktikan');
             $table->unsignedBigInteger('praktikum_id')->nullable();
-            $table->string('npm', 40);
+            $table->string('npm', 40)->unique();
+            $table->string('password', 100);
             $table->string('nama_praktikan', 100);
             $table->string('notelp', 20);
             $table->string('email', 100)->unique();

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePraktikumsTable extends Migration
+class Admin extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreatePraktikumsTable extends Migration
      */
     public function up()
     {
-        Schema::create('praktikums', function (Blueprint $table) {
-            $table->bigIncrements('id_praktikum');
-            $table->string('nama_praktikum', 100);
-            $table->string('deskripsi');
-            $table->string('gambar')->nullable();
+        Schema::create('admins', function (Blueprint $table) {
+            $table->integer('id_admin')->autoIncrement();
+            $table->string('username', 100)->unique();
+            $table->string('password', 100);
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreatePraktikumsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('praktikums');
+        //
     }
 }

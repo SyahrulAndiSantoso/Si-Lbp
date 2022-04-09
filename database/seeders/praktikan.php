@@ -16,15 +16,24 @@ class praktikan extends Seeder
      */
     public function run()
     {
-        for($i=1; $i<=10;$i++):
-            DB::table('praktikans')->insert([
-                'praktikum_id' =>rand(1,2),
-                'npm' => "$i",
-                'nama_praktikan' => "syahrul $i",
-                'notelp' => '081803600258'.$i,
-                'email' => 'syahrul'.$i.'@gmail.com',
-            ]);
-         endfor;
-        
+        // for ($i = 1; $i <= 10; $i++) :
+        //     DB::table('praktikans')->insert([
+        //         'praktikum_id' => rand(1, 2),
+        //         'npm' => "$i",
+        //         'password' => bcrypt('12345') . $i,
+        //         'nama_praktikan' => "syahrul $i",
+        //         'notelp' => '081803600258' . $i,
+        //         'email' => 'syahrul' . $i . '@gmail.com',
+        //     ]);
+        // endfor;
+
+        DB::table('praktikans')->insert([
+            'praktikum_id' => 1,
+            'npm' => "1",
+            'password' => bcrypt('12345'),
+            'nama_praktikan' => "syahrul",
+            'notelp' => '081803600258',
+            'email' => 'syahrul@gmail.com',
+        ]);
     }
 }
