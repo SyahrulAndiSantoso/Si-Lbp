@@ -47,7 +47,7 @@ Route::get('/masuk', function () {
     return view('praktikan.login_praktikan', [
         'judul' => 'Login'
     ]);
-})->name('login')->middleware('guest');
+})->name('login');
 
 // Route::get('/admin/login-admin', function () {
 //     return view('admin.login_admin', [
@@ -106,13 +106,10 @@ Route::get('/admin/login-admin', [AdminController::class, 'index']);
 Route::post('/admin/login', [AdminController::class, 'prosesLogin'])->name("login");
 Route::post('/admin/logout', [AdminController::class, 'logout']);
 
-// Route::get('/admin', function () {
-//     return view('admin.login_admin');
-// })->middleware('auth:admin');
-
 // ---------------- PRAKTIKAN ---------------
 Route::post('/praktikan/login', [PraktikanController::class, 'loginPraktikan']);
 Route::get('/praktikan/logout', [PraktikanController::class, 'logout']);
+Route::post('/praktikan/register', [PraktikanController::class, 'register']);
 
 Route::get('/admin/praktikan', [PraktikanController::class, 'index'])->name("viewPraktikan");
 Route::post('/praktikan/store', [PraktikanController::class, 'store']);

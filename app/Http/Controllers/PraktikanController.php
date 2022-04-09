@@ -50,6 +50,19 @@ class PraktikanController extends Controller
         return redirect()->route('viewPraktikan');
     }
 
+    public function register(Request $request)
+    {
+        Praktikan::create([
+            'npm' => $request->npm,
+            'nama_praktikan' => $request->nama_praktikan,
+            'password' => bcrypt($request->password),
+            'notelp' => $request->notelp,
+            'email' => $request->email,
+        ]);
+
+        return redirect('/masuk');
+    }
+
     public function loginPraktikan(Request $request)
     {
         $npm = $request->input('npm');
