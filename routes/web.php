@@ -124,8 +124,8 @@ Route::post('/latihan/update', [LatihanController::class, 'update']);
 Route::get('/praktikum',[QuizController::class,'praktikum']);
 Route::get('/panduan-praktikum',[QuizController::class,'PanduanPraktikum']);
 Route::get('/penjelasan-praktikum/{id}',[QuizController::class,'PenjelasanPraktikum']);
-Route::get('/pengerjaan-soal/{id}',[QuizController::class,'PengerjaanSoal']);
-Route::get('/cek-jawaban',[QuizController::class,'cekJawaban']);
+Route::get('/pengerjaan-soal/{id}',[QuizController::class,'PengerjaanSoal'])->name('pengerjaanSoal');
+Route::get('cek-jawaban',[QuizController::class,'cekJawaban'])->name('CekJawaban');
 
 // --------- CKEditor ------------------------
 // route upload image

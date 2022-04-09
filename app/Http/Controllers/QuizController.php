@@ -32,10 +32,12 @@ class QuizController extends Controller
 
     public function cekJawaban(Request $request){
 
-    putenv("PATH=C:\Users\asus\Documents\1.2 Semester 6\KP (magang)\Lbp-quiz\Si-Lbp\public\MinGW\bin");
+    putenv("PATH=".public_path('minGW/bin'));
+	
 	$CC="g++";
 	$out="a.exe";
 	$code=$request->jawaban;
+	
 
 	$input=$request->input;
 	$filename_code="main.cpp";
@@ -71,8 +73,8 @@ class QuizController extends Controller
 			$out=$out." < ".$filename_in; //ada inputan
 			$output=shell_exec($out);
 		}
-		//echo "<pre>$output</pre>";
-		echo "$output";
+		echo "<pre>$output</pre>";
+		// return redirect()->route('viewMateri');
               //echo "<textarea id='div' class=\"form-control\" name=\"output\" rows=\"10\" cols=\"50\">$output</textarea><br><br>";
 	}
 	else if(!strpos($error,"error"))
@@ -94,6 +96,7 @@ class QuizController extends Controller
 	{
 		echo "<pre>$error</pre>";
 	}
+	// dd($output);
 	exec("del $filename_code");
 	exec("del *.o");
 	exec("del *.txt");

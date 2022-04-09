@@ -17,7 +17,7 @@ main() {
 </textarea>
                     <input type="hidden" class="form-control" id="input" name="input">
                     <div class="row justify-content-lg-end justify-content-end">
-                        <button type="submit" data-bs-toggle="modal" data-bs-target="#modalLevel" class="btn bg-button m-3 text-white rounded-5 fs-6 w-25 shadow-sm">Jawab</button>
+                        <button  data-bs-toggle="modal" id="tombol" data-bs-target="#modalLevel" class="btn bg-button m-3 text-white rounded-5 fs-6 w-25 shadow-sm">Jawab</button>
                     </div>
                 </form>
             </div>
@@ -31,9 +31,9 @@ main() {
                     </div>
                 </div>
                 <label class="mt-5 fw-bold fs-5" for="">Hasil</label>
-                <div class="card w-100 rounded-10 shadow-sm mh-300 h-300">
+                <div class="card w-100 rounded-10 shadow-sm mh-300 h-300" >
                     <div class="card-body mh-100 overflow-auto">
-                        <p class="card-text"></p>
+                        <p class="card-text" id="hasil"></p>
                     </div>
                 </div>
             </div>
@@ -74,5 +74,45 @@ main() {
         {{-- </div> --}}
     {{-- </div> --}}
 {{-- </div> --}}
+
+<script type="text/javascript">
+  
+    $(document).ready(function(){
+  
+       $("#tombol").click(function(){
+    
+             $("#hasil").html("Loading ......");
+  
+  
+       });
+  
+    });
+  
+  </script>
+  <script>
+    //wait for page load to initialize script
+    $(document).ready(function(){
+        //listen for form submission
+        $('form').on('submit', function(e){
+          //prevent form from submitting and leaving page
+          e.preventDefault();
+    
+          // AJAX 
+          $.ajax({
+                method: 'get', //type of submit
+                cache: false, //important or else you might get wrong data returned to you
+                url: "{{route('CekJawaban', ['_token' => csrf_token()])}}", //destination
+                datatype: "html", //expected data format from process.php
+                data: $('form').serialize(), //target your form's data and serialize for a POST
+                success: function(result) { // data is the var which holds the output of your process.php
+    
+                    // locate the div with #result and fill it with returned data from process.php
+                    $('#hasil').html(result);
+                }       
+            });
+        });
+    });
+    </script>
+    
 
 @endsection
