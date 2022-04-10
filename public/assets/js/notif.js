@@ -29,7 +29,7 @@ if(flashData == "Menambahkan"||flashData == "Mengupdate"||flashData == "Menghapu
     message: Halaman+' '+flashData,
     position: 'topRight'
 });
-}else if(flashData == "sukses"){
+}else if(flashData == "berhasil"){
   iziToast.success({
     title: 'Login',
     message: Halaman+' '+flashData,

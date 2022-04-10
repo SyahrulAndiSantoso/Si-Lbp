@@ -48,7 +48,7 @@
                 <ul class="navbar-nav navbar-right">
 
 
-                    <li class="dropdown"><a href="#" data-toggle="dropdown"
+                    <li class="dropdown"><a href="/admin/logout" data-toggle="dropdown"
                             class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                             <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}"
                                 class="rounded-circle mr-1">

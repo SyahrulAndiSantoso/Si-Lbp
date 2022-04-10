@@ -43,8 +43,7 @@ class AdminController extends Controller
             return redirect('/admin/login-admin')->with('gagal', 'gagal');
         } else if ($login->username == $username and Hash::check($password, $login->password)) {
             $request->session()->regenerate();
-            Session::put('sukses', 'berhasil');
-            return redirect()->intended('/admin/dashboard');
+            return redirect()->intended('/admin/dashboard')->with('sukses', 'berhasil');
         }
     }
 
