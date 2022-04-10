@@ -17,13 +17,19 @@
                                             value="{{ $data->id_latihan }}">
                                         <div class="mb-3">
                                             <label class="form-label">Soal</label>
-                                            <textarea class="form-control" name="soal" id="soal"
-                                                style="height: 100px">{{ $data->soal }}</textarea>
+                                            <textarea class="form-control" name="soal" id="soal" style="height: 100px"
+                                                required>{{ $data->soal }}</textarea>
+                                            @error('soal')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Jawaban</label>
-                                            <textarea class="form-control" name="jawaban" id="jawaban"
-                                                style="height: 100px">{{ $data->jawaban }}</textarea>
+                                            <textarea class="form-control" name="jawaban" id="jawaban" style="height: 100px"
+                                                required>{{ $data->jawaban }}</textarea>
+                                            @error('jawaban')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Praktikum</label>
@@ -56,7 +62,10 @@
                                         <div class="mb-3">
                                             <label class="form-label">Kisi - kisi</label>
                                             <input type="text" class="form-control" id="kisi_kisi" name="kisi_kisi"
-                                                value="{{ $data->kisi_kisi }}">
+                                                value="{{ old('kisi_kisi', $data->kisi_kisi) }}" required>
+                                            @error('kisi_kisi')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </form>

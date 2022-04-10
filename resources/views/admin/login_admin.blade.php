@@ -18,6 +18,10 @@
 </head>
 
 <body>
+    @if (session()->has('gagal'))
+        <div class="flash-data" data-flashdata="{{ session('gagal') }}" data-halaman="admin">
+        </div>
+    @endif
     <div id="app">
         <section class="section">
             <div class="container mt-5">

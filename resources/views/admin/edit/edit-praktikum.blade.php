@@ -17,13 +17,22 @@
                                         <input type="hidden" name="id_praktikum" value="{{ $praktikum->id_praktikum }}">
                                         <input type="hidden" name="gambarLama" value="{{ $praktikum->gambar }}">
                                         <div class="mb-3">
-                                            <label class="form-label">Nama Pelajaran</label>
-                                            <input type="text" class="form-control" id="pelajaran" name="nama_praktikum"
-                                                value="{{ $praktikum->nama_praktikum }}">
+                                            <label class="form-label">Nama Praktikum</label>
+                                            <input type="text"
+                                                class="form-control @error('nama_praktikum') is-invalid @enderror"
+                                                id="nama_praktikum" name="nama_praktikum"
+                                                value="{{ old('nama_praktikum', $praktikum->nama_praktikum) }}">
+                                            @error('nama_praktikum')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Deskripsi</label>
-                                            <textarea class="form-control" name="deskripsi" id="deskripsi"> {{ $praktikum->deskripsi }}</textarea>
+                                            <textarea class="form-control @error('deskripsi') is-invalid @enderror"
+                                                name="deskripsi" id="deskripsi"> {{ $praktikum->deskripsi }}</textarea>
+                                            @error('deskripsi')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Gambar</label>
@@ -35,6 +44,9 @@
                                             @endif
                                             <input class="form-control" type="file" id="gambar" name="gambar"
                                                 onchange="preview()">
+                                            @error('gambar')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </form>
@@ -62,6 +74,7 @@
                 imgPreview.src = oFREvent.target.result;
             }
         }
+
     </script>
 @endsection
 

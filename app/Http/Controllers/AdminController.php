@@ -40,10 +40,10 @@ class AdminController extends Controller
         $login = Admin::where(['username' => $username])->first();
 
         if ($login == null) {
-            return redirect('/admin/login-admin')->with('failed', 'login gagal');
+            return redirect('/admin/login-admin')->with('gagal', 'gagal');
         } else if ($login->username == $username and Hash::check($password, $login->password)) {
             $request->session()->regenerate();
-            Session::put('login', 'login berhasil');
+            Session::put('sukses', 'berhasil');
             return redirect()->intended('/admin/dashboard');
         }
     }

@@ -31,14 +31,24 @@ class LatihanController extends Controller
 
     public function store(Request $request)
     {
-        latihan::create($request->all());
-        return back();
+        $validatedData = $request->validate([
+            "soal" => "required",
+            "jawaban" => "required",
+            "praktikum_id" => "required",
+            "materi_id" => "required",
+            "kisi_kisi" => "required|min:2"
+        ]);
+        $validatedData['soal'] = strip_tags($request->soal);
+        $validatedData['jawaban'] = strip_tags($request->jawaban);
+
+        latihan::create($validatedData);
+        return back()->with('sukses tambah', 'Menambahkan');
     }
 
     public function delete($id)
     {
         latihan::find($id)->delete();
-        return redirect()->route('viewLatihan');
+        return redirect()->route('viewLatihan')->with('sukses hapus', 'Menghapus');
     }
 
     public function viewEdit($id)
@@ -50,10 +60,21 @@ class LatihanController extends Controller
         return view('admin.edit.edit-latihan', compact('data', 'judul', 'data_praktikum', 'data_materi'));
     }
 
-    public function update(Request $request){
+    public function update(Request $request)
+    {
         $id_latihan = $request->id_latihan;
         $latihan = latihan::FindOrFail($id_latihan);
-        $latihan->update($request->all());
-          return redirect()->route('viewLatihan');
+        $validatedData = $request->validate([
+            "soal" => "required",
+            "jawaban" => "required",
+            "praktikum_id" => "required",
+            "materi_id" => "required",
+            "kisi_kisi" => "required|min:2"
+        ]);
+        $validatedData['soal'] = strip_tags($request->soal);
+        $validatedData['jawaban'] = strip_tags($request->jawaban);
+        
+        $latihan->update($validatedData);
+        return redirect()->route('viewLatihan')->with('sukses update', 'Mengupdate');
     }
 }

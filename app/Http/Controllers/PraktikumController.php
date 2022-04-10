@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Praktikum;
+use Database\Seeders\praktikum as SeedersPraktikum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -46,14 +47,19 @@ class PraktikumController extends Controller
      */
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            "nama_praktikum" => "required|min:5",
+            "deskripsi" => "required",
+            "gambar" => "required|image"
+        ]);
 
         // dd($request);
-        $this->PraktikumModel->nama_praktikum = $request->praktikum;
-        $this->PraktikumModel->deskripsi = strip_tags($request->deskripsi);
-        $this->PraktikumModel->gambar = $request->file('gambar')->store('image-storage');
 
-        $this->PraktikumModel->save();
-        return redirect('/admin/praktikum');
+        $validatedData['deskripsi'] = strip_tags($request->deskripsi);
+        $validatedData['gambar'] = $request->file('gambar')->store('image-storage');
+
+        Praktikum::create($validatedData);
+        return redirect('/admin/praktikum')->with('sukses tambah', 'Menambahkan');
     }
 
     /**
@@ -93,19 +99,21 @@ class PraktikumController extends Controller
     {
         // dd($request->all());
         $id_praktikum = $request->id_praktikum;
-        $praktikum = $this->PraktikumModel->FindOrFail($id_praktikum);
-        $praktikum->update([
-            'id_praktikum' => $id_praktikum,
-            'nama_praktikum' => $request->nama_praktikum,
-            'deskripsi' => strip_tags($request->deskripsi),
-            'gambar' => $request->file('gambar')->store('image-storage'),
+        $praktikum = Praktikum::FindOrFail($id_praktikum);
+        $validatedData = $request->validate([
+            "nama_praktikum" => "required|min:5",
+            "deskripsi" => "required",
+            "gambar" => "required|image"
         ]);
+        $validatedData['deskripsi'] = strip_tags($request->deskripsi);
+        $validatedData['gambar'] = $request->file('gambar')->store('image-storage');
 
         if ($request->gambarLama) {
             Storage::delete($request->gambarLama);
         }
+        $praktikum->update($validatedData);
 
-        return redirect()->route('viewPraktikum');
+        return redirect()->route('viewPraktikum')->with('sukses update', 'Mengupdate');
     }
 
     /**
@@ -120,6 +128,6 @@ class PraktikumController extends Controller
             Storage::delete($request->gambar);
         }
         $this->PraktikumModel->find($id)->delete();
-        return redirect()->route('viewPraktikum');
+        return redirect()->route('viewPraktikum')->with('sukses hapus', 'Menghapus');
     }
 }

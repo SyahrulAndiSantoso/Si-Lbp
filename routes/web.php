@@ -133,13 +133,6 @@ Route::get('/latihan/view-edit/{id}', [LatihanController::class, 'viewEdit']);
 Route::post('/latihan/update', [LatihanController::class, 'update']);
 
 // ---------------- Quiz ---------------------
-<<<<<<< HEAD
-Route::get('/praktikum',[QuizController::class,'praktikum']);
-Route::get('/panduan-praktikum',[QuizController::class,'PanduanPraktikum']);
-Route::get('/penjelasan-praktikum/{id}',[QuizController::class,'PenjelasanPraktikum']);
-Route::get('/pengerjaan-soal/{id}',[QuizController::class,'PengerjaanSoal'])->name('pengerjaanSoal');
-Route::get('cek-jawaban',[QuizController::class,'cekJawaban'])->name('CekJawaban');
-=======
 Route::get('/praktikum', [QuizController::class, 'praktikum']);
 Route::get('/panduan-praktikum', [QuizController::class, 'PanduanPraktikum']);
 Route::get('/penjelasan-praktikum/{id}', [QuizController::class, 'PenjelasanPraktikum']);
@@ -152,7 +145,6 @@ Route::post('/admin/praktikum/store', [PraktikumController::class, 'store']);
 Route::post('/admin/praktikum/update', [PraktikumController::class, 'update']);
 Route::delete('/admin/praktikum/delete/{number}', [PraktikumController::class, 'destroy']);
 Route::get('/admin/edit-praktikum/{id}', [PraktikumController::class, 'edit']);
->>>>>>> 6239f63573733e834622c15366115a38dda7fd75
 
 // --------- CKEditor ------------------------
 // route upload image
