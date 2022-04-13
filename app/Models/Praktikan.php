@@ -23,23 +23,4 @@ class Praktikan extends Model
     {
         return $this->belongsTo(Praktikum::class, 'praktikum_id', 'id_praktikum');
     }
-
-
-    // 
-    // public function getAll()
-    // {
-    // return Praktikan::all();
-    // }
-    // 
-    // public function create()
-    // {
-    // Praktikan::save();
-    // }
-    // 
-    // public function hapus($id)
-    // {
-    // Praktikan::destroy($id);
-    // }
-    // 
-
 }

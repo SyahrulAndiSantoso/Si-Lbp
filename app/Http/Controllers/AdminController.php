@@ -34,17 +34,27 @@ class AdminController extends Controller
      */
     public function prosesLogin(Request $request)
     {
-        $username = $request->input('username');
-        $password = $request->input('password');
+        $this->validate($request, [
+        'username' => 'required',
+        'password' => 'required'
+        ]);
 
-        $login = Admin::where(['username' => $username])->first();
-
-        if ($login == null) {
-            return redirect('/admin/login-admin')->with('gagal', 'gagal');
-        } else if ($login->username == $username and Hash::check($password, $login->password)) {
+        if (Auth::guard('admin')->attempt(['username' => $request->username, 'password' => $request->password])) {
             $request->session()->regenerate();
-            return redirect()->intended('/admin/dashboard')->with('sukses', 'berhasil');
+        return redirect()->intended('/admin/dashboard');
         }
+        
+        // $username = $request->input('username');
+        // $password = $request->input('password');
+
+        // $login = Admin::where(['username' => $username])->first();
+
+        // if ($login == null) {
+        //     return redirect('/admin/login-admin')->with('gagal', 'gagal');
+        // } else if ($login->username == $username and Hash::check($password, $login->password)) {
+        //     $request->session()->regenerate();
+        //     return redirect()->intended('/admin/dashboard')->with('sukses', 'berhasil');
+        // }
     }
 
     public function logout()

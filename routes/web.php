@@ -38,16 +38,11 @@ Route::get('/peringkat', function () {
     ]);
 });
 
-
-
-
-
-
 Route::get('/masuk', function () {
     return view('praktikan.login_praktikan', [
         'judul' => 'Login'
     ]);
-})->name('login');
+})->middleware('guest');
 
 // Route::get('/admin/login-admin', function () {
 //     return view('admin.login_admin', [
@@ -87,29 +82,13 @@ Route::get('/admin/edit-latihan', function () {
     ]);
 });
 
+
+Route::middleware(['auth:admin'])->group(function () {
 Route::get('/admin/dashboard', function () {
     return view('admin.dashboard_admin', [
         "judul" => "Dashboard Admin"
     ]);
 });
-
-// Route::get('/admin/edit-praktikum', function () {
-//     return view('admin.edit.edit-praktikum', [
-//         "judul" => "Edit praktikum"
-//     ]);
-// });
-
-
-// ---------------- DASHBOARD ---------------
-Route::get('/admin/login-admin', [AdminController::class, 'index']);
-// Route::get('/admin/login', [AdminController::class, 'index'])->name('login.admin');
-Route::post('/admin/login', [AdminController::class, 'prosesLogin'])->name("login");
-Route::post('/admin/logout', [AdminController::class, 'logout']);
-
-// ---------------- PRAKTIKAN ---------------
-Route::post('/praktikan/login', [PraktikanController::class, 'loginPraktikan']);
-Route::get('/praktikan/logout', [PraktikanController::class, 'logout']);
-Route::post('/praktikan/register', [PraktikanController::class, 'register']);
 
 Route::get('/admin/praktikan', [PraktikanController::class, 'index'])->name("viewPraktikan");
 Route::post('/praktikan/store', [PraktikanController::class, 'store']);
@@ -145,6 +124,19 @@ Route::post('/admin/praktikum/store', [PraktikumController::class, 'store']);
 Route::post('/admin/praktikum/update', [PraktikumController::class, 'update']);
 Route::delete('/admin/praktikum/delete/{number}', [PraktikumController::class, 'destroy']);
 Route::get('/admin/edit-praktikum/{id}', [PraktikumController::class, 'edit']);
+
+});
+
+// ---------------- DASHBOARD ---------------
+Route::get('/admin/login-admin', [AdminController::class, 'index'])->name("login")->middleware('guest');
+// Route::get('/admin/login', [AdminController::class, 'index'])->name('login.admin');
+Route::post('/admin/login', [AdminController::class, 'prosesLogin']);
+Route::post('/admin/logout', [AdminController::class, 'logout']);
+
+// ---------------- PRAKTIKAN ---------------
+Route::post('/praktikan/login', [PraktikanController::class, 'loginPraktikan'])->name('loginPraktikan');
+Route::get('/praktikan/logout', [PraktikanController::class, 'logout']);
+Route::post('/praktikan/register', [PraktikanController::class, 'register']);
 
 // --------- CKEditor ------------------------
 // route upload image

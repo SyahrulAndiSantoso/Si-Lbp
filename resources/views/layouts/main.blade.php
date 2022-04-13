@@ -52,16 +52,19 @@
                             class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                             <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}"
                                 class="rounded-circle mr-1">
-                            <div class="d-sm-none d-lg-inline-block">Hi, Syahrul Riza</div>
+                            <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::guard('admin')->user()->username }}</div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <a data-toggle="modal" data-target="#modalPengaturan" class="dropdown-item has-icon">
                                 <i class="fas fa-cog"></i> Pengaturan
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a href="#" class="dropdown-item has-icon text-danger">
-                                <i class="fas fa-sign-out-alt"></i> Keluar
-                            </a>
+                            <form action="/admin/logout" method="POST">
+                                @csrf
+                                <button class="dropdown-item has-icon text-danger">
+                                    <i class="fas fa-sign-out-alt"> Keluar</i>
+                                </button>
+                            </form>
                         </div>
                     </li>
                 </ul>
