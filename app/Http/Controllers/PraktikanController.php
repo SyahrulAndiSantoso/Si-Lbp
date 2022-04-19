@@ -7,6 +7,7 @@ use Database\Seeders\praktikan as SeedersPraktikan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 class PraktikanController extends Controller
 {
@@ -77,27 +78,39 @@ class PraktikanController extends Controller
         return redirect('/masuk');
     }
 
-    // public function loginPraktikan(Request $request)
-    // {
-    //     $npm = $request->input('npm');
-    //     $password = $request->input('password');
+    public function loginPraktikan(Request $request)
+    {
+        $this->validate($request, [
+        'npm' => 'required',
+        'password' => 'required'
+        ]);
 
-    //     $praktikan = Praktikan::where(['npm' => $npm])->first();
+        if (Auth::guard('praktikan')->attempt(['npm' => $request->npm, 'password' => $request->password])) {
+            $request->session()->regenerate();
+        return redirect()->intended('/dashboard')->with('sukses','berhasil');
+        }
 
-    //     if ($praktikan == null) {
-    //         return redirect('/masuk')->with('failed', 'login gagal');
-    //     } else if ($praktikan->npm == $npm and Hash::check($password, $praktikan->password)) {
-    //         $request->session()->regenerate();
-    //         Session::put('npm', $npm);
-    //         return redirect()->intended('/dashboard');
-    //     }
-    // }
+        return redirect()->intended('/masuk')->with('login gagal','gagal');
 
-    // public function logout()
-    // {
-    //     request()->session()->invalidate();
-    //     request()->session()->regenerateToken();
-    //     Session::flush();
-    //     return redirect('/masuk');
-    // }
+        // $npm = $request->input('npm');
+        // $password = $request->input('password');
+
+        // $praktikan = Praktikan::where(['npm' => $npm])->first();
+
+        // if ($praktikan == null) {
+        //     return redirect('/masuk')->with('failed', 'login gagal');
+        // } else if ($praktikan->npm == $npm and Hash::check($password, $praktikan->password)) {
+        //     $request->session()->regenerate();
+        //     Session::put('npm', $npm);
+        //     return redirect()->intended('/dashboard');
+        // }
+    }
+
+    public function logout()
+    {
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+        Session::flush();
+        return redirect('/masuk');
+    }
 }

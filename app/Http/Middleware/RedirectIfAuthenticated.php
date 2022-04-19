@@ -21,14 +21,13 @@ class RedirectIfAuthenticated
     {
         if (Auth::guard('admin')->check()) {
 
-        return redirect('/admin/login-admin');
+        return redirect('/admin/dashboard');
 
-        } 
-        // else if (Auth::guard('praktikan')->check()) {
+        }else if (Auth::guard('praktikan')->check()) {
 
-        // return redirect('/praktikan');
+        return redirect('/dashboard');
       
-        // }
+        }
 
         return $next($request);
     }

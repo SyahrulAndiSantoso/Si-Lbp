@@ -1,6 +1,10 @@
 @extends('layouts.main2')
 
 @section('konten')
+@if (session()->has('sukses'))
+        <div class="flash-data" data-flashdata="{{ session('sukses') }}" data-halaman="praktikan">
+        </div>
+@endif
 
 <div class="container-fluid">
     <div class="container pt-5">

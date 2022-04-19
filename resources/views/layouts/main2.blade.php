@@ -16,12 +16,12 @@
     {{-- my css --}}
     <link rel="stylesheet" href="{{ asset('assets/css/style1.css') }}">
     {{-- Fontawesome Libraries --}}
-<<<<<<< HEAD
   <link href="{{ asset('assets/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="{{asset('assets/css/vibrant-ink.min.css')}}">
-=======
-    <link href="{{ asset('assets/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
->>>>>>> 6239f63573733e834622c15366115a38dda7fd75
+  {{-- Notif Toast Js --}}
+    <script src="{{ asset('assets/js/iziToast.min.js') }}"></script>
+     {{-- Notif Toast Css --}}
+    <link rel="stylesheet" href="{{ asset('assets/css/iziToast.min.css') }}">
     <title>{{ $judul }}</title>
 </head>
 
@@ -53,9 +53,7 @@
                             <img class="w-51" src="{{ asset('assets/img/user-akun.png') }}">
                             <a class="nav-link dropdown-toggle text-reset" href="#" id="navbarDropdownMenuLink"
                                 role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                @if (session()->has('npm'))
-                                    {{ session('npm') }}
-                                @endif
+                                {{ Auth::guard('praktikan')->user()->nama_praktikan }}
                             </a>
                             <ul class="dropdown-menu px-3" aria-labelledby="navbarDropdownMenuLink">
                                 <li><a class="dropdown-item" href="/dashboard">
@@ -94,6 +92,8 @@
                 class="text-primary">By Laboratorium Bahasa Pemrograman</span></h6>
     </div>
 
+    {{-- Notif --}}
+    <script src="{{ asset('assets/js/notif.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>

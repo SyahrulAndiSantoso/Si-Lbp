@@ -41,8 +41,10 @@ class AdminController extends Controller
 
         if (Auth::guard('admin')->attempt(['username' => $request->username, 'password' => $request->password])) {
             $request->session()->regenerate();
-        return redirect()->intended('/admin/dashboard');
+        return redirect()->intended('/admin/dashboard')->with('sukses','berhasil');
         }
+
+        return redirect()->intended('/admin/login-admin')->with('login gagal','gagal');
         
         // $username = $request->input('username');
         // $password = $request->input('password');

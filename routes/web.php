@@ -21,7 +21,7 @@ use App\Http\Controllers\LatihanController;
 |
 */
 
-
+Route::middleware(['guest'])->group(function () {
 Route::get('/', function () {
     return view('praktikan.landing_page', [
         'judul' => 'Home'
@@ -42,7 +42,11 @@ Route::get('/masuk', function () {
     return view('praktikan.login_praktikan', [
         'judul' => 'Login'
     ]);
-})->middleware('guest');
+});
+
+
+
+});
 
 // Route::get('/admin/login-admin', function () {
 //     return view('admin.login_admin', [
@@ -54,6 +58,8 @@ Route::get('/daftar', function () {
         "judul" => "Registrasi"
     ]);
 });
+
+Route::middleware(['auth:praktikan'])->group(function () {
 Route::get('/dashboard', function () {
     return view('praktikan.dashboard_praktikan', [
         "judul" => "Dashboard"
@@ -66,22 +72,22 @@ Route::get('/pengaturan', function () {
     ]);
 });
 
+// ---------------- Quiz ---------------------
+Route::get('/praktikum', [QuizController::class, 'praktikum']);
+Route::get('/panduan-praktikum', [QuizController::class, 'PanduanPraktikum']);
+Route::get('/penjelasan-praktikum/{id}', [QuizController::class, 'PenjelasanPraktikum']);
+Route::get('/pengerjaan-soal/{id}', [QuizController::class, 'PengerjaanSoal']);
+Route::get('/cek-jawaban', [QuizController::class, 'cekJawaban']);
+
+});
+
+
 
 // Route::get('/admin/pelajaran', function () {
 //     return view('admin.pelajaran', [
 //         'judul' => 'Pelajaran'
 //     ]);
 // });
-
-
-
-// EDIT DATA
-Route::get('/admin/edit-latihan', function () {
-    return view('admin.edit.edit-latihan', [
-        "judul" => "Edit Latihan"
-    ]);
-});
-
 
 Route::middleware(['auth:admin'])->group(function () {
 Route::get('/admin/dashboard', function () {
@@ -110,13 +116,6 @@ Route::post('/latihan/store', [LatihanController::class, 'store']);
 Route::get('/latihan/delete/{id}', [LatihanController::class, 'delete']);
 Route::get('/latihan/view-edit/{id}', [LatihanController::class, 'viewEdit']);
 Route::post('/latihan/update', [LatihanController::class, 'update']);
-
-// ---------------- Quiz ---------------------
-Route::get('/praktikum', [QuizController::class, 'praktikum']);
-Route::get('/panduan-praktikum', [QuizController::class, 'PanduanPraktikum']);
-Route::get('/penjelasan-praktikum/{id}', [QuizController::class, 'PenjelasanPraktikum']);
-Route::get('/pengerjaan-soal/{id}', [QuizController::class, 'PengerjaanSoal']);
-Route::get('/cek-jawaban', [QuizController::class, 'cekJawaban']);
 
 // ---------------- Praktikum ---------------------
 Route::get('/admin/praktikum', [PraktikumController::class, 'index'])->name("viewPraktikum");
