@@ -16,12 +16,9 @@
     {{-- my css --}}
     <link rel="stylesheet" href="{{ asset('assets/css/style1.css') }}">
     {{-- Fontawesome Libraries --}}
-<<<<<<< HEAD
   <link href="{{ asset('assets/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="{{asset('assets/css/vibrant-ink.min.css')}}">
-=======
+
     <link href="{{ asset('assets/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
->>>>>>> 6239f63573733e834622c15366115a38dda7fd75
     <title>{{ $judul }}</title>
 </head>
 

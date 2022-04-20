@@ -20,7 +20,7 @@
                         <img class="w-51 m-3" src="{{ asset('assets/img/logo1.png') }}">
                     </div>
 
-                    <h4 class="text-center fw-bold mb-4">Struktur Data</h4>
+                    <h4 class="text-center fw-bold mb-4">{{$JudulPanduan}}</h4>
                     <p class="px-5">Pada Pelajaran Struktur Data, membahas tentang struct, stack, queue, search, sorting, pointer, dan linked list </p>
                     <div class="container px-5">
                         <p class="fw-bold ps-5 pt-2">Panduan Mengerjakan :</p>
@@ -31,7 +31,7 @@
                     </div>
 
                     <div class="d-flex justify-content-end m-3">
-                        <a class="btn bg-button text-white rounded" href="/penjelasan-praktikum/1">Mulai Sekarang</a>
+                        <a class="btn bg-button text-white rounded" href="/penjelasan-praktikum/{{$AQ->id_materi}}">Mulai Sekarang</a>
                     </div>
 
                 </div>

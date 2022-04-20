@@ -36,7 +36,7 @@
                             <label class="form-label">Materi</label>
                             <select class="form-control" id="materi_id" name="materi_id">
                                 @foreach ($data_materi as $row)
-                                    <option value="{{ $row->id_materi }}">{{ $row->nama_materi }}</option>
+                                    <option value="{{ $row->id_materi }}">{{ $row->nama_praktikum }} || {{ $row->nama_materi }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -83,9 +83,9 @@
                                                 @foreach ($data as $row)
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $row->soal }}</td>
-                                                        <td>{{ $row->jawaban }}</td>
-                                                        <td>{{ $row->praktikum->nama_praktikum }}</td>
+                                                        <td>{!! $row->soal !!}</td>
+                                                        <td>{!! $row->jawaban !!}</td>
+                                                        <td>{{ $row->nama_praktikum }}</td>
                                                         <td>{{ $row->materi->nama_materi }}</td>
                                                         <td>{{ $row->kisi_kisi }}</td>
                                                         <td>

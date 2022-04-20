@@ -16,10 +16,9 @@ class latihan extends Seeder
      */
     public function run()
     {
-        for($i=1; $i<=10;$i++):
+        for($i=1; $i<=5;$i++):
             DB::table('latihans')->insert([
-                'praktikum_id' =>rand(1,2),
-                'materi_id' =>$i,
+                'materi_id' => $i,
                 'soal' => "soal $i",
                 'jawaban' => 'hello world',
                 'kisi_kisi' => 'for,if,array',

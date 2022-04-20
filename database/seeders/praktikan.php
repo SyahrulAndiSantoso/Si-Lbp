@@ -28,12 +28,19 @@ class praktikan extends Seeder
         // endfor;
 
         DB::table('praktikans')->insert([
-            'praktikum_id' => 1,
-            'npm' => "1",
-            'password' => bcrypt('12345'),
+            'npm'          => "1",
+            'password'     => bcrypt('1'),
             'nama_praktikan' => "syahrul",
-            'notelp' => '081803600258',
-            'email' => 'syahrul@gmail.com',
+            'notelp'       => '081803600258',
+            'email'        => 'syahrul@gmail.com',
+        ]);
+
+        DB::table('praktikans')->insert([
+            'npm'          => "2",
+            'password'     => bcrypt('2'),
+            'nama_praktikan' => "habib",
+            'notelp'       => '081803600258',
+            'email'        => 'habib@gmail.com',
         ]);
     }
 }

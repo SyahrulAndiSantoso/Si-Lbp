@@ -15,14 +15,16 @@ class CreatePraktikansTable extends Migration
     {
         Schema::create('praktikans', function (Blueprint $table) {
             $table->bigIncrements('id_praktikan');
-            $table->unsignedBigInteger('praktikum_id')->nullable();
+            // $table->unsignedBigInteger('praktikum_id')->nullable();
+            // $table->unsignedBigInteger('latihan_id');
             $table->string('npm', 40)->unique();
             $table->string('password', 100);
             $table->string('nama_praktikan', 100);
             $table->string('notelp', 20);
             $table->string('email', 100)->unique();
             $table->timestamps();
-            $table->foreign('praktikum_id')->references('id_praktikum')->on('praktikums')->onDelete('cascade')->onUpdate('cascade');
+            // $table->foreign('praktikum_id')->references('id_praktikum')->on('praktikums')->onDelete('cascade')->onUpdate('cascade');
+            // $table->foreign('latihan_id')->references('id_latihan')->on('latihans')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

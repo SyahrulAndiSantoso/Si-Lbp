@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Praktikan;
-use Database\Seeders\praktikan as SeedersPraktikan;
+use App\Models\AccessQuiz;
+use App\Models\Materi;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+
 
 class PraktikanController extends Controller
 {
@@ -52,6 +55,7 @@ class PraktikanController extends Controller
 
     public function register(Request $request)
     {
+
         Praktikan::create([
             'npm' => $request->npm,
             'nama_praktikan' => $request->nama_praktikan,
@@ -59,6 +63,21 @@ class PraktikanController extends Controller
             'notelp' => $request->notelp,
             'email' => $request->email,
         ]);
+        
+        // setting default praktikum praktikan ketika awal register
+        $id_praktikan = Praktikan::where(['npm' => $request->npm])->first()->id_praktikan;
+        AccessQuiz::create([
+           'praktikan_id' => $id_praktikan,
+           'praktikum_id' => 1,
+           'materi_id'    => 1,
+         ]);
+          // setting default praktikum praktikan ketika awal register
+        $awalmateri = Materi::where(['praktikum_id'=>2])->first()->id_materi;
+        AccessQuiz::create([
+           'praktikan_id' => $id_praktikan,
+           'praktikum_id' => 2,
+           'materi_id'    => $awalmateri,
+         ]);
 
         return redirect('/masuk');
     }
@@ -74,6 +93,7 @@ class PraktikanController extends Controller
             return redirect('/masuk')->with('failed', 'login gagal');
         } else if ($praktikan->npm == $npm and Hash::check($password, $praktikan->password)) {
             $request->session()->regenerate();
+            Session::put('id', $praktikan->id_praktikan);
             Session::put('npm', $npm);
             return redirect()->intended('/dashboard');
         }
