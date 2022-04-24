@@ -18,7 +18,10 @@
                                         <div class="mb-3">
                                             <label class="form-label">Nama Materi</label>
                                             <input type="text" class="form-control" id="edit-namaMateri" name="nama_materi"
-                                                value="{{ $data->nama_materi }}">
+                                                value="{{ old('nama_meteri', $data->nama_materi) }}" required>
+                                            @error('nama_materi')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Praktikum</label>
@@ -44,9 +47,12 @@
                                         <div class="mb-3">
                                             <label class="form-label">Isi Materi</label>
                                             <textarea class="form-control" name="isi_materi" id="isi_materi"
-                                                style="height: 100px">
-                                                    {{ $data->isi_materi }}
-                                                </textarea>
+                                                style="height: 100px" required>
+                                                                {{ $data->isi_materi }}
+                                                            </textarea>
+                                            @error('isi_materi')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </form>

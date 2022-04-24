@@ -15,9 +15,17 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
+     {{-- Notif Toast Js --}}
+    <script src="{{ asset('assets/js/iziToast.min.js') }}"></script>
+     {{-- Notif Toast Css --}}
+    <link rel="stylesheet" href="{{ asset('assets/css/iziToast.min.css') }}">
 </head>
 
 <body>
+     @if (session()->has('login gagal'))
+        <div class="flash-data" data-flashdata="{{ session('login gagal') }}" data-halaman="praktikan">
+        </div>
+    @endif
     <div id="app">
         <section class="section">
             <div class="container mt-5">
@@ -90,7 +98,8 @@
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
 
-    <!-- Page Specific JS File -->
+    {{-- Notif --}}
+    <script src="{{ asset('assets/js/notif.js') }}"></script>
 </body>
 
 </html>

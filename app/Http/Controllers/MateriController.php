@@ -28,8 +28,14 @@ class MateriController extends Controller
 
     public function store(Request $request)
     {
-        Materi::create($request->all());
-        return back();
+        $validatedData = $request->validate([
+            "nama_materi" => "required|min:4",
+            "praktikum_id" => "required",
+            "isi_materi" => "required"
+        ]);
+        $validatedData['isi_materi'] = strip_tags($request->isi_materi);
+        Materi::create($validatedData);
+        return back()->with('sukses tambah', 'Menambahkan');
     }
 
     public function viewEdit($id)
@@ -44,14 +50,20 @@ class MateriController extends Controller
     {
         $id_materi = $request->id_materi;
         $materi = Materi::FindOrFail($id_materi);
-        $materi->update($request->all());
-        return redirect()->route('viewMateri');
+        $validatedData = $request->validate([
+            "nama_materi" => "required",
+            "praktikum_id" => "required",
+            "isi_materi" => "required"
+        ]);
+        $validatedData['isi_materi'] = strip_tags($request->isi_materi);
+        $materi->update($validatedData);
+        return redirect()->route('viewMateri')->with('sukses update', 'Mengupdate');
     }
 
     public function delete($id)
     {
         $data = Materi::find($id);
         $data->delete();
-        return redirect()->route('viewMateri');
+        return redirect()->route('viewMateri')->with('sukses hapus', 'Menghapus');
     }
 }

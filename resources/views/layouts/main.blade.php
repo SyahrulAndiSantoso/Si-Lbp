@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    {{-- Sweetalert --}}
+    {{-- Notif Toast Js --}}
+    <script src="{{ asset('assets/js/iziToast.min.js') }}"></script>
+    {{-- Notif Sweetalert --}}
     <script src="{{ asset('assets/sweetalert/sweetalert2.all.min.js') }}"></script>
     {{-- css modal --}}
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap4-modal-fullscreen.css') }}">
@@ -26,6 +28,8 @@
     <link rel="shortcut icon" type="image/png" href="{{ asset('assets/img/circle-logo.png') }}">
     {{-- ckeditor --}}
     <script src="//cdn.ckeditor.com/4.18.0/full/ckeditor.js"></script>
+    {{-- Notif Toast Css --}}
+    <link rel="stylesheet" href="{{ asset('assets/css/iziToast.min.css') }}">
     {{-- chart js --}}
     <script src="{{ asset('assets/js/chart/Chart.min.js') }}"></script>
 </head>
@@ -44,11 +48,11 @@
                 <ul class="navbar-nav navbar-right">
 
 
-                    <li class="dropdown"><a href="#" data-toggle="dropdown"
+                    <li class="dropdown"><a href="/admin/logout" data-toggle="dropdown"
                             class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                             <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}"
                                 class="rounded-circle mr-1">
-                            <div class="d-sm-none d-lg-inline-block">Hi, Admin</div>
+                            <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::guard('admin')->user()->username }}</div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <a data-toggle="modal" data-target="#modalPengaturan" class="dropdown-item has-icon">
@@ -61,9 +65,6 @@
                                     <i class="fas fa-sign-out-alt"> Keluar</i>
                                 </button>
                             </form>
-                            {{-- <a href="/admin/logout" class="dropdown-item has-icon text-danger">
-                                <i class="fas fa-sign-out-alt"></i> Keluar
-                            </a> --}}
                         </div>
                     </li>
                 </ul>
@@ -79,7 +80,7 @@
                                 href="/admin/dashboard"><i class="fa-brands fa-hotjar"></i><span>Dashboard</span></a>
                         </li>
                         <li class="{{ $judul == 'Praktikum' ? 'active' : '' }}"><a class="nav-link"
-                                href="/admin/praktikum"><i class="fa-solid fa-book"></i> <span>Pelajaran</span></a></li>
+                                href="/admin/praktikum"><i class="fa-solid fa-book"></i> <span>Praktikum</span></a></li>
                         <li class=" {{ $judul == 'Materi' ? 'active' : '' }}"><a class="nav-link"
                                 href="/admin/materi"><i class="fa-solid fa-file-code"></i> <span>Materi</span></a></li>
                         <li class="{{ $judul == 'Latihan' ? 'active' : '' }}"><a class="nav-link"
@@ -159,7 +160,9 @@
     <!-- Template JS File -->
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
-    <script src="{{ asset('assets/js/myScript.js') }}"></script>
+    {{-- Notif --}}
+    <script src="{{ asset('assets/js/notif.js') }}"></script>
+
 
     <script>
         // Set new default font family and font color to mimic Bootstrap's default styling
@@ -283,6 +286,7 @@
                 }
             }
         });
+
     </script>
 
 
@@ -290,11 +294,12 @@
         $(document).ready(function() {
             $('#example').DataTable();
         });
+
     </script>
 
     @yield('ckeditor1')
     @yield('ckeditor2')
-    <!-- Page Specific JS File -->
+
 </body>
 
 </html>

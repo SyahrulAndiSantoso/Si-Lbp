@@ -1,7 +1,32 @@
 @extends('layouts.main')
 
 @section('konten')
+    {{-- Notif Berhasil --}}
+    @if (session()->has('sukses tambah'))
+        <div class="flash-data" data-flashdata="{{ session('sukses tambah') }}" data-halaman="Latihan">
+        </div>
+    @elseif(session()->has('sukses update'))
+        <div class="flash-data" data-flashdata="{{ session('sukses update') }}" data-halaman="Latihan">
+        </div>
+    @elseif(session()->has('sukses hapus'))
+        <div class="flash-data" data-flashdata="{{ session('sukses hapus') }}" data-halaman="Latihan">
+        </div>
+    @endif
+    {{-- Notif Gagal --}}
+    @error('soal')
+        <div class="flash-data" data-flashdata="Gagal" data-halaman="Latihan">
+        </div>
+    @enderror
 
+    @error('jawaban')
+        <div class="flash-data" data-flashdata="Gagal" data-halaman="Latihan">
+        </div>
+    @enderror
+
+    @error('kisi_kisi')
+        <div class="flash-data" data-flashdata="Gagal" data-halaman="Latihan">
+        </div>
+    @enderror
     <!-- Modal Tambah -->
     <div class="modal fade modal-fullscreen" id="modalTambah" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -18,11 +43,18 @@
                         @csrf
                         <div class="mb-3">
                             <label class="form-label">Soal</label>
-                            <textarea class="form-control" name="soal" id="soal" style="height: 100px"></textarea>
+                            <textarea class="form-control" name="soal" id="soal" style="height: 100px" required></textarea>
+                            @error('soal')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Jawaban</label>
-                            <textarea class="form-control" name="jawaban" id="jawaban" style="height: 100px"></textarea>
+                            <textarea class="form-control" name="jawaban" id="jawaban" style="height: 100px"
+                                required></textarea>
+                            @error('jawaban')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Praktikum</label>
@@ -42,7 +74,11 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Kisi - kisi</label>
-                            <input type="text" class="form-control" id="kisi_kisi" name="kisi_kisi">
+                            <input type="text" class="form-control @error('kisi_kisi') is-invalid @enderror" id="kisi_kisi"
+                                name="kisi_kisi" value="{{ old('kisi_kisi') }}" required>
+                            @error('kisi_kisi')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
@@ -90,8 +126,9 @@
                                                         <td>{{ $row->kisi_kisi }}</td>
                                                         <td>
                                                             <a href="/latihan/delete/{{ $row->id_latihan }}"
-                                                                class="btn btn-danger">Hapus</a>
-                                                            <a href="/latihan/view-edit/{{ $row->id_latihan }}" class="btn btn-warning text-white">Edit</a>
+                                                                class="btn btn-danger tombol-hapus">Hapus</a>
+                                                            <a href="/latihan/view-edit/{{ $row->id_latihan }}"
+                                                                class="btn btn-warning text-white">Edit</a>
                                                         </td>
                                                     </tr>
                                                 @endforeach

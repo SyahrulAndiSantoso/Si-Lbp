@@ -1,6 +1,32 @@
 @extends('layouts.main')
 
 @section('konten')
+    {{-- Notif Berhasil --}}
+    @if (session()->has('sukses tambah'))
+        <div class="flash-data" data-flashdata="{{ session('sukses tambah') }}" data-halaman="Materi">
+        </div>
+    @elseif(session()->has('sukses update'))
+        <div class="flash-data" data-flashdata="{{ session('sukses update') }}" data-halaman="Materi">
+        </div>
+    @elseif(session()->has('sukses hapus'))
+        <div class="flash-data" data-flashdata="{{ session('sukses hapus') }}" data-halaman="Materi">
+        </div>
+    @endif
+    {{-- Notif Gagal --}}
+    @error('nama_materi')
+        <div class="flash-data" data-flashdata="Gagal" data-halaman="Materi">
+        </div>
+    @enderror
+
+    @error('isi_materi')
+        <div class="flash-data" data-flashdata="Gagal" data-halaman="Materi">
+        </div>
+    @enderror
+
+    @error('praktikum_id')
+        <div class="flash-data" data-flashdata="Gagal" data-halaman="Materi">
+        </div>
+    @enderror
     <!-- Modal Tambah -->
     <div class="modal fade modal-fullscreen" id="modalTambah" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -18,11 +44,15 @@
                         @csrf
                         <div class="mb-3">
                             <label class="form-label">Nama Materi</label>
-                            <input type="text" class="form-control" id="namaMateri1" name="nama_materi">
+                            <input type="text" class="form-control @error('nama_materi') is-invalid @enderror"
+                                id="nama_materi" name="nama_materi" required>
+                            @error('nama_materi')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Praktikum</label>
-                            <select class="form-control" id="praktikum" name="praktikum_id">
+                            <select class="form-control" id="praktikum_id" name="praktikum_id">
                                 <optgroup label="PRAKTIKUM">
                                     @foreach ($data_praktikum as $row)
                                         <option value="{{ $row->id_praktikum }}">{{ $row->nama_praktikum }}</option>
@@ -32,8 +62,11 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Isi Materi</label>
-                            <textarea class="form-control" name="isi_materi" id="isi_materi"
-                                style="height: 100px"> </textarea>
+                            <textarea class="form-control" name="isi_materi" id="isi_materi" style="height: 100px"
+                                required> </textarea>
+                            @error('isi_materi')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
@@ -62,7 +95,7 @@
                                                 <tr>
                                                     <th>No</th>
                                                     <th>Nama Materi</th>
-                                                    <th>excerpt</th>
+                                                    <th>Isi Materi</th>
                                                     <th>Pelajaran</th>
                                                     <th>Aksi</th>
                                                 </tr>
@@ -70,14 +103,14 @@
                                             <tbody>
                                                 @foreach ($data as $row)
                                                     <tr>
-                                                        <td>1</td>
+                                                        <td>{{ $loop->iteration }}</td>
                                                         <td>{{ $row->nama_materi }}</td>
                                                         {{-- <td>{!! $row->isi_materi !!}</td> --}}
-                                                        <td>{{'Excertp'}}</td>
+                                                        <td>{{ $row->isi_materi }}</td>
                                                         <td>{{ $row->praktikum->nama_praktikum }}</td>
                                                         <td>
                                                             <a href="/materi/delete/{{ $row->id_materi }}" id="hapus"
-                                                                class="btn btn-danger">Hapus</a>
+                                                                class="btn btn-danger tombol-hapus">Hapus</a>
                                                             <a href="/materi/view-edit/{{ $row->id_materi }}"
                                                                 style="cursor:pointer"
                                                                 class="btn btn-warning text-white tombol-edit-materi">Edit</a>

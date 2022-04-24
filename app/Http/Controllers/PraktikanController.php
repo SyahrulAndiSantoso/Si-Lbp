@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 
 class PraktikanController extends Controller
@@ -28,8 +29,15 @@ class PraktikanController extends Controller
 
     public function store(Request $request)
     {
-        Praktikan::create($request->all());
-        return redirect()->route('viewPraktikan');
+        $validatedData = $request->validate([
+            "npm" => "required|min:13|max:30",
+            "nama_praktikan" => "required|min:3",
+            "notelp" => "required|min:12",
+            "email" => "required|email:dns",
+            "password" => "required|min:7"
+        ]);
+        Praktikan::create($validatedData);
+        return back()->with('sukses tambah', 'Menambahkan');
     }
 
     public function viewEdit($id)
@@ -42,15 +50,22 @@ class PraktikanController extends Controller
     public function update(Request $request)
     {
         $data = Praktikan::find($request->id_praktikan);
-        $data->update($request->all());
-        return redirect()->route('viewPraktikan');
+        $validatedData = $request->validate([
+            "npm" => "required|min:13|max:30",
+            "nama_praktikan" => "required|min:3",
+            "notelp" => "required|min:12",
+            "email" => "required|email:dns",
+            "password" => "required|min:7"
+        ]);
+        $data->update($validatedData);
+        return redirect()->route('viewPraktikan')->with('sukses update', 'Mengupdate');
     }
 
     public function delete($id)
     {
         $data = Praktikan::find($id);
         $data->delete();
-        return redirect()->route('viewPraktikan');
+        return redirect()->route('viewPraktikan')->with('sukses hapus', 'Menghapus');
     }
 
     public function register(Request $request)
@@ -84,19 +99,30 @@ class PraktikanController extends Controller
 
     public function loginPraktikan(Request $request)
     {
-        $npm = $request->input('npm');
-        $password = $request->input('password');
+        $this->validate($request, [
+        'npm' => 'required',
+        'password' => 'required'
+        ]);
 
-        $praktikan = Praktikan::where(['npm' => $npm])->first();
-
-        if ($praktikan == null) {
-            return redirect('/masuk')->with('failed', 'login gagal');
-        } else if ($praktikan->npm == $npm and Hash::check($password, $praktikan->password)) {
+        if (Auth::guard('praktikan')->attempt(['npm' => $request->npm, 'password' => $request->password])) {
             $request->session()->regenerate();
-            Session::put('id', $praktikan->id_praktikan);
-            Session::put('npm', $npm);
-            return redirect()->intended('/dashboard');
+        return redirect()->intended('/dashboard')->with('sukses','berhasil');
         }
+
+        return redirect()->intended('/masuk')->with('login gagal','gagal');
+
+        // $npm = $request->input('npm');
+        // $password = $request->input('password');
+
+        // $praktikan = Praktikan::where(['npm' => $npm])->first();
+
+        // if ($praktikan == null) {
+        //     return redirect('/masuk')->with('failed', 'login gagal');
+        // } else if ($praktikan->npm == $npm and Hash::check($password, $praktikan->password)) {
+        //     $request->session()->regenerate();
+        //     Session::put('npm', $npm);
+        //     return redirect()->intended('/dashboard');
+        // }
     }
 
     public function logout()

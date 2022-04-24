@@ -1,5 +1,9 @@
 @extends('layouts.main')
 @section('konten')
+    @if (session()->has('sukses'))
+        <div class="flash-data" data-flashdata="{{ session('sukses') }}" data-halaman="admin">
+        </div>
+    @endif
     <section class="section">
         <div class="card" style="background-color: #FCFCFE;">
             <div class="card-body">
@@ -44,7 +48,7 @@
                                     <h4>Total Latihan</h4>
                                 </div>
                                 <div class="card-body">
-                                    {{-- {{$latihan}} --}}
+                                    {{-- {{$latihan}}y --}}
                                 </div>
                             </div>
                         </div>

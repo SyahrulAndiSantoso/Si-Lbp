@@ -53,8 +53,15 @@ return [
             'driver' => 'token',
             'provider' => 'admin',
         ],
+        'praktikan' => [
+            'driver' => 'session',
+            'provider' => 'praktikan',
+        ],
 
-
+        'praktikan-api' => [
+            'driver' => 'token',
+            'provider' => 'praktikan',
+        ],
     ],
 
     /*
@@ -82,6 +89,10 @@ return [
         'admin' => [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
+        ],
+        'praktikan' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Praktikan::class,
         ],
 
         // 'users' => [

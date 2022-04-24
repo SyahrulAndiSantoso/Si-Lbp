@@ -5,8 +5,11 @@ namespace App\Models;
 use Database\Seeders\latihan;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class Praktikan extends Model
+class Praktikan extends Authenticatable
 {
     use HasFactory;
     protected $table = "praktikans";
@@ -18,6 +21,7 @@ class Praktikan extends Model
         'notelp',
         'email',
     ];
+
 
     // public function praktikum()
     // {
@@ -33,5 +37,8 @@ class Praktikan extends Model
         return $this->belongsToMany('praktikan_id','id_praktikan');
     }
 
-
+    public function praktikum()
+    {
+        return $this->belongsTo(Praktikum::class, 'praktikum_id', 'id_praktikum');
+    }
 }
