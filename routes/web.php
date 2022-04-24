@@ -70,10 +70,12 @@ Route::get('/pengaturan', function () {
 
 // ---------------- Quiz ---------------------
 Route::get('/praktikum', [QuizController::class, 'praktikum']);
-Route::get('/panduan-praktikum', [QuizController::class, 'PanduanPraktikum']);
+Route::post('/panduan-praktikum/{id}', [QuizController::class, 'PanduanPraktikum']);
 Route::get('/penjelasan-praktikum/{id}', [QuizController::class, 'PenjelasanPraktikum']);
 Route::get('/pengerjaan-soal/{id}', [QuizController::class, 'PengerjaanSoal']);
-Route::get('/cek-jawaban', [QuizController::class, 'cekJawaban']);
+Route::get('/cek-jawaban', [QuizController::class, 'cekJawaban'])->name('CekJawaban');
+Route::get('validasi-jawaban', [QuizController::class, 'ValidasiJawaban'])->name('ValidasiJawaban');
+Route::get('ChangeMateri', [QuizController::class, 'ChangeMateri'])->name('ChangeMateri');
 
 });
 

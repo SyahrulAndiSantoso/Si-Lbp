@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Praktikan;
+use Database\Seeders\praktikan as SeedersPraktikan;
 use App\Models\AccessQuiz;
 use App\Models\Materi;
 use Illuminate\Http\Request;
@@ -10,7 +11,6 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
-
 
 class PraktikanController extends Controller
 {
@@ -99,10 +99,10 @@ class PraktikanController extends Controller
 
     public function loginPraktikan(Request $request)
     {
-        $this->validate($request, [
-        'npm' => 'required',
-        'password' => 'required'
-        ]);
+        // $this->validate($request, [
+        // 'npm' => 'required',
+        // 'password' => 'required'
+        // ]);
 
         if (Auth::guard('praktikan')->attempt(['npm' => $request->npm, 'password' => $request->password])) {
             $request->session()->regenerate();
@@ -110,19 +110,6 @@ class PraktikanController extends Controller
         }
 
         return redirect()->intended('/masuk')->with('login gagal','gagal');
-
-        // $npm = $request->input('npm');
-        // $password = $request->input('password');
-
-        // $praktikan = Praktikan::where(['npm' => $npm])->first();
-
-        // if ($praktikan == null) {
-        //     return redirect('/masuk')->with('failed', 'login gagal');
-        // } else if ($praktikan->npm == $npm and Hash::check($password, $praktikan->password)) {
-        //     $request->session()->regenerate();
-        //     Session::put('npm', $npm);
-        //     return redirect()->intended('/dashboard');
-        // }
     }
 
     public function logout()

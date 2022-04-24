@@ -20,7 +20,7 @@ class QuizController extends Controller
     public function PanduanPraktikum($id_praktikum){
         $judul = 'Panduan Praktikum';
 		$JudulPanduan = ($id_praktikum==1) ? "Pemrograman Terstruktur" : "Struktur Data"; // mengecek judul panduan berdasarkan id pada parameter
-		$id_praktikan = Session::get('id'); 
+		$id_praktikan = request()->id_praktikan; 
 		$AQ = AccessQuiz::first()->Quiz($id_praktikan,$id_praktikum); // mendapatkan access quiz dengan idpraktikan dan idpraktikum
 		$AQ = $AQ[0]; //membuka array dari AQ[0] jadi AQ
 
@@ -145,12 +145,13 @@ class QuizController extends Controller
 				'penanda'     => $penanda,
 				'idLatihan'   => $latihan->id_latihan,
 				'idPraktikum' => $idPraktikum,
-				'idPraktikan' => Session::get('id'),
+				'idPraktikan' => request()->id_praktikan,
 			];
 		}
 	}
 
 	public function ChangeMateri(Request $request){
+		// dd($request->all());
 		$idLatihan = AccessQuiz::first()->getIdLatihanFromAccessQuiz($request->idPraktikum, $request->idLatihan, $request->idPraktikan);
 		$idLatihan = $idLatihan[0]->id_latihan; //idLatihan saat ini
 		$allLatihan = AccessQuiz::first()->getAllLatihan($request->idPraktikum); //semua id latihan pada praktikum tertentu

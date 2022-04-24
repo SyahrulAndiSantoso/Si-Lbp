@@ -18,6 +18,7 @@ main() {
                     <input type="hidden" class="form-control" id="input" name="input">
                     <input type="hidden" class="form-control" id="hasil" name="hasil">
                     <input type="hidden" class="form-control" value="{{$latihan->id_latihan}}" name="id_latihan">
+                    <input type="hidden" class="form-control" name="id_praktikan" value="{{ Auth::guard('praktikan')->user()->id_praktikan }}">
                     <div class="row justify-content-lg-end justify-content-end">
                         <button   id="tombol"  class="btn bg-warning m-3 text-white rounded-5 fs-6 w-25 shadow-sm">Run</button>
                         <button  id="jawab" class="btn bg-button m-3 text-white rounded-5 fs-6 w-25 shadow-sm">Jawab</button>
