@@ -34,6 +34,16 @@ if(flashData == "Menambahkan"||flashData == "Mengupdate"||flashData == "Menghapu
     title: 'Login',
     message: Halaman+' '+flashData,
 });
+}else if(flashData == "registrasi"){
+  iziToast.success({
+    title: 'Registrasi',
+    message: Halaman+' '+'berhasil',
+});
+}else if(flashData == "logout"){
+  iziToast.success({
+    title: 'Logout',
+    message: Halaman+' '+'berhasil',
+});
 }
 
 // Tombol Hapus

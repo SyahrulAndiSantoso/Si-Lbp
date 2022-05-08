@@ -70,31 +70,32 @@ class PraktikanController extends Controller
 
     public function register(Request $request)
     {
-
-        Praktikan::create([
-            'npm' => $request->npm,
-            'nama_praktikan' => $request->nama_praktikan,
-            'password' => bcrypt($request->password),
-            'notelp' => $request->notelp,
-            'email' => $request->email,
+        $validatedData = $request->validate([
+            'npm' => 'required|min:7',
+            'nama_praktikan' => 'required|min:5',
+            'password' => 'required|min:7',
+            'notelp' => 'required|min:11',
+            'email' => 'required|email:dns'
         ]);
-        
+        $validatedData['password'] = bcrypt($validatedData['password']);
+        Praktikan::create($validatedData);
+
         // setting default praktikum praktikan ketika awal register
         $id_praktikan = Praktikan::where(['npm' => $request->npm])->first()->id_praktikan;
         AccessQuiz::create([
-           'praktikan_id' => $id_praktikan,
-           'praktikum_id' => 1,
-           'materi_id'    => 1,
-         ]);
-          // setting default praktikum praktikan ketika awal register
-        $awalmateri = Materi::where(['praktikum_id'=>2])->first()->id_materi;
+            'praktikan_id' => $id_praktikan,
+            'praktikum_id' => 1,
+            'materi_id'    => 1,
+        ]);
+        // setting default praktikum praktikan ketika awal register
+        $awalmateri = Materi::where(['praktikum_id' => 2])->first()->id_materi;
         AccessQuiz::create([
-           'praktikan_id' => $id_praktikan,
-           'praktikum_id' => 2,
-           'materi_id'    => $awalmateri,
-         ]);
+            'praktikan_id' => $id_praktikan,
+            'praktikum_id' => 2,
+            'materi_id'    => $awalmateri,
+        ]);
 
-        return redirect('/masuk');
+        return redirect('/masuk')->with('registrasi berhasil', 'registrasi');
     }
 
     public function loginPraktikan(Request $request)
@@ -106,10 +107,10 @@ class PraktikanController extends Controller
 
         if (Auth::guard('praktikan')->attempt(['npm' => $request->npm, 'password' => $request->password])) {
             $request->session()->regenerate();
-        return redirect()->intended('/dashboard')->with('sukses','berhasil');
+            return redirect()->intended('/dashboard')->with('sukses', 'berhasil');
         }
 
-        return redirect()->intended('/masuk')->with('login gagal','gagal');
+        return redirect()->intended('/masuk')->with('login gagal', 'gagal');
     }
 
     public function logout()
@@ -117,6 +118,6 @@ class PraktikanController extends Controller
         request()->session()->invalidate();
         request()->session()->regenerateToken();
         Session::flush();
-        return redirect('/masuk');
+        return redirect('/masuk')->with('logout', 'logout');
     }
 }

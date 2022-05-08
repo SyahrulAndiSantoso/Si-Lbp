@@ -34,38 +34,56 @@
                                     @csrf
                                     <div class="form-group">
                                         <label for="email">Npm</label>
-                                        <input id="npm" type="text" class="form-control" name="npm">
-                                        <div class="invalid-feedback">
-                                        </div>
+                                        <input id="npm" type="text"
+                                            class="form-control @error('npm') is-invalid @enderror" name="npm"
+                                            value="{{ old('npm') }}">
+                                        @error('npm')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group">
                                         <label for="email">Nama</label>
-                                        <input id="nama_praktikan" type="text" class="form-control"
-                                            name="nama_praktikan">
-                                        <div class="invalid-feedback">
-                                        </div>
+                                        <input id="nama_praktikan" type="text"
+                                            class="form-control @error('nama_praktikan') is-invalid @enderror"
+                                            value="{{ old('nama_praktikan') }}" name="nama_praktikan">
+                                        @error('nama_praktikan')
+
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group">
                                         <label for="email">Kata Sandi</label>
-                                        <input id="password" type="password" class="form-control" name="password">
-                                        <div class="invalid-feedback">
-                                        </div>
+                                        <input id="password" type="password"
+                                            class="form-control @error('password') is-invalid @enderror"
+                                            value="{{ old('password') }}" name="password">
+                                        @error('password')
+
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group">
                                         <label for="email">No.Hp/Whatsapp</label>
-                                        <input id="notelp" type="number" class="form-control" name="notelp">
-                                        <div class="invalid-feedback">
-                                        </div>
+                                        <input id="notelp" type="number"
+                                            class="form-control @error('notelp') is-invalid @enderror"
+                                            value="{{ old('notelp') }}" name="notelp">
+                                        @error('notelp')
+                                            <div class="text-danger">{{ $message }}</div>
+
+                                        @enderror
                                     </div>
 
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input id="email" type="text" class="form-control" name="email">
-                                        <div class="invalid-feedback">
-                                        </div>
+                                        <input id="email" type="text"
+                                            class="form-control @error('email') is-invalid @enderror"
+                                            value="{{ old('email') }}" name="email">
+                                        @error('email')
+                                            <div class="text-danger">{{ $message }}</div>
+
+                                        @enderror
                                     </div>
 
                                     <div class="form-group">

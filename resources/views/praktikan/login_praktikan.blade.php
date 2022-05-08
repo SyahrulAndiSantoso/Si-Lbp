@@ -25,6 +25,12 @@
      @if (session()->has('login gagal'))
         <div class="flash-data" data-flashdata="{{ session('login gagal') }}" data-halaman="praktikan">
         </div>
+        @elseif (session()->has('registrasi berhasil'))
+        <div class="flash-data" data-flashdata="{{ session('registrasi berhasil') }}" data-halaman="praktikan">
+        </div>
+        @elseif (session()->has('logout'))
+        <div class="flash-data" data-flashdata="{{ session('logout') }}" data-halaman="praktikan">
+        </div>
     @endif
     <div id="app">
         <section class="section">
@@ -41,8 +47,11 @@
                                     @csrf
                                     <div class="form-group">
                                         <label for="email">Npm</label>
-                                        <input id="npm" type="text" class="form-control" name="npm" tabindex="1"
+                                        <input id="npm" type="text" class="form-control @error('npm') is-invalid @enderror" name="npm" value="{{ old('npm') }}" tabindex="1"
                                             required autofocus>
+                                            @error('npm')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                                     </div>
 
                                     <div class="form-group">
@@ -54,8 +63,11 @@
                                                 </a>
                                             </div>
                                         </div>
-                                        <input id="password" type="password" class="form-control" name="password"
-                                            tabindex="2" required>
+                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password"
+                                        value="{{ old('password') }}" tabindex="2" required>
+                                        @error('password')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group">
