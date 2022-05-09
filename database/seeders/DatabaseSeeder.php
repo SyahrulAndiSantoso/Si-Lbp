@@ -20,9 +20,10 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             praktikum::class,
-            praktikan::class,
             SeedersMateri::class,
             latihan::class,
+            praktikan::class,
+            AccessQuiz::class,
             admin::class,
         ]);
     }

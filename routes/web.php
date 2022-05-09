@@ -27,11 +27,7 @@ Route::get('/', function () {
         'judul' => 'Home'
     ]);
 });
-Route::get('/panduan', function () {
-    return view('praktikan.panduan', [
-        'judul' => 'Panduan'
-    ]);
-});
+
 Route::get('/peringkat', function () {
     return view('praktikan.peringkat', [
         'judul' => 'Peringkat'
@@ -74,10 +70,12 @@ Route::get('/pengaturan', function () {
 
 // ---------------- Quiz ---------------------
 Route::get('/praktikum', [QuizController::class, 'praktikum']);
-Route::get('/panduan-praktikum', [QuizController::class, 'PanduanPraktikum']);
+Route::post('/panduan-praktikum/{id}', [QuizController::class, 'PanduanPraktikum']);
 Route::get('/penjelasan-praktikum/{id}', [QuizController::class, 'PenjelasanPraktikum']);
 Route::get('/pengerjaan-soal/{id}', [QuizController::class, 'PengerjaanSoal']);
-Route::get('/cek-jawaban', [QuizController::class, 'cekJawaban']);
+Route::get('/cek-jawaban', [QuizController::class, 'cekJawaban'])->name('CekJawaban');
+Route::get('validasi-jawaban', [QuizController::class, 'ValidasiJawaban'])->name('ValidasiJawaban');
+Route::get('ChangeMateri', [QuizController::class, 'ChangeMateri'])->name('ChangeMateri');
 
 });
 
@@ -136,6 +134,7 @@ Route::post('/admin/logout', [AdminController::class, 'logout']);
 Route::post('/praktikan/login', [PraktikanController::class, 'loginPraktikan'])->name('loginPraktikan');
 Route::get('/praktikan/logout', [PraktikanController::class, 'logout']);
 Route::post('/praktikan/register', [PraktikanController::class, 'register']);
+
 
 // --------- CKEditor ------------------------
 // route upload image

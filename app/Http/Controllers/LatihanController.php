@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Praktikum;
 use App\Models\latihan;
-use App\Models\materi;
+use App\Models\Materi;
 use App\Models\Kisi_Kisi;
 
 use Illuminate\Http\Request;
@@ -24,7 +24,8 @@ class LatihanController extends Controller
     {
         $data = latihan::all();
         $judul = "Latihan";
-        $data_materi = materi::all();
+        $data_materi = Materi::first()->getMateri();
+        // dd($data_materi);
         $data_praktikum = praktikum::all();
         return view('admin.latihan', compact('data', 'judul', 'data_materi', 'data_praktikum'));
     }

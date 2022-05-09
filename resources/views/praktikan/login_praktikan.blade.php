@@ -15,15 +15,21 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/components.css') }}">
-     {{-- Notif Toast Js --}}
+    {{-- Notif Toast Js --}}
     <script src="{{ asset('assets/js/iziToast.min.js') }}"></script>
-     {{-- Notif Toast Css --}}
+    {{-- Notif Toast Css --}}
     <link rel="stylesheet" href="{{ asset('assets/css/iziToast.min.css') }}">
 </head>
 
 <body>
-     @if (session()->has('login gagal'))
+    @if (session()->has('login gagal'))
         <div class="flash-data" data-flashdata="{{ session('login gagal') }}" data-halaman="praktikan">
+        </div>
+    @elseif (session()->has('registrasi berhasil'))
+        <div class="flash-data" data-flashdata="{{ session('registrasi berhasil') }}" data-halaman="praktikan">
+        </div>
+    @elseif (session()->has('logout'))
+        <div class="flash-data" data-flashdata="{{ session('logout') }}" data-halaman="praktikan">
         </div>
     @endif
     <div id="app">
@@ -41,9 +47,13 @@
                                     @csrf
                                     <div class="form-group">
                                         <label for="email">Npm</label>
-                                        <input id="npm" type="text" class="form-control" name="npm" tabindex="1"
-                                            required autofocus>
+                                        <input id="npm" type="text"
+                                            class="form-control @error('npm') is-invalid @enderror" name="npm"
+                                            value="{{ old('npm') }}" tabindex="1" required autofocus>
                                     </div>
+                                    @error('npm')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
 
                                     <div class="form-group">
                                         <div class="d-block">
@@ -54,8 +64,12 @@
                                                 </a>
                                             </div>
                                         </div>
-                                        <input id="password" type="password" class="form-control" name="password"
-                                            tabindex="2" required>
+                                        <input id="password" type="password"
+                                            class="form-control @error('password') is-invalid @enderror" name="password"
+                                            value="{{ old('password') }}" tabindex="2" required>
+                                        @error('password')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group">

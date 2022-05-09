@@ -26,7 +26,13 @@
                         <p class="px-4 fs-12 mb-5" style="font-size: 12px;">Pada Praktikum Pemrograman Terstruktur membahas tentang tipe data, operator, pengkondisian, looping array, operasi string, dan function</p>
 
                         <div class="d-flex justify-content-center">
-                            <a class="btn bg-button text-white rounded m-3 w-25 shadow-sm" href="/panduan-praktikum">pilih</a>
+                            <form action="/panduan-praktikum/1" method="POST">
+                            {{-- <a class="btn bg-button text-white rounded m-3 w-25 shadow-sm" href="/panduan-praktikum/1">pilih</a>  --}}   
+                            @csrf
+                            <input type="hidden" name="id_praktikan" value="{{ Auth::guard('praktikan')->user()->id_praktikan }}">
+                            <button class="btn bg-button text-white rounded w-100 shadow-sm">pilih</button>
+                            </form>
+                            
                         </div>
                     </div>
                 </div>
@@ -39,7 +45,13 @@
                         <p class="px-4 fs-12 mb-5" style="font-size: 12px;">Pada Praktikum Struktur Data, membahas tentang struct, stack, queue, search, sorting, pointer, dan linked list</p>
 
                         <div class="d-flex justify-content-center">
-                            <a class="btn bg-button text-white rounded m-3 w-25 shadow-sm" href="/panduan-praktikum">pilih</a>
+                            {{-- <a class="btn bg-button text-white rounded m-3 w-25 shadow-sm" href="/panduan-praktikum/2">pilih</a> --}}
+                            <form action="/panduan-praktikum/2" method="POST">
+                                {{-- <a class="btn bg-button text-white rounded m-3 w-25 shadow-sm" href="/panduan-praktikum/1">pilih</a>  --}}   
+                                @csrf
+                                <input type="hidden" name="id_praktikan" value="{{ Auth::guard('praktikan')->user()->id_praktikan }}">
+                                <button class="btn bg-button text-white rounded w-100 shadow-sm">pilih</button>
+                                </form>
                         </div>
                     </div>
                 </div>

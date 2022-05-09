@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style1.css') }}">
     {{-- Fontawesome Libraries --}}
   <link href="{{ asset('assets/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+
+    <link href="{{ asset('assets/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+
   <link rel="stylesheet" href="{{asset('assets/css/vibrant-ink.min.css')}}">
   {{-- Notif Toast Js --}}
     <script src="{{ asset('assets/js/iziToast.min.js') }}"></script>
