@@ -100,12 +100,12 @@ class PraktikanController extends Controller
 
     public function loginPraktikan(Request $request)
     {
-        // $this->validate($request, [
-        // 'npm' => 'required',
-        // 'password' => 'required'
-        // ]);
+        $credentials = $request->validate([
+            "npm" => "required",
+            "password" => "required"
+        ]);
 
-        if (Auth::guard('praktikan')->attempt(['npm' => $request->npm, 'password' => $request->password])) {
+        if (Auth::guard('praktikan')->attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended('/dashboard')->with('sukses', 'berhasil');
         }
