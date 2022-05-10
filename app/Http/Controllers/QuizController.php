@@ -23,7 +23,7 @@ class QuizController extends Controller
 		$id_praktikan = request()->id_praktikan; 
 		$AQ = AccessQuiz::first()->Quiz($id_praktikan,$id_praktikum); // mendapatkan access quiz dengan idpraktikan dan idpraktikum
 		$AQ = $AQ[0]; //membuka array dari AQ[0] jadi AQ
-
+		
         return view('praktikan.panduan-praktikum',compact('judul','JudulPanduan','AQ'));
     }
 

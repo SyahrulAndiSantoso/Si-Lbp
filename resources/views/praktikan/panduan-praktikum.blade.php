@@ -31,7 +31,7 @@
                     </div>
 
                     <div class="d-flex justify-content-end m-3">
-                        <a class="btn bg-button text-white rounded" href="/penjelasan-praktikum/{{$AQ->id_materi}}">Mulai Sekarang</a>
+                        <a class="btn bg-button text-white rounded" href="/penjelasan-praktikum/{{$AQ->materi_id}}">Mulai Sekarang</a>
                     </div>
 
                 </div>
