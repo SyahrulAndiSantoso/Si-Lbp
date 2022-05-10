@@ -32,9 +32,9 @@ class PraktikanController extends Controller
         $validatedData = $request->validate([
             "npm" => "required|min:13|max:30",
             "nama_praktikan" => "required|min:3",
-            "notelp" => "required|min:12",
+            "notelp" => "required|min:10|max:13",
             "email" => "required|email:dns",
-            "password" => "required|min:7"
+            "password" => "required|min:8"
         ]);
         Praktikan::create($validatedData);
         return back()->with('sukses tambah', 'Menambahkan');
@@ -53,9 +53,9 @@ class PraktikanController extends Controller
         $validatedData = $request->validate([
             "npm" => "required|min:13|max:30",
             "nama_praktikan" => "required|min:3",
-            "notelp" => "required|min:12",
+            "notelp" => "required|min:10|max:13",
             "email" => "required|email:dns",
-            "password" => "required|min:7"
+            "password" => "required|min:8"
         ]);
         $data->update($validatedData);
         return redirect()->route('viewPraktikan')->with('sukses update', 'Mengupdate');
@@ -71,10 +71,10 @@ class PraktikanController extends Controller
     public function register(Request $request)
     {
         $validatedData = $request->validate([
-            'npm' => 'required|min:7',
+            'npm' => 'required|min:15',
             'nama_praktikan' => 'required|min:5',
-            'password' => 'required|min:7',
-            'notelp' => 'required|min:11',
+            'password' => 'required|min:8',
+            'notelp' => 'required|min:10|max:13',
             'email' => 'required|email:dns'
         ]);
         $validatedData['password'] = bcrypt($validatedData['password']);
