@@ -120,6 +120,7 @@ Route::get('/admin/praktikum', [PraktikumController::class, 'index'])->name("vie
 Route::post('/admin/praktikum/store', [PraktikumController::class, 'store']);
 Route::post('/admin/praktikum/update', [PraktikumController::class, 'update']);
 Route::delete('/admin/praktikum/delete/{number}', [PraktikumController::class, 'destroy']);
+// Route::get('/admin/praktikum/delete/{number}', [PraktikumController::class, 'destroy']);
 Route::get('/admin/edit-praktikum/{id}', [PraktikumController::class, 'edit']);
 
 });

@@ -130,4 +130,13 @@ class PraktikumController extends Controller
         $this->PraktikumModel->find($id)->delete();
         return redirect()->route('viewPraktikum')->with('sukses hapus', 'Menghapus');
     }
+
+    // public function destroy($id)
+    // {
+    //     // if ($request->gambar) {
+    //     //     Storage::delete($request->gambar);
+    //     // }
+    //     $this->PraktikumModel->find($id)->delete();
+    //     return redirect()->route('viewPraktikum')->with('sukses hapus', 'Menghapus');
+    // }
 }

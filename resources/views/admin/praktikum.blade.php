@@ -120,9 +120,11 @@
                                                                 @method('delete')
                                                                 <input type="hidden" name="gambar" id=""
                                                                     value="{{ $p['gambar'] }}">
-                                                                <button id="hapus"
-                                                                    class="btn btn-danger mr-1 tombol-hapus">Hapus</button>
+                                                                <button id="hapus" class="btn btn-danger mr-1" onclick="if (confirm('Apakah Anda Yakin Akan Menghapus Data ? ')) confirmDelete({{$p['id_praktikum']}}); return false">Hapus
+                                                                </button>
+                                                                
                                                             </form>
+                                                            {{-- <a href="/admin/praktikum/delete/{{ $p['id_praktikum'] }}" class="btn btn-danger">Hapus</a> --}}
                                                             <a href="/admin/edit-praktikum/{{ $p['id_praktikum'] }}"
                                                                 class="btn btn-warning text-white">Edit</a>
                                                         </td>
@@ -156,6 +158,15 @@
             oFReader.onload = function(oFREvent) {
                 imgPreview.src = oFREvent.target.result;
             }
+        }
+
+    </script>
+
+    <script>
+        function confirmDelete(id) {
+            .then((willDelete) => {
+                    $('#'+id).submit();
+            });
         }
 
     </script>
