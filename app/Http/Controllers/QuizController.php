@@ -41,69 +41,43 @@ class QuizController extends Controller
         return view('praktikan.pengerjaan_soal',compact('judul','latihan'));
     }
 
+	public function compiler($code){
+
+		$curl = curl_init();
+		
+		curl_setopt_array($curl, array(
+   CURLOPT_URL => 'https://api.jdoodle.com/v1/execute',
+   CURLOPT_RETURNTRANSFER => true,
+   CURLOPT_ENCODING => '',
+   CURLOPT_MAXREDIRS => 10,
+   CURLOPT_TIMEOUT => 0,
+   CURLOPT_FOLLOWLOCATION => true,
+   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+   CURLOPT_CUSTOMREQUEST => 'POST',
+   CURLOPT_POSTFIELDS =>'{
+		  "clientId" : "2fc9c1272f68adca264ff71446d48358",
+		  "clientSecret" : "173d47d487158220c3183e0ac789817729179b17ceb69092059ecf3552b5272a",
+		  "script" : '.$code.',
+		  "language" : "cpp",
+		  "versionIndex" : "5"
+		}
+		',
+		CURLOPT_HTTPHEADER => array(
+			   'Content-Type: application/json'
+		),
+	));
+	$response = curl_exec($curl);
+	curl_close($curl);
+	$hasil = json_decode($response,false);
+	echo $hasil->output;
+	}
+
     public function cekJawaban(Request $request){
-		putenv("PATH=".public_path('minGW/bin'));
-		
-		$CC="g++";
-		$out="a.exe";
-		$code=$request->jawaban;
-
-		$input=$request->input;
-		$filename_code="main.cpp";
-		$filename_in="input.txt";
-		$filename_error="error.txt";
-		$executable="a.exe";
-		$command=$CC." -lm ".$filename_code;	
-		$command_error=$command." 2>".$filename_error;
-		
-		$file_code=fopen($filename_code,"w+");
-		fwrite($file_code,$code);
-		fclose($file_code);
-		$file_in=fopen($filename_in,"w+");
-		fwrite($file_in,$input);
-		fclose($file_in);
-		exec("cacls  $executable /g everyone:f"); 
-		exec("cacls  $filename_error /g everyone:f");	
-
-		shell_exec($command_error);
-		$error=file_get_contents($filename_error);
-
-		if(trim($error)=="")
-		{
-			if(trim($input)=="")
-			{
-				$output=shell_exec($out); //jika tidak ada inputan
-			}
-			else
-			{
-				$out=$out." < ".$filename_in; //ada inputan
-				$output=shell_exec($out);
-			}
-			echo "<pre>$output</pre>";
-		
-		}
-		else if(!strpos($error,"error"))
-		{
-			echo "<pre>$error</pre>";
-			if(trim($input)=="")
-			{
-				$output=shell_exec($out);
-			}
-			else
-			{
-				$out=$out." < ".$filename_in;
-				$output=shell_exec($out);
-			}
-			echo "$output";			
-		}
-		else
-		{
-			echo "<pre>$error</pre>";
-		}
-		exec("del $filename_code");
-		exec("del *.o");
-		exec("del *.txt");
-		exec("del $executable");
+	
+		$newLine = str_replace(array("\r","\n"),"\\n",$request->jawaban); //mengganti enter dgn \n
+		$slash   = str_replace("\"",'\\"',$newLine); // mencari " dan mengganti dengan \\"
+		$code    = '"'.$slash.'"'; //menambahkan petik di awal dan akhir
+		$this->compiler($code);
     }
 
 	public function ValidasiJawaban(Request $request){
@@ -121,8 +95,10 @@ class QuizController extends Controller
 				}else{ 												//kisi-kisi cuma 1
 						$CekKisiKisi = strpos($request->jawaban,$kisi_kisi[0]);  //mengecek jawaban sesuai kisi-kisi, menggunakan cari string (strpos)
 					}
+					
 
-			$jawaban = strpos($request->hasil,$latihan->jawaban); // mengecek jawaban sesuia hasil, menggunakan cari string (strpos)
+			$jawaban = ($request->hasil==$latihan->jawaban)? 1:0; // mengecek jawaban sesuia hasil, menggunakan cari string (strpos)
+
 			$penanda=0;	
 
 				if($jawaban){

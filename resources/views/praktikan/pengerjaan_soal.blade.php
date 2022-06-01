@@ -12,8 +12,10 @@
                             style="font-family: consolas;">#include<iostream>
 using namespace std;
                                                 
-main() {  
-                                                
+int main() {  
+      
+  
+    return 0; 
 }
                                             </textarea>
                         <input type="hidden" class="form-control" id="input" name="input">
@@ -78,12 +80,11 @@ main() {
                     url: "{{ route('CekJawaban', ['_token' => csrf_token()]) }}", //destination
                     datatype: "html", //expected data format from process.php
                     data: $('form').serialize(), //target your form's data and serialize for a POST
-                    success: function(
-                        result) { // data is the var which holds the output of your process.php
-
+                    success: function(result) { // data is the var which holds the output of your process.php
                         // locate the div with #result and fill it with returned data from process.php
                         $('#hasil').val(result);
                         $('#hasil-show').html(result);
+                        
                     }
                 });
             });
