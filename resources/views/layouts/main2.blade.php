@@ -28,43 +28,66 @@
     <title>{{ $judul }}</title>
 </head>
 
-<body>
+<body class="bg-black">
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
-        <div class="container">
-            <a class="navbar-brand" href="/dashboard">
-                <img class="navbar-brand w-101 h-51" src="{{ asset('assets/img/lbp-blue.svg') }}">
-            </a>
+    <div class="card rounded-15" style="width: 93%; height: 919px; background-color: #fff; margin: 30px auto;">
+        <div class="wrapper">
+          <!-- Sidebar -->
+          <nav id="sidebar">
+              <div class="sidebar-header">
+                  <div class="d-flex justify-content-center">
+                    <img src="{{ asset('assets/img/lbp-blue.svg') }}" alt="logo-lbp" width="80px">
+                  </div>
+              </div>
+      
+              <ul class="list-unstyled components px-5">
+                  <li>
+                      <a href="/dashboard" class="text-decoration-none text-dark"><img src="{{ asset('assets/img/home.png') }}" alt="" width="15px" class="me-3">Home</a>
+                  </li>
+                  <li>
+                      <a href="#" class="text-decoration-none text-dark"><img src="{{ asset('assets/img/profile.png') }}" alt="" width="15px" class="me-3">Profile</a>
+                  </li>
+                  <li>
+                      <a href="/praktikum" class="text-decoration-none text-dark"><img src="{{ asset('assets/img/practice.png') }}" alt="" width="15px" class="me-3">Practices</a>
+                  </li>
+                  <li>
+                      <a href="/panduan" class="text-decoration-none text-dark"><img src="{{ asset('assets/img/guide.png') }}" alt="" width="15px" class="me-3">Guides</a>
+                  </li>
+                  <div class="position-absolute rounded-5" style="width: 169.87px; height: 238px; margin-top: 370px; background-color: #E8EDF5;">
+                    
+                      <img src="{{ asset('assets/img/circle.png') }}" alt="" width="80px" class="position-absolute top-0 start-50 translate-middle">
+                    <div class="text-black text-center mt-5">
+                      <h6 class="fw-bold">Join With Us</h6>
+                      <p class="text-black fs-12">
+                      Lorem ipsum dolor sit <br />
+                      amet consectetur <br />
+                      adipisicing elit <br />
+                      sed do eiusmod tempor
+                    </p>
+                    <button class="btn btn-white mb-3 fw-bold">Let's Join</button>
+                    </div>
+                  </div>
+          </nav>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item ms-3">
-                        <a class="nav-link active fw-bolder" aria-current="page" href="/praktikum">Praktikum</a>
-                    </li>
-                    <li class="nav-item ms-3">
-                        <a class="nav-link active fw-bolder" href="/peringkat">Peringkat</a>
-                    </li>
-                </ul>
-                <!-- <div class="row"> -->
-                <div class="col-9 container justify-content-lg-end">
-                    <div class="container col d-flex justify-content-lg-end justify-content-sm-center">
-                        <li class="nav-item dropdown d-flex">
-                            <img class="w-51" src="{{ asset('assets/img/user-akun.png') }}">
-                            <a class="nav-link dropdown-toggle text-reset" href="#" id="navbarDropdownMenuLink"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ Auth::guard('praktikan')->user()->nama_praktikan }}
-                            </a>
-                            <ul class="dropdown-menu px-3" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="/dashboard">
-                                        <img class="w-15 me-2"
-                                            src="{{ asset('assets/img/icon-dashboard.png') }}">
-                                        Dashboard
-                                    </a>
-                                </li>
+          <div id="content" class="rounded-15" style="background-color: #E8EDF5; width: 100%; height: 916px; border: 10px solid #fff;">
+            <nav class="navbar navbar-expand-lg navbar-light bg-tratransparent">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn2" style="background-color: transparent;">
+                        <!-- <i class="fas fa-align-left"></i> -->
+                        <div class="burger">
+                          <span></span>
+                          <span></span>
+                          <span></span>
+                        </div>
+                    </button>
+                    <div class="dropdown me-3">
+                        <img src="{{ asset('assets/img/profile2.png') }}" alt="" width="45px" class="mb-3 me-3">
+                        <a class="btn2 bg-transparent text-decoration-none text-dark fs-14" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ Auth::guard('praktikan')->user()->nama_praktikan }}
+                          <p class="fs-12">{{ Auth::guard('praktikan')->user()->email }}</p>
+                        </a>
+                      
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <li><a class="dropdown-item" href="/pengaturan">
                                         <img class="w-15 me-2"
                                             src="{{ asset('assets/img/icon-pengaturan.png') }}">
@@ -77,23 +100,18 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li>
+        
                     </div>
-
                 </div>
-
-                <!-- </div> -->
-            </div>
-        </div>
-    </nav>
+              </nav>
 
     @yield('konten')
 
     <!-- <footer class="text-center shadow p-3 mt-2 bg-body">Laboratorium Bahasa Pemrograman</footer> -->
-    <div class="w-100 bg-white shadow bottom-0">
+    {{-- <div class="w-100 bg-white shadow bottom-0">
         <h6 class="text-center p-3 my-auto">Made With <i class="text-danger fa-solid fa-heart"></i> <span
                 class="text-primary">By Laboratorium Bahasa Pemrograman</span></h6>
-    </div>
+    </div> --}}
 
     {{-- Notif --}}
     <script src="{{ asset('assets/js/notif.js') }}"></script>
@@ -105,6 +123,16 @@
         $(document).ready(function() {
             $('#example').DataTable();
         });
+    </script>
+
+    <script>
+    $(document).ready(function () {
+    
+    $('#sidebarCollapse').on('click', function () {
+      $('#sidebar').toggleClass('active');
+    });
+    
+    });
     </script>
 
 </body>

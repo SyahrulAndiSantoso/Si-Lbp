@@ -1,23 +1,21 @@
-@extends('layouts.main2')
+@extends('layouts.main4')
 
 @section('konten')
 
-    <div class="container-fluid">
-        <div class="container pt-5 mb-12">
-            <div class="row justify-content-center">
-                <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+    <div class="container-fluid" style="padding: 0px 70px 0px 70px">
+            <div class="row justify-content-center g-5">
+                <div class="col-lg-7 col-md-12 col-sm-12 col-12">
                     <form action="" class="w-100 h-102 mt-5">
-                        <label class="fw-bold fs-5" for="">Code Editor</label>
-                        <textarea class="bg-button rounded-10 text-white w-100 h-52 shadow-sm" name="jawaban"
-                            style="font-family: consolas;">#include<iostream>
+                        <textarea class="rounded-10 px-4 py-4 text-textarea w-100 shadow-sm" name="jawaban"
+                            style="font-family: consolas; height: 605px; background: #3F3948;">#include<iostream>
 using namespace std;
                                                 
 int main() {  
-      
-  
+    
+    
     return 0; 
 }
-                                            </textarea>
+                        </textarea>
                         <input type="hidden" class="form-control" id="input" name="input">
                         <input type="hidden" class="form-control" id="hasil" name="hasil">
                         <input type="hidden" class="form-control" value="{{ $latihan->id_latihan }}" name="id_latihan">
@@ -25,31 +23,30 @@ int main() {
                             value="{{ Auth::guard('praktikan')->user()->id_praktikan }}">
                         <div class="row justify-content-lg-end justify-content-end">
                             <button id="tombol"
-                                class="btn bg-warning m-3 text-white rounded-5 fs-6 w-25 shadow-sm">Run</button>
+                                class="btn m-3 text-dark fw-bold rounded-5 fs-6 w-25 shadow-sm" style="background: #F6EBCF">Running ></button>
                             <button id="jawab"
-                                class="btn bg-button m-3 text-white rounded-5 fs-6 w-25 shadow-sm">Jawab</button>
+                                class="btn m-3 text-white fw-bold rounded-5 fs-6 w-25 shadow-sm" style="background: #3F3948">Jawab</button>
                         </div>
 
                     </form>
                 </div>
 
                 <div class="col-lg-5 col-md-12 col-sm-12">
-                    <label class="fw-bold fs-5 mt-5">Soal</label>
-                    <div class="card w-100 rounded-10 shadow-sm mh-300 h-300">
-
+                    <div class="card w-100 rounded-10 shadow-sm mh-375 h-375 mt-5" style="background: #F6EBCF">
+                        
                         <div class="card-body mh-100 overflow-auto">
+                            <p class="fw-bold fs-5">Soal</p>
                             <p class="card-text">{!! $latihan->soal !!}</p>
                         </div>
                     </div>
-                    <label class="mt-5 fw-bold fs-5" for="">Hasil</label>
-                    <div class="card w-100 rounded-10 shadow-sm mh-300 h-300">
+                    <div class="card w-100 mt-5 rounded-10 shadow-sm mh-200 h-200" style="background: #F6EBCF">
                         <div class="card-body mh-100 overflow-auto">
+                            <p class="fw-bold fs-5">Hasil</p>
                             <p class="card-text" id="hasil-show"></p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 
 
@@ -128,7 +125,7 @@ int main() {
                                         message: 'Telah Menyelesaikan Praktikum',
                                     });
                                 } else {
-                                    window.location.href = "/penjelasan-praktikum/" +
+                                    window.location.href = "/materi-praktikum/" +
                                         result;
                                 }
                             }
@@ -153,6 +150,5 @@ int main() {
         });
 
     </script>
-
 
 @endsection

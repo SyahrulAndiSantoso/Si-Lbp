@@ -27,6 +27,26 @@ class PraktikanController extends Controller
         return view('admin.praktikan', compact('praktikan', 'judul'));
     }
 
+    public function forgotPassword(Request $request)
+    {
+        $credentials = $request->validate([
+            "email" => "required|email:dns",
+        ]);
+
+
+
+        // $data = Praktikan::select('email')->where('email', $credentials)->get();
+        // dd($data);
+
+        // if ($data == $credentials) {
+        $judul = "Reset Password";
+        return view('praktikan.reset-password', compact('judul'));
+        // } else {
+        //     $judul = "Forgot Password";
+        //     return view('praktikan.forgot-password', compact('judul'));
+        // }
+    }
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([

@@ -1,15 +1,15 @@
-@extends('layouts.main3')
+@extends('layouts.main2')
 
 @section('konten')
     
     
 <div class="container-fluid">
-    <div class="container pt-5">
+    <div class="container">
 
         <div class="row justify-content-center">
 
             <div class="col-lg-8 col-md-12 col-sm-12 col-12">
-                <p class="text-center fs-2 fw-bold pt-5 mb-5">PANDUAN PENGGUNAAN APLIKASI</p>
+                <p class="text-center fs-2 fw-bold mb-5">PANDUAN PENGGUNAAN APLIKASI</p>
             </div>
         </div>
 
@@ -46,7 +46,7 @@
 
             <div class="col-lg-8 col-md-12 col-sm-12 col-12">
                 <div class="rounded-pill bg-button">
-                    <p class="text-white py-lg-3 px-lg-3 py-4 px-4 fw-bold">6. Ika praktikan memilih melanjutkan maka akan masuk ke halaman untuk mengerjakan latihan</p>
+                    <p class="text-white py-lg-3 px-lg-3 py-4 px-4 fw-bold">6. JIka praktikan memilih melanjutkan maka akan masuk ke halaman untuk mengerjakan latihan</p>
                 </div>
             </div>
 

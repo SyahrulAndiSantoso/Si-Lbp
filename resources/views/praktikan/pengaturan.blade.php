@@ -2,7 +2,7 @@
 
 @section('konten')
 
-<div class="container d-flex justify-content-center w-50 mb-12 mt-10 ">
+<div class="container d-flex justify-content-center w-100">
     <div class="card w-75 rounded-10">
         <div class="card-header bg-button">
             <h3 class="text-center text-white">Pengaturan Akun</h3>
