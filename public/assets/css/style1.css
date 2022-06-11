@@ -318,6 +318,10 @@ ul ul a {
     );
 }
 
+.canvas .percentage {
+    display: none;
+}
+
 /* Media Query */
 
 @media only screen and (max-width: 576px) {
@@ -676,6 +680,20 @@ ul ul a {
     #sidebar.active {
         margin-left: -250px;
         opacity: 0;
+    }
+
+    .canvas {
+        position: relative;
+    }
+    .canvas .percentage {
+        position: absolute;
+        top: 50%;
+        left: 40%;
+        text-align: center;
+        color: var(--text-color);
+        font-weight: 600;
+        font-size: 16px;
+        display: block;
     }
 }
 

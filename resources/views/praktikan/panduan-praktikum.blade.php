@@ -16,7 +16,7 @@
         </p>
       </div>
       <div>
-        <a class="btn-start text-decoration-none" href="/materi-praktikum/{{$AQ->materi_id}}">Start Practice</a>
+        <a class="btn-start text-decoration-none" href="/daftar-materi/{{$id}}">Start Practice</a>
     </div>
     </div>
   </div>

@@ -19,10 +19,12 @@ class AccessQuiz extends Migration
             $table->unsignedBigInteger('praktikan_id');
             $table->unsignedBigInteger('praktikum_id');
             $table->unsignedBigInteger('materi_id');
+            $table->unsignedBigInteger('latihan_id');
             $table->timestamps();
             $table->foreign('praktikan_id')->references('id_praktikan')->on('praktikans')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('praktikum_id')->references('id_praktikum')->on('praktikums')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('materi_id')->references('id_materi')->on('materis')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('latihan_id')->references('id_latihan')->on('latihans')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

@@ -17,6 +17,7 @@ class CreateLatihansTable extends Migration
             $table->bigIncrements('id_latihan');
             // $table->unsignedBigInteger('praktikum_id');
             $table->unsignedBigInteger('materi_id');
+            $table->text('nama_latihan');
             $table->text('soal');
             $table->string('jawaban');
             $table->string('kisi_kisi');

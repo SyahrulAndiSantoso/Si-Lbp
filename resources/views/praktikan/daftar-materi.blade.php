@@ -3,48 +3,56 @@
 @section('konten')
 <section>
   <div class="container list-wrapper">
-    <div class="materi-link">
-      <i class="bx bxs-lock-open-alt"></i>
-      <img src="{{ asset('assets/img/bg-list-materi.svg') }}" alt="" srcset="" />
-      <p>Perintah Keluaran & Masukan</p>
-      <i class="bx bxs-chevron-down down-arrow"></i>
-    </div>
-    <div class="list-materi">
-      <div class="materi">
-        <p>Menggunakan Perintah Keluaran Cout</p>
-      </div>
-      <div class="materi">
-        <p>Menggunakan Perintah Keluaran Printf</p>
-      </div>
-    </div>
+ 
+      @foreach($materi as $row)
+        
+      <div class="materi-link">
+        @php
+          $isDisable = ($quiz->materi_id >= $row->id_materi)?  "bx bxs-lock-open-alt" : "bx bxs-lock-alt";
+        @endphp
 
-    <div class="materi-link">
-      <i class="bx bxs-lock-alt"></i>
-      <img src="{{ asset('assets/img/bg-list-materi.svg') }}" alt="" srcset="" />
-      <p>Perulangan & Pengujian</p>
-      <i class="bx bxs-chevron-down down-arrow"></i>
-    </div>
-    <div class="materi-link">
-      <i class="bx bxs-lock-alt"></i>
-      <img src="{{ asset('assets/img/bg-list-materi.svg') }}" alt="" srcset="" />
-      <p>Array</p>
-      <i class="bx bxs-chevron-down down-arrow"></i>
-    </div>
-    <div class="materi-link">
-      <i class="bx bxs-lock-alt"></i>
-      <img src="{{ asset('assets/img/bg-list-materi.svg') }}" alt="" srcset="" />
-      <p>Fuction & Header</p>
-      <i class="bx bxs-chevron-down down-arrow"></i>
-    </div>
+        <i class="{{$isDisable}}"></i>
+        <img src="{{ asset('assets/img/bg-list-materi.svg') }}" alt="" srcset="" />
+        <p>{{ $row->nama_materi }}</p>
+        <i class="bx bxs-chevron-down down-arrow"></i>
+      </div>
+
+      <div class="list-materi">
+
+        @foreach($latihan as $i)
+          @if($i->materi_id == $row->id_materi)
+            
+          <div class="materi">
+            @if($isDisable == "bx bxs-lock-open-alt")
+                
+                <a href="/materi-praktikum/{{$i->id_latihan}}/{{$row->id_materi}}">{{$i->nama_latihan}}</a>
+            
+            @else
+
+                <a href="#">{{$i->nama_latihan}}</a>
+
+            @endif
+          </div>
+
+          @endif
+        @endforeach
+
+      </div>
+      @endforeach
+ 
   </div>
 </section>
 
 <script>
-  let arrowDown = document.querySelector(".down-arrow");
-let listMateri = document.querySelector(".list-materi");
-arrowDown.addEventListener("click", function () {
-  listMateri.classList.toggle("inactive");
-});
+  let arrowDown = document.querySelectorAll(".down-arrow");
+  let listMateri = document.querySelectorAll(".list-materi");
+  
+for (i = 0; i < arrowDown.length; i++) {
+  arrowDown[i].addEventListener('click', function(i) {
+    listMateri[i].classList.toggle("inactive");
+  }.bind(this, i));  
+}
+
 </script>
 
 @endsection

@@ -14,6 +14,7 @@ class Latihan extends Model
     protected $primaryKey = 'id_latihan';
     protected $fillable = [
         "materi_id",
+        "nama_latihan",
         "soal",
         "jawaban",
         "kisi_kisi",
@@ -37,4 +38,6 @@ class Latihan extends Model
     public function AccessQuiz(){
         return $this->belongsToMany('latihan_id','id_latihan');
     }
+    
+    
 }

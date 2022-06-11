@@ -5,6 +5,7 @@ namespace App\Models;
 use Database\Seeders\latihan;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -40,5 +41,13 @@ class Praktikan extends Authenticatable
     public function praktikum()
     {
         return $this->belongsTo(Praktikum::class, 'praktikum_id', 'id_praktikum');
+    }
+
+    public function getFirstIdMateri($idMateri){
+        return DB:: table('latihans')
+            ->join('materis','latihans.materi_id','=','materis.id_materi')
+            ->select('latihans.id_latihan')
+            ->where('materis.id_materi','=',$idMateri)
+            ->get();
     }
 }

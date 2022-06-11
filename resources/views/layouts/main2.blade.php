@@ -13,6 +13,7 @@
     {{-- bootstrap --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+       
     {{-- my css --}}
     <link rel="stylesheet" href="{{ asset('assets/css/style1.css') }}">
     {{-- Fontawesome Libraries --}}
@@ -23,6 +24,9 @@
   <link rel="stylesheet" href="{{asset('assets/css/vibrant-ink.min.css')}}">
   {{-- Notif Toast Js --}}
     <script src="{{ asset('assets/js/iziToast.min.js') }}"></script>
+    
+    {{-- chartjs --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
      {{-- Notif Toast Css --}}
     <link rel="stylesheet" href="{{ asset('assets/css/iziToast.min.css') }}">
     <title>{{ $judul }}</title>
@@ -64,7 +68,7 @@
                       adipisicing elit <br />
                       sed do eiusmod tempor
                     </p>
-                    <button class="btn btn-white mb-3 fw-bold">Let's Join</button>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLScI2n2Ildq94B73Fe5FZcyypqj-FZc-ypBJpzLpzgqEMwAh_A/viewform" class="btn btn-white mb-3 fw-bold">Let's Join</a>
                     </div>
                   </div>
           </nav>

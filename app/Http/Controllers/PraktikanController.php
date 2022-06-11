@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Praktikan;
-use Database\Seeders\praktikan as SeedersPraktikan;
-use App\Models\AccessQuiz;
+use App\Mail\sendMail;
 use App\Models\Materi;
+use App\Models\Latihan;
+use App\Models\Praktikan;
+use App\Models\AccessQuiz;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Auth;
+use Database\Seeders\praktikan as SeedersPraktikan;
+use Illuminate\Support\Facades\Mail;
 
 class PraktikanController extends Controller
 {
@@ -27,25 +31,6 @@ class PraktikanController extends Controller
         return view('admin.praktikan', compact('praktikan', 'judul'));
     }
 
-    public function forgotPassword(Request $request)
-    {
-        $credentials = $request->validate([
-            "email" => "required|email:dns",
-        ]);
-
-
-
-        // $data = Praktikan::select('email')->where('email', $credentials)->get();
-        // dd($data);
-
-        // if ($data == $credentials) {
-        $judul = "Reset Password";
-        return view('praktikan.reset-password', compact('judul'));
-        // } else {
-        //     $judul = "Forgot Password";
-        //     return view('praktikan.forgot-password', compact('judul'));
-        // }
-    }
 
     public function store(Request $request)
     {
@@ -106,13 +91,17 @@ class PraktikanController extends Controller
             'praktikan_id' => $id_praktikan,
             'praktikum_id' => 1,
             'materi_id'    => 1,
+            'latihan_id'   => 1,
         ]);
         // setting default praktikum praktikan ketika awal register
         $awalmateri = Materi::where(['praktikum_id' => 2])->first()->id_materi;
+        $awalLatihan = Praktikan::first()->getFirstIdMateri($awalmateri);
+        
         AccessQuiz::create([
             'praktikan_id' => $id_praktikan,
             'praktikum_id' => 2,
             'materi_id'    => $awalmateri,
+            'latihan_id'   => $awalLatihan[0]->id_latihan,
         ]);
 
         return redirect('/masuk')->with('registrasi berhasil', 'registrasi');
@@ -140,4 +129,36 @@ class PraktikanController extends Controller
         Session::flush();
         return redirect('/masuk')->with('logout', 'logout');
     }
+
+//     public function forgotPassword(){
+//         $judul = "Forgot Password";
+//         return view('praktikan.forgot-password', compact('judul'));   
+//     }
+
+//     public function forgotPasswordStore(Request $request){
+//         $judul = "Reset Password";
+//         $credentials = $request->validate([
+//             "email" => "required|email:dns",
+//         ]);
+
+//         $token = base64_encode(random_bytes(32));
+//         $this->_sendEmail($token);
+    
+//     }
+
+//     public function resetPassword(Request $request){
+
+       
+//     }
+
+//     private function _sendEmail($token){
+
+//         $details =[
+//             'title' => 'mail from LBP',
+//             'body' => 'new password',
+//         ];
+//             Mail::to("emzob8030@gmail.com")->send(new sendMail);
+//             return "Email Send";
+//             // App::make('url')->to('/')
+//     }
 }

@@ -33,21 +33,21 @@ Route::middleware(['guest'])->group(function () {
             'judul' => 'Login'
         ]);
     });
-});
+    
+    Route::get('/daftar', function () {
+        return view('praktikan.registrasi', [
+            "judul" => "Registrasi"
+        ]);
+    });
+    
+    
+    
 
-Route::get('/daftar', function () {
-    return view('praktikan.registrasi', [
-        "judul" => "Registrasi"
-    ]);
+    // Route::get('/forgot-password', [PraktikanController::class, 'forgotPassword'])->name('forgotPassword');
+    // Route::post('/forgot-password-store', [PraktikanController::class, 'forgotPasswordStore']);
+    // Route::get('/reset-password', [PraktikanController::class, 'resetPassword'])->name('resetPassword');
+    
 });
-
-Route::get('/forgot-password', function () {
-    return view('praktikan.forgot-password', [
-        'judul' => 'Forgot Password'
-    ]);
-});
-
-Route::post('/forgot-password', [PraktikanController::class, 'forgotPassword']);
 
 Route::get('/panduan', function () {
     return view('praktikan.panduan', [
@@ -56,12 +56,8 @@ Route::get('/panduan', function () {
 });
 
 Route::middleware(['auth:praktikan'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('praktikan.dashboard_praktikan', [
-            "judul" => "Dashboard"
-        ]);
-    });
-
+   
+    
     Route::get('/daftar-materi', function () {
         return view('praktikan.daftar-materi', [
             'judul' => 'Daftar Materi'
@@ -73,24 +69,19 @@ Route::middleware(['auth:praktikan'])->group(function () {
             "judul" => "Pengaturan Akun"
         ]);
     });
-
+    
     // ---------------- Quiz ---------------------
+    Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/praktikum', [QuizController::class, 'praktikum']);
-    Route::post('/panduan-praktikum/{id}', [QuizController::class, 'PanduanPraktikum']);
-    Route::get('/materi-praktikum/{id}', [QuizController::class, 'MateriPraktikum']);
+    Route::get('/daftar-materi/{id}', [QuizController::class, 'daftarMateri']);
+    Route::post('/panduan-praktikum', [QuizController::class, 'PanduanPraktikum']);
+    Route::get('/materi-praktikum/{idLatihan}/{idMateri}', [QuizController::class, 'MateriPraktikum']);
     Route::get('/pengerjaan-soal/{id}', [QuizController::class, 'PengerjaanSoal']);
     Route::get('/cek-jawaban', [QuizController::class, 'cekJawaban'])->name('CekJawaban');
     Route::get('validasi-jawaban', [QuizController::class, 'ValidasiJawaban'])->name('ValidasiJawaban');
     Route::get('ChangeMateri', [QuizController::class, 'ChangeMateri'])->name('ChangeMateri');
 });
 
-
-
-// Route::get('/admin/pelajaran', function () {
-//     return view('admin.pelajaran', [
-//         'judul' => 'Pelajaran'
-//     ]);
-// });
 
 Route::middleware(['auth:admin'])->group(function () {
     Route::get('/admin/dashboard', function () {

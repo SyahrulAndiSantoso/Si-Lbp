@@ -8,7 +8,8 @@ use App\Models\Praktikan;
 use App\Models\AccessQuiz;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
+
 
 class QuizController extends Controller
 {
@@ -18,30 +19,36 @@ class QuizController extends Controller
 		return view('praktikan.praktikum', compact('judul'));
 	}
 
-	public function PanduanPraktikum($id_praktikum)
+	public function PanduanPraktikum(Request $request)
 	{
 		$judul = 'Panduan Praktikum';
-		$JudulPanduan = ($id_praktikum == 1) ? "Pemrograman Terstruktur" : "Struktur Data"; // mengecek judul panduan berdasarkan id pada parameter
-		$id_praktikan = request()->id_praktikan;
-		$AQ = AccessQuiz::first()->Quiz($id_praktikan, $id_praktikum); // mendapatkan access quiz dengan idpraktikan dan idpraktikum
-		$AQ = $AQ[0]; //membuka array dari AQ[0] jadi AQ
-
-		return view('praktikan.panduan-praktikum', compact('judul', 'JudulPanduan', 'AQ'));
+		$id = $request->praktikumId;
+		return view('praktikan.panduan-praktikum', compact('judul','id') );
 	}
 
-	public function MateriPraktikum($id)
+	public function daftarMateri($id){
+		$judul = 'Daftar Materi';
+		$materi = AccessQuiz::getAllMateri($id);
+		$latihan = Latihan::all();
+		$idPraktikan = Auth::guard('praktikan')->user()->id_praktikan;
+		$quiz = AccessQuiz::where(['praktikan_id' =>$idPraktikan, 'praktikum_id' => $id])->first();
+
+		return view('praktikan.daftar-materi', compact('judul','materi','latihan','quiz'));
+	}
+
+	public function MateriPraktikum($idLatihan,$idMateri)
 	{
 		$judul = "Materi Praktikum";
-		$materi = Materi::find($id);
-		return view('praktikan.materi', compact('judul', 'materi'));
+		$materi = Materi::find($idMateri);
+		$latihan = Latihan::where(['id_latihan' =>$idLatihan, 'materi_id' => $idMateri])->first();
+
+		return view('praktikan.materi', compact('judul', 'materi','latihan'));
 	}
 
 	public function PengerjaanSoal($id)
 	{
 		$judul = "Pengerjaan Soal";
-		$materi_id = Materi::find($id);
-		$latihan = Latihan::where(['materi_id' => $materi_id['id_materi']])->first();
-		// dd($latihan);
+		$latihan = Latihan::where(['id_latihan' => $id])->first();
 		return view('praktikan.pengerjaan_soal', compact('judul', 'latihan'));
 	}
 
@@ -74,7 +81,11 @@ class QuizController extends Controller
 		$response = curl_exec($curl);
 		curl_close($curl);
 		$hasil = json_decode($response, false);
-		echo $hasil->output;
+		$hasilshow = str_replace("\n","<br>",$hasil->output); //mengganti enter dengan <br>
+		return $result = [
+			'hasil' => $hasil->output,
+			'hasilshow' => $hasilshow
+		];
 	}
 
 	public function cekJawaban(Request $request)
@@ -83,7 +94,9 @@ class QuizController extends Controller
 		$newLine = str_replace(array("\r", "\n"), "\\n", $request->jawaban); //mengganti enter dgn \n
 		$slash   = str_replace("\"", '\\"', $newLine); // mencari " dan mengganti dengan \\"
 		$code    = '"' . $slash . '"'; //menambahkan petik di awal dan akhir
-		$this->compiler($code);
+		$result = $this->compiler($code);
+		return $result;
+		
 	}
 
 	public function ValidasiJawaban(Request $request)
@@ -137,16 +150,22 @@ class QuizController extends Controller
 		// dd($request->all());
 		$idLatihan = AccessQuiz::first()->getIdLatihanFromAccessQuiz($request->idPraktikum, $request->idLatihan, $request->idPraktikan);
 		$idLatihan = $idLatihan[0]->id_latihan; //idLatihan saat ini
-		$allLatihan = AccessQuiz::first()->getAllLatihan($request->idPraktikum); //semua id latihan pada praktikum tertentu
-
+		$allLatihan = AccessQuiz::first()->getAllLatihan($request->idPraktikum); //semua id latihan pada praktikum tertentu cuma buat perulangan
+	
 		foreach ($allLatihan as $row) {
 			if ($idLatihan == end($allLatihan[count($allLatihan) - 1])) {
 				return 0;
 			} else {
 				if ($row->id_latihan == $idLatihan) {
 					$idLatihan = $idLatihan + 1;
-					AccessQuiz::first()->updateLatihanOnUser($request->idPraktikum, $request->idPraktikan, $idLatihan);
-					return $idLatihan;
+					$idMateri = AccessQuiz::getIdMateriFromLatihan($idLatihan);
+					$idMateri = $idMateri[0]->materi_id; //hanya membuka array
+					
+					AccessQuiz::first()->updateLatihanOnUser($request->idPraktikum, $request->idPraktikan, $idMateri ,$idLatihan);
+					return $result = [
+						'idMateri' => $idMateri,
+						'idLatihan' => $idLatihan
+					];
 				}
 			}
 		}

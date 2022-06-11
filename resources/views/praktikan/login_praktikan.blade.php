@@ -58,7 +58,7 @@
                 @enderror
             </div>
         <div class="text-end my-2">
-            <a href="/forgot-password" class="fs-12 text-body" style="text-decoration: none;">Forgot Password ?</a>
+            {{-- <a href="/forgot-password" class="fs-12 text-body" style="text-decoration: none;">Forgot Password ?</a> --}}
         </div>
         <div class="">
             <button type="submit" class="btn w-100 fs-14 fw-bold text-white rounded-5" style="background: #FF7979 ;">Sign</button>

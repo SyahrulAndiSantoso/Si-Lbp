@@ -40,4 +40,6 @@ class Materi extends Model
             ->select('materis.*','praktikums.nama_praktikum')
             ->get();
     }
+
+
 }

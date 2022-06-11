@@ -19,6 +19,7 @@ class AccessQuiz extends Model
         "praktikan_id",
         "praktikum_id",
         "materi_id",
+        "latihan_id",
     ];
 
     public function praktikum(){
@@ -31,6 +32,10 @@ class AccessQuiz extends Model
 
     public function materi(){
         return $this->belongsToMany('materi_id','id_materi');
+    }
+
+    public function latihan(){
+        return $this->belongsToMany('latihan_id','id_latihan');
     }
     
 
@@ -68,11 +73,27 @@ class AccessQuiz extends Model
             ->get();
     }
 
-    public function updateLatihanOnUser($idPraktikum, $idPraktikan, $idbaru){
+    public static function getAllMateri($idPraktikum){
+        return DB:: table('materis')
+            ->select('*')
+            ->where('praktikum_id','=',$idPraktikum)
+            ->get();
+    }
+
+    
+
+    public static function getIdMateriFromLatihan($idLatihan){
+        return DB:: table('latihans')
+            ->select('materi_id')
+            ->where('id_latihan','=',$idLatihan)
+            ->get();
+    }
+
+    public function updateLatihanOnUser($idPraktikum, $idPraktikan,$idMateri ,$idLatihan){
       return  DB::table('access_quiz')
         ->where('praktikan_id', $idPraktikan)
         ->where('praktikum_id', $idPraktikum)
-        ->update(array('materi_id' => $idbaru));
+        ->update(['materi_id' => $idMateri, 'latihan_id' => $idLatihan]);
     }
 }
 

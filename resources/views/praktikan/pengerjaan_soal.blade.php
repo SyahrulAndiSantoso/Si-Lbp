@@ -78,9 +78,10 @@ int main() {
                     datatype: "html", //expected data format from process.php
                     data: $('form').serialize(), //target your form's data and serialize for a POST
                     success: function(result) { // data is the var which holds the output of your process.php
-                        // locate the div with #result and fill it with returned data from process.php
-                        $('#hasil').val(result);
-                        $('#hasil-show').html(result);
+                        // locate the div with #result and fill it with returned data from process.php 
+                        console.log(result);
+                        $('#hasil').val(result.hasil);
+                        $('#hasil-show').html(result.hasilshow);
                         
                     }
                 });
@@ -118,7 +119,7 @@ int main() {
                                 'idPraktikan': result.idPraktikan,
                             },
                             success: function(result) {
-
+                                console.log(result);
                                 if (result == 0) {
                                     iziToast.success({
                                         title: 'Selamat Anda',
@@ -126,7 +127,7 @@ int main() {
                                     });
                                 } else {
                                     window.location.href = "/materi-praktikum/" +
-                                        result;
+                                        result.idLatihan+"/"+result.idMateri;
                                 }
                             }
                         });
