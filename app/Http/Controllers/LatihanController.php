@@ -33,6 +33,7 @@ class LatihanController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+            "nama_latihan" => "required",
             "soal" => "required",
             "jawaban" => "required",
             "praktikum_id" => "required",

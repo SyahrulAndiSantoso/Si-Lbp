@@ -55,10 +55,8 @@
                             <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::guard('admin')->user()->username }}</div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a data-toggle="modal" data-target="#modalPengaturan" class="dropdown-item has-icon">
-                                <i class="fas fa-cog"></i> Pengaturan
-                            </a>
-                            <div class="dropdown-divider"></div>
+                            
+                            {{-- <div class="dropdown-divider"></div> --}}
                             <form action="/admin/logout" method="POST">
                                 @csrf
                                 <button class="dropdown-item has-icon text-danger">

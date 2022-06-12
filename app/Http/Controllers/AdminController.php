@@ -34,6 +34,7 @@ class AdminController extends Controller
      */
     public function prosesLogin(Request $request)
     {
+
         $this->validate($request, [
         'username' => 'required',
         'password' => 'required'

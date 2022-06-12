@@ -42,6 +42,13 @@
                     <form action="/latihan/store" method="POST">
                         @csrf
                         <div class="mb-3">
+                            <label class="form-label">nama Latihan</label>
+                            <input class="form-control" name="nama_latihan" id="nama_latihan"  required/>
+                            @error('nama_latihan')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
                             <label class="form-label">Soal</label>
                             <textarea class="form-control" name="soal" id="soal" style="height: 100px" required></textarea>
                             @error('soal')

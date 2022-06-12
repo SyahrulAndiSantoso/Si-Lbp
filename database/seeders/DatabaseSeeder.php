@@ -19,11 +19,11 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
         $this->call([
-            praktikum::class,
-            SeedersMateri::class,
-            latihan::class,
-            praktikan::class,
-            AccessQuiz::class,
+            // praktikum::class,
+            // SeedersMateri::class,
+            // latihan::class,
+            // praktikan::class,
+            // AccessQuiz::class,
             admin::class,
         ]);
     }
