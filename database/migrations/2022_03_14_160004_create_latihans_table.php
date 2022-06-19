@@ -21,6 +21,7 @@ class CreateLatihansTable extends Migration
             $table->text('soal');
             $table->string('jawaban');
             $table->string('kisi_kisi');
+            $table->string('time',255);
             $table->timestamps();
             // $table->foreign('praktikum_id')->references('id_praktikum')->on('praktikums')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('materi_id')->references('id_materi')->on('materis')->onDelete('cascade')->onUpdate('cascade');

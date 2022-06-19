@@ -52,10 +52,11 @@
                             class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                             <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}"
                                 class="rounded-circle mr-1">
-                            <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::guard('admin')->user()->username }}</div>
+                            <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::guard('admin')->user()->username }}
+                            </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            
+
                             {{-- <div class="dropdown-divider"></div> --}}
                             <form action="/admin/logout" method="POST">
                                 @csrf
@@ -87,6 +88,13 @@
                         <li class="menu-header">Pengguna</li>
                         <li class="{{ $judul == 'Praktikan' ? 'active' : '' }}"><a class="nav-link"
                                 href="/admin/praktikan"><i class="fa-solid fa-users"></i> <span>Praktikan</span></a>
+                        </li>
+                        <li class="{{ $judul == 'Jawaban' ? 'active' : '' }}"><a class="nav-link"
+                                href="/admin/jawaban"><i class="fa-solid fa-book"></i> <span>Jawaban</span></a>
+                        </li>
+                        <li class="{{ $judul == 'List Nilai' ? 'active' : '' }}"><a class="nav-link"
+                                href="/admin/listnilai"><i class="fa-solid fa-clipboard-list"></i> <span>List
+                                    Nilai</span></a>
                         </li>
                     </ul>
                 </aside>

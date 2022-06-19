@@ -9,7 +9,7 @@ use App\Models\AccessQuiz;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\Jawaban;
 
 class QuizController extends Controller
 {
@@ -169,5 +169,18 @@ class QuizController extends Controller
 				}
 			}
 		}
+	}
+
+	// simpan otomatis jika waktu selesai
+	public function autoSave(Request $request){
+		$data = [
+			"praktikan_id" =>  Auth::guard('praktikan')->user()->id_praktikan ,
+			"latihan_id" => $request->idLatihan,
+			"jawaban" => $request->jawaban,
+			"hasil" => $request->hasil,
+		];
+		// return $request->all();
+		Jawaban::create($data);
+       
 	}
 }

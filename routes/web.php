@@ -71,7 +71,7 @@ Route::middleware(['auth:praktikan'])->group(function () {
     });
     
     // ---------------- Quiz ---------------------
-    Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name("DashboardPraktikan");
     Route::get('/praktikum', [QuizController::class, 'praktikum']);
     Route::get('/daftar-materi/{id}', [QuizController::class, 'daftarMateri']);
     Route::post('/panduan-praktikum', [QuizController::class, 'PanduanPraktikum']);
@@ -80,6 +80,7 @@ Route::middleware(['auth:praktikan'])->group(function () {
     Route::get('/cek-jawaban', [QuizController::class, 'cekJawaban'])->name('CekJawaban');
     Route::get('validasi-jawaban', [QuizController::class, 'ValidasiJawaban'])->name('ValidasiJawaban');
     Route::get('ChangeMateri', [QuizController::class, 'ChangeMateri'])->name('ChangeMateri');
+    Route::post('/autoSave', [QuizController::class, 'autoSave'])->name('autoSave');
 });
 
 
@@ -110,6 +111,18 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/latihan/delete/{id}', [LatihanController::class, 'delete']);
     Route::get('/latihan/view-edit/{id}', [LatihanController::class, 'viewEdit']);
     Route::post('/latihan/update', [LatihanController::class, 'update']);
+    
+    //------------------- Jawaban --------------------
+    Route::get('/admin/jawaban', [AdminController::class, 'allJawaban'])->name("listJawaban");
+    Route::get('/admin/penilaian/{idpraktikan}/{idlatihan}', [AdminController::class, 'penilaian']);
+    Route::get('/store-nilai', [AdminController::class, 'storeNilai']);
+    
+    // List Nilai
+    Route::get('/admin/listnilai', [AdminController::class, 'listNilai'])->name("listNilai");
+    Route::get('/hapus-nilai/{id}', [AdminController::class, 'hapusNilai']);
+    Route::get('/edit-nilai-view/{id}', [AdminController::class, 'editNilaiView']);
+    Route::post('/edit-nilai', [AdminController::class, 'editNilai']);
+
 
     // ---------------- Praktikum ---------------------
     Route::get('/admin/praktikum', [PraktikumController::class, 'index'])->name("viewPraktikum");

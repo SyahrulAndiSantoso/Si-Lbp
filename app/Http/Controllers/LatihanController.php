@@ -32,13 +32,15 @@ class LatihanController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $validatedData = $request->validate([
             "nama_latihan" => "required",
             "soal" => "required",
             "jawaban" => "required",
             "praktikum_id" => "required",
             "materi_id" => "required",
-            "kisi_kisi" => "required|min:2"
+            "kisi_kisi" => "required|min:2",
+            "time" => "required"
         ]);
         $validatedData['soal'] = strip_tags($request->soal);
         $validatedData['jawaban'] = strip_tags($request->jawaban);
@@ -67,11 +69,13 @@ class LatihanController extends Controller
         $id_latihan = $request->id_latihan;
         $latihan = latihan::FindOrFail($id_latihan);
         $validatedData = $request->validate([
+            "nama_latihan" => "required",
             "soal" => "required",
             "jawaban" => "required",
             "praktikum_id" => "required",
             "materi_id" => "required",
-            "kisi_kisi" => "required|min:2"
+            "kisi_kisi" => "required|min:2",
+            "time" => "required"
         ]);
         $validatedData['soal'] = strip_tags($request->soal);
         $validatedData['jawaban'] = strip_tags($request->jawaban);

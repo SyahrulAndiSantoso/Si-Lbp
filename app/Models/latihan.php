@@ -5,6 +5,8 @@ namespace App\Models;
 use Database\Seeders\praktikan;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+
 
 class Latihan extends Model
 {
@@ -18,6 +20,7 @@ class Latihan extends Model
         "soal",
         "jawaban",
         "kisi_kisi",
+        "time",
     ];
 
     // public function praktikum()
@@ -38,6 +41,13 @@ class Latihan extends Model
     public function AccessQuiz(){
         return $this->belongsToMany('latihan_id','id_latihan');
     }
+
+    // public static function getLatihanWithPraktikum(){
+    //     return DB:: table('access_quiz')
+    //         ->join('latihans','latihans.id_latihan','=','access_quiz.latihan_id')
+    //         ->select('*')
+    //         ->get();
+    // }
     
     
 }
