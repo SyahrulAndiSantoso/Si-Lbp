@@ -84,26 +84,6 @@ class PraktikanController extends Controller
         ]);
         $validatedData['password'] = bcrypt($validatedData['password']);
         Praktikan::create($validatedData);
-
-        // setting default praktikum praktikan ketika awal register
-        $id_praktikan = Praktikan::where(['npm' => $request->npm])->first()->id_praktikan;
-        AccessQuiz::create([
-            'praktikan_id' => $id_praktikan,
-            'praktikum_id' => 1,
-            'materi_id'    => 1,
-            'latihan_id'   => 1,
-        ]);
-        // setting default praktikum praktikan ketika awal register
-        $awalmateri = Materi::where(['praktikum_id' => 2])->first()->id_materi;
-        $awalLatihan = Praktikan::first()->getFirstIdMateri($awalmateri);
-        
-        AccessQuiz::create([
-            'praktikan_id' => $id_praktikan,
-            'praktikum_id' => 2,
-            'materi_id'    => $awalmateri,
-            'latihan_id'   => $awalLatihan[0]->id_latihan,
-        ]);
-
         return redirect('/masuk')->with('registrasi berhasil', 'registrasi');
     }
 
@@ -118,7 +98,6 @@ class PraktikanController extends Controller
             $request->session()->regenerate();
             return redirect()->intended('/dashboard')->with('sukses', 'berhasil');
         }
-
         return redirect()->intended('/masuk')->with('login gagal', 'gagal');
     }
 
@@ -129,36 +108,4 @@ class PraktikanController extends Controller
         Session::flush();
         return redirect('/masuk')->with('logout', 'logout');
     }
-
-//     public function forgotPassword(){
-//         $judul = "Forgot Password";
-//         return view('praktikan.forgot-password', compact('judul'));   
-//     }
-
-//     public function forgotPasswordStore(Request $request){
-//         $judul = "Reset Password";
-//         $credentials = $request->validate([
-//             "email" => "required|email:dns",
-//         ]);
-
-//         $token = base64_encode(random_bytes(32));
-//         $this->_sendEmail($token);
-    
-//     }
-
-//     public function resetPassword(Request $request){
-
-       
-//     }
-
-//     private function _sendEmail($token){
-
-//         $details =[
-//             'title' => 'mail from LBP',
-//             'body' => 'new password',
-//         ];
-//             Mail::to("emzob8030@gmail.com")->send(new sendMail);
-//             return "Email Send";
-//             // App::make('url')->to('/')
-//     }
 }

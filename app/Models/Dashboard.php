@@ -18,19 +18,19 @@ class Dashboard extends Model
             ->get();
     }
 
-    public static function getFinishLatihan($idPraktikum){
-        return DB:: table('access_quiz')
-            ->join('latihans','latihans.id_latihan','=','access_quiz.latihan_id')
-            ->select('latihans.id_latihan')
-            ->where('access_quiz.praktikum_id','=',$idPraktikum)
-            ->get();
-    }
+    // public static function getFinishLatihan($idPraktikum){
+    //     return DB:: table('access_quiz')
+    //         ->join('latihans','latihans.id_latihan','=','access_quiz.latihan_id')
+    //         ->select('latihans.id_latihan')
+    //         ->where('access_quiz.praktikum_id','=',$idPraktikum)
+    //         ->get();
+    // }
 
-    public static function getLatihanNow($idPraktikan,$idPraktikum){
-        return DB:: table('access_quiz')
-            ->select('access_quiz.latihan_id','access_quiz.materi_id')
-            ->where('access_quiz.praktikum_id','=',$idPraktikum)
-            ->where('access_quiz.praktikan_id','=',$idPraktikan)
-            ->get();
-    }
+    // public static function getLatihanNow($idPraktikan,$idPraktikum){
+    //     return DB:: table('access_quiz')
+    //         ->select('access_quiz.latihan_id','access_quiz.materi_id')
+    //         ->where('access_quiz.praktikum_id','=',$idPraktikum)
+    //         ->where('access_quiz.praktikan_id','=',$idPraktikan)
+    //         ->get();
+    // }
 }

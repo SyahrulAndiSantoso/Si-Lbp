@@ -80,8 +80,6 @@
                         </li>
                         <li class="{{ $judul == 'Praktikum' ? 'active' : '' }}"><a class="nav-link"
                                 href="/admin/praktikum"><i class="fa-solid fa-book"></i> <span>Praktikum</span></a></li>
-                        <li class=" {{ $judul == 'Materi' ? 'active' : '' }}"><a class="nav-link"
-                                href="/admin/materi"><i class="fa-solid fa-file-code"></i> <span>Materi</span></a></li>
                         <li class="{{ $judul == 'Latihan' ? 'active' : '' }}"><a class="nav-link"
                                 href="/admin/latihan"><i class="fa-solid fa-clipboard-list"></i>
                                 <span>Latihan</span></a></li>

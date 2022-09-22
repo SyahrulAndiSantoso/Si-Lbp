@@ -41,17 +41,17 @@ class AdminController extends Controller
 
         // $this->validate($request, [
         $validatedData = $request->validate([
-        'username' => 'required',
-        'password' => 'required'
+            'username' => 'required',
+            'password' => 'required'
         ]);
 
         if (Auth::guard('admin')->attempt(['username' => $request->username, 'password' => $request->password])) {
             $request->session()->regenerate();
-        return redirect()->intended('/admin/dashboard')->with('sukses','berhasil');
+            return redirect()->intended('/admin/dashboard')->with('sukses', 'berhasil');
         }
 
-        return redirect()->intended('/admin/login-admin')->with('login gagal','gagal');
-        
+        return redirect()->intended('/admin/login-admin')->with('login gagal', 'gagal');
+
         // $username = $request->input('username');
         // $password = $request->input('password');
 
@@ -77,23 +77,26 @@ class AdminController extends Controller
 
     // jawaban
 
-    public function allJawaban(){
+    public function allJawaban()
+    {
         $judul = 'Daftar Jawaban';
         $jawaban = Jawaban::getJawaban();
-        // dd($jawaban);
-        
-        return view("admin.jawaban", compact('judul','jawaban'));
-    }
-    public function penilaian($idpraktikan,$idlatihan){
-        $judul = 'Penilaian';
-        $jawaban = Jawaban::getPenilaian($idpraktikan,$idlatihan);
-        
-        return view("admin.penilaian", compact('judul','jawaban'));
+
+        return view("admin.jawaban", compact('judul', 'jawaban'));
     }
 
-    public function storeNilai(Request $request){
+    public function penilaian($idpraktikan, $idlatihan)
+    {
+        $judul = 'Penilaian';
+        $jawaban = Jawaban::getPenilaian($idpraktikan, $idlatihan);
+
+        return view("admin.penilaian", compact('judul', 'jawaban'));
+    }
+
+    public function storeNilai(Request $request)
+    {
         $data = [
-            'praktikan_id' => $request->praktikan_id ,
+            'praktikan_id' => $request->praktikan_id,
             'praktikum_id' => $request->praktikum_id,
             'latihan_id' => $request->latihan_id,
             'nilai' => $request->nilai,
@@ -103,30 +106,31 @@ class AdminController extends Controller
     }
 
     // list nilai
-    public function listNilai(){
+    public function listNilai()
+    {
         $judul = 'List Nilai';
         $nilai = Nilai::getNilai();
-        // dd($jawaban);
-        
-        return view("admin.list-nilai", compact('judul','nilai'));
+        return view("admin.list-nilai", compact('judul', 'nilai'));
     }
-    
+
     public function hapusNilai($id)
     {
         Nilai::find($id)->delete();
         return redirect()->route('listNilai');
     }
-    
-    public function editNilaiView($id){
+
+    public function editNilaiView($id)
+    {
         $judul = 'Edit Nilai';
         $nilai = Nilai::getNilaiSpecific($id);
         // dd($nilai); 
-        return view("admin.nilai-view",compact('judul','nilai'));
+        return view("admin.nilai-view", compact('judul', 'nilai'));
     }
 
-    public function editNilai(Request $request){
+    public function editNilai(Request $request)
+    {
         $nilai = Nilai::FindOrFail($request->id_nilai);
-       
+
         $data = [
             'praktikan_id' => $request->praktikan_id,
             'praktikum_id' => $request->praktikum_id,

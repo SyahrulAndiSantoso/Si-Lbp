@@ -35,7 +35,7 @@
                                                 <td>{{$row->npm}}</td>
                                                 <td>{{$row->nama_praktikan}}</td>
                                                 <td>{{$row->nama_praktikum}}</td>
-                                                <td>{{$row->nama_materi}}</td>
+                                                <td>{{$row->nama_latihan}}</td>
                                                 <td>{{$row->nilai}}</td>
 
                                                 <td>

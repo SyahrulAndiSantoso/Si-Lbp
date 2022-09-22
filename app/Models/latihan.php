@@ -16,10 +16,9 @@ class Latihan extends Model
     protected $primaryKey = 'id_latihan';
     protected $fillable = [
         "materi_id",
+        "praktikum_id",
         "nama_latihan",
         "soal",
-        "jawaban",
-        "kisi_kisi",
         "time",
     ];
 

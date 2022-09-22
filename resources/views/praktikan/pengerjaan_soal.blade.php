@@ -115,66 +115,6 @@ int main() {
 </script>
 
 <script>
-    // ----------------------- pretest masih belum digunakan
-    // $('#jawab').on('click', function() {
-
-    //         $.ajax({
-    //             method: 'get',
-    //             cache: false,
-    //             url: "{{ route('ValidasiJawaban', ['_token' => csrf_token()]) }}",
-    //             datatype: "html",
-    //             data: $('form').serialize(),
-
-    //             success: function(result) {
-    //                 console.log(result);
-
-    //                 if (result.penanda == 1) {
-    //                     iziToast.success({
-    //                         title: 'Jawaban Benar',
-    //                         message: 'dan Sesuai Ketentuan',
-    //                     });
-    //                     $.ajax({
-    //                         method: 'get',
-    //                         cache: false,
-    //                         url: "{{ route('ChangeMateri') }}",
-    //                         datatype: "html",
-    //                         data: {
-    //                             'idPraktikum': result.idPraktikum,
-    //                             'idLatihan': result.idLatihan,
-    //                             'idPraktikan': result.idPraktikan,
-    //                         },
-    //                         success: function(result) {
-    //                             console.log(result);
-    //                             if (result == 0) {
-    //                                 iziToast.success({
-    //                                     title: 'Selamat Anda',
-    //                                     message: 'Telah Menyelesaikan Praktikum',
-    //                                 });
-    //                             } else {
-    //                                 window.location.href = "/materi-praktikum/" +
-    //                                     result.idLatihan+"/"+result.idMateri;
-    //                             }
-    //                         }
-    //                     });
-
-    //                 } else if (result.penanda == 2) {
-    //                     iziToast.error({
-    //                         title: 'Jawaban Benar,',
-    //                         message: 'Tidak Sesuai Ketentuan',
-    //                         position: 'topRight'
-    //                     });
-    //                 } else {
-    //                     iziToast.error({
-    //                         title: 'Jawaban Salah,',
-    //                         message: 'Silahkan Coba Lagi',
-    //                         position: 'topRight'
-    //                     });
-    //                 }
-
-    //             }
-    //         });
-    //     });
-
     $('#jawab').on('click', function() {
     $.ajax({
             method: 'post',

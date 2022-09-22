@@ -25,18 +25,16 @@ class Jawaban extends Model
         return DB:: table('jawaban')
             ->join('latihans','latihans.id_latihan','=','jawaban.latihan_id')
             ->join('praktikans','praktikans.id_praktikan','=','jawaban.praktikan_id')
-            ->join('materis','materis.id_materi','=','latihans.materi_id')
-            ->join('praktikums','praktikums.id_praktikum','=','materis.praktikum_id')
-            ->select('jawaban.*','praktikans.nama_praktikan','latihans.nama_latihan','materis.nama_materi','materis.praktikum_id','praktikums.nama_praktikum')
+            ->join('praktikums','praktikums.id_praktikum','=','latihans.praktikum_id')
+            ->select('jawaban.*','praktikans.nama_praktikan','latihans.nama_latihan','praktikums.nama_praktikum')
             ->get();
     }
      public static function getPenilaian($idpraktikan,$idlatihan){
         return DB:: table('jawaban')
             ->join('latihans','latihans.id_latihan','=','jawaban.latihan_id')
             ->join('praktikans','praktikans.id_praktikan','=','jawaban.praktikan_id')
-            ->join('materis','materis.id_materi','=','latihans.materi_id')
-            ->join('praktikums','praktikums.id_praktikum','=','materis.praktikum_id')
-            ->select('jawaban.*','praktikans.nama_praktikan','latihans.nama_latihan','materis.nama_materi','latihans.soal','materis.praktikum_id')
+            ->join('praktikums','praktikums.id_praktikum','=','latihans.praktikum_id')
+            ->select('jawaban.*','praktikans.nama_praktikan','latihans.nama_latihan','latihans.soal','latihans.praktikum_id')
             ->where('jawaban.praktikan_id','=',$idpraktikan)
             ->where('jawaban.latihan_id','=',$idlatihan)
             ->get();

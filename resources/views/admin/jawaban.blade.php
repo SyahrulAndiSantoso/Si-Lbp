@@ -22,7 +22,7 @@
                                                 <th>No</th>
                                                 <th>Nama</th>
                                                 <th>praktikum</th>
-                                                <th>Modul</th>
+                                                <th>Latihan</th>
                                                 <th>Jawaban</th>
                                                 <th>Hasil Running</th>
                                                 <th>Aksi</th>
@@ -34,7 +34,7 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{$row->nama_praktikan}}</td>
                                                 <td>{{$row->nama_praktikum}}</td>
-                                                <td>{{$row->nama_materi}}</td>
+                                                <td>{{$row->nama_latihan}}</td>
                                                 <td>{{$row->jawaban}}</td>
                                                 <td>{{$row->hasil}}</td>
 

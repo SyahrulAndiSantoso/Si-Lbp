@@ -56,14 +56,6 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Jawaban</label>
-                        <textarea class="form-control" name="jawaban" id="jawaban" style="height: 100px"
-                            required></textarea>
-                        @error('jawaban')
-                        <div class="text-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
                         <label class="form-label">Praktikum</label>
                         <select class="form-control" id="praktikum_id" name="praktikum_id">
                             @foreach ($data_praktikum as $row)
@@ -72,26 +64,9 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Materi</label>
-                        <select class="form-control" id="materi_id" name="materi_id">
-                            @foreach ($data_materi as $row)
-                            <option value="{{ $row->id_materi }}">{{ $row->nama_praktikum }} || {{ $row->nama_materi }}
-                            </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Kisi - kisi</label>
-                        <input type="text" class="form-control @error('kisi_kisi') is-invalid @enderror" id="kisi_kisi"
-                            name="kisi_kisi" value="{{ old('kisi_kisi') }}" required>
-                        @error('kisi_kisi')
-                        <div class="text-danger">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
                         <label class="form-label">Waktu Praktikum</label>
                         <input type="datetime-local" class="form-control @error('time') is-invalid @enderror" id="time"
-                            name="time" value="{{ old('time') }}" required>
+                            name="time" value="{{ old('time') }}" style="width: 10%" required>
                         @error('time')
                         <div class="text-danger">{{ $message }}</div>
                         @enderror
@@ -125,10 +100,7 @@
                                                 <th>No</th>
                                                 <th>Nama Latihan</th>
                                                 <th>Soal</th>
-                                                <th>Jawaban</th>
                                                 <th>Praktikum</th>
-                                                <th>Materi</th>
-                                                <th>Kisi - Kisi</th>
                                                 <th>Waktu praktikum Dimulai</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -139,10 +111,7 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{!! $row->nama_latihan !!}</td>
                                                 <td>{!! $row->soal !!}</td>
-                                                <td>{!! $row->jawaban !!}</td>
                                                 <td>{{ $row->nama_praktikum }}</td>
-                                                <td>{{ $row->materi->nama_materi }}</td>
-                                                <td>{{ $row->kisi_kisi }}</td>
                                                 <td>{{ $row-> time}}</td>
                                                 <td>
                                                     <a href="/latihan/delete/{{ $row->id_latihan }}"

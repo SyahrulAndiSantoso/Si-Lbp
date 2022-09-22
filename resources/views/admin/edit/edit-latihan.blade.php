@@ -54,20 +54,6 @@
                                         </select>
                                     </div>
                                     <div class="mb-3">
-                                        <label class="form-label">Materi</label>
-                                        <select class="form-control" id="materi_id" name="materi_id">
-                                            @foreach ($data_materi as $row)
-                                            @if ($row->id_materi == $data->materi_id)
-                                            <option value="{{ $row->id_materi }}" selected>
-                                                {{ $row->nama_materi }}</option>
-                                            @else
-                                            <option value="{{ $row->id_materi }}">{{ $row->nama_materi }}
-                                            </option>
-                                            @endif
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
                                         <label class="form-label">Kisi - kisi</label>
                                         <input type="text" class="form-control" id="kisi_kisi" name="kisi_kisi"
                                             value="{{ old('kisi_kisi', $data->kisi_kisi) }}" required>

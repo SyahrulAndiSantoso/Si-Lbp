@@ -23,8 +23,7 @@ class Nilai extends Model
             ->join('latihans','latihans.id_latihan','=','nilai.latihan_id')
             ->join('praktikans','praktikans.id_praktikan','=','nilai.praktikan_id')
             ->join('praktikums','praktikums.id_praktikum','=','nilai.praktikum_id')
-            ->join('materis','materis.praktikum_id','=','praktikums.id_praktikum')
-            ->select('nilai.*','praktikans.npm','praktikans.nama_praktikan','latihans.nama_latihan','materis.nama_materi','praktikums.id_praktikum','praktikums.nama_praktikum')
+            ->select('nilai.*','praktikans.npm','praktikans.nama_praktikan','latihans.nama_latihan','praktikums.id_praktikum','praktikums.nama_praktikum')
             ->get();
     }
 
@@ -33,8 +32,7 @@ class Nilai extends Model
             ->join('latihans','latihans.id_latihan','=','nilai.latihan_id')
             ->join('praktikans','praktikans.id_praktikan','=','nilai.praktikan_id')
             ->join('praktikums','praktikums.id_praktikum','=','nilai.praktikum_id')
-            ->join('materis','materis.praktikum_id','=','praktikums.id_praktikum')
-            ->select('nilai.*','praktikans.npm','praktikans.nama_praktikan','latihans.nama_latihan','materis.nama_materi','praktikums.id_praktikum','praktikums.nama_praktikum')
+            ->select('nilai.*','praktikans.npm','praktikans.nama_praktikan','latihans.nama_latihan','praktikums.id_praktikum','praktikums.nama_praktikum')
             ->where('id_nilai','=',$id)
             ->get();
     }

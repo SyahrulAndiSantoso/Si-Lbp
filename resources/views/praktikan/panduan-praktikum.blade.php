@@ -2,7 +2,7 @@
 
 
 @section('konten')
-    
+
 <section>
   <div class="container practice-wrapper">
     <div class="practice">
@@ -16,8 +16,8 @@
         </p>
       </div>
       <div>
-        <a class="btn-start text-decoration-none" href="/daftar-materi/{{$id}}">Start Practice</a>
-    </div>
+        <a class="btn-start text-decoration-none" href="/latihan/{{$id}}">Start Practice</a>
+      </div>
     </div>
   </div>
 </section>
