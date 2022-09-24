@@ -18,7 +18,7 @@
                                     <h4>Total Praktikan</h4>
                                 </div>
                                 <div class="card-body">
-                                    {{-- {{$praktikan}} --}}
+                                    {{$praktikan}}
                                 </div>
                             </div>
                         </div>
@@ -30,10 +30,10 @@
                             </div>
                             <div class="card-wrap">
                                 <div class="card-header">
-                                    <h4>Total Pelajaran</h4>
+                                    <h4>Total Praktikum</h4>
                                 </div>
                                 <div class="card-body">
-                                    {{-- {{$materi}} --}}
+                                    {{$praktikum}}
                                 </div>
                             </div>
                         </div>
@@ -48,31 +48,9 @@
                                     <h4>Total Latihan</h4>
                                 </div>
                                 <div class="card-body">
-                                    {{-- {{$latihan}}y --}}
+                                    {{$latihan}}
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-xl-12 col-lg-12">
-                <div class="card shadow mb-4">
-                    <!-- Card Header - Dropdown -->
-                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-dark-blue">Chart</h6>
-                        <div class="dropdown no-arrow">
-                            <a class="dropdown-toggle">
-                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- Card Body -->
-                    <div class="card-body">
-                        <div class="chart-area">
-                            <canvas id="myAreaChart"></canvas>
                         </div>
                     </div>
                 </div>

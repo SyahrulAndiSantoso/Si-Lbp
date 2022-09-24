@@ -81,11 +81,7 @@ Route::middleware(['auth:praktikan'])->group(function () {
 
 
 Route::middleware(['auth:admin'])->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return view('admin.dashboard_admin', [
-            "judul" => "Dashboard Admin"
-        ]);
-    });
+    Route::get('/admin/dashboard', [DashboardController::class, 'dashboardAdmin'])->name('viewDashboard');
 
     Route::get('/admin/praktikan', [PraktikanController::class, 'index'])->name("viewPraktikan");
     Route::post('/praktikan/store', [PraktikanController::class, 'store']);

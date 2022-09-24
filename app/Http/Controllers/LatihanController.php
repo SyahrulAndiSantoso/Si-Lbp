@@ -36,7 +36,6 @@ class LatihanController extends Controller
             "praktikum_id" => "required",
             "time" => "required"
         ]);
-        $validatedData['soal'] = strip_tags($request->soal);
 
         latihan::create($validatedData);
         return back()->with('sukses tambah', 'Menambahkan');
@@ -63,14 +62,10 @@ class LatihanController extends Controller
         $validatedData = $request->validate([
             "nama_latihan" => "required",
             "soal" => "required",
-            "jawaban" => "required",
             "praktikum_id" => "required",
-            "kisi_kisi" => "required|min:2",
             "time" => "required"
         ]);
-        $validatedData['soal'] = strip_tags($request->soal);
-        $validatedData['jawaban'] = strip_tags($request->jawaban);
-        
+
         $latihan->update($validatedData);
         return redirect()->route('viewLatihan')->with('sukses update', 'Mengupdate');
     }

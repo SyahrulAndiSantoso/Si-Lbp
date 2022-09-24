@@ -22,31 +22,18 @@ class Latihan extends Model
         "time",
     ];
 
-    // public function praktikum()
-    // {
-    //     return $this->belongsTo(Praktikum::class, 'praktikum_id', 'id_praktikum');
-    // }
+    public function praktikum()
+    {
+        return $this->belongsTo(Praktikum::class, 'praktikum_id', 'id_praktikum');
+    }
 
     public function materi()
     {
         return $this->belongsTo(materi::class, 'materi_id', 'id_materi');
     }
 
-    // public function praktikan()
-    // {
-    //     return $this->belongsTo(praktikan::class, 'latihan_id', 'id_latihan');
-    // }
-
     public function AccessQuiz(){
         return $this->belongsToMany('latihan_id','id_latihan');
     }
 
-    // public static function getLatihanWithPraktikum(){
-    //     return DB:: table('access_quiz')
-    //         ->join('latihans','latihans.id_latihan','=','access_quiz.latihan_id')
-    //         ->select('*')
-    //         ->get();
-    // }
-    
-    
 }
