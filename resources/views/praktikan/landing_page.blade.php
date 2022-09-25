@@ -5,17 +5,11 @@
 <div class="container pt-md-5 pt-0">
     <div class="row justify-content-center g-0 mt-md-3 mt-0">
         <div class="col-lg-6 col-md-12 col-sm-12 col-12" style="margin-top: 80px;">
-            <h1 class="mt-5 fs-50 lh-70 fw-b my-auto text-yellow">The Next
+            <h1 class="mt-lg-2 mt-md-2 mt-sm-2 mt-5 fs-50 lh-70 fw-b my-auto text-yellow">The Next
                 <span class="text-purple">Generation</span>
                 <p class="mb-3">Praktikum Method <span class="text-purple">LBP</span></p>
             </h1>
-            <p class="fs-14" style="color:#454444; font-weight:400"> Praktikum Pemrograman Terstruktur & Struktur Data
-                Lab
-                Bahasa
-                Pemrograman Menggunakan
-                Bahasa Pemrograman C++. Dilakukan secara Online melalui Website ini Tanpa perlu Melakukan instalasi IDE
-                C++ di local Komputer karena disini sudah tersedia Compiler Online yang bisa digunakan tanpa instalasi
-                terlebih dahulu.
+            <p class="fs-14" style="color:#454444; font-weight:400"> Praktikum Pemrograman Terstruktur & Struktur Data Lab Bahasa Pemrograman Menggunakan Bahasa Pemrograman C++. Dilakukan secara Online melalui Website ini Tanpa perlu Melakukan instalasi IDE C++ di local Komputer karena disini sudah tersedia Compiler Online yang bisa digunakan tanpa instalasi terlebih dahulu.
             </p>
 
             <div class="row justify-content-lg-start justify-content-sm-center">

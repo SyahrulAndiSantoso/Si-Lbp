@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use App\Models\Nilai;
-use App\Models\Materi;
 use App\Models\Latihan;
 use App\Models\Praktikan;
 use App\Models\Jawaban;
@@ -25,11 +24,7 @@ class AdminController extends Controller
 
         return view('admin.login_admin', compact('judul'));
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function prosesLogin(Request $request)
     {
 

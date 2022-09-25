@@ -40,13 +40,6 @@ Route::middleware(['guest'])->group(function () {
         ]);
     });
 
-
-
-
-    // Route::get('/forgot-password', [PraktikanController::class, 'forgotPassword'])->name('forgotPassword');
-    // Route::post('/forgot-password-store', [PraktikanController::class, 'forgotPasswordStore']);
-    // Route::get('/reset-password', [PraktikanController::class, 'resetPassword'])->name('resetPassword');
-
 });
 
 Route::get('/panduan', function () {
@@ -64,11 +57,8 @@ Route::middleware(['auth:praktikan'])->group(function () {
         ]);
     });
 
-    Route::get('/pengaturan', function () {
-        return view('praktikan.pengaturan', [
-            "judul" => "Pengaturan Akun"
-        ]);
-    });
+    Route::post('/profile', [PraktikanController::class, 'viewProfile']);
+    Route::post('/update-profile', [PraktikanController::class, 'updateProfile'])->name("updateProfile");
 
     // ---------------- Quiz ---------------------
     Route::get('/dashboard', [DashboardController::class, 'index'])->name("DashboardPraktikan");
@@ -121,13 +111,11 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::post('/admin/praktikum/store', [PraktikumController::class, 'store']);
     Route::post('/admin/praktikum/update', [PraktikumController::class, 'update']);
     Route::delete('/admin/praktikum/delete/{number}', [PraktikumController::class, 'destroy']);
-    // Route::get('/admin/praktikum/delete/{number}', [PraktikumController::class, 'destroy']);
     Route::get('/admin/edit-praktikum/{id}', [PraktikumController::class, 'edit']);
 });
 
 // ---------------- DASHBOARD ---------------
 Route::get('/admin/login-admin', [AdminController::class, 'index'])->name("login")->middleware('guest');
-// Route::get('/admin/login', [AdminController::class, 'index'])->name('login.admin');
 Route::post('/admin/login', [AdminController::class, 'prosesLogin']);
 Route::post('/admin/logout', [AdminController::class, 'logout']);
 
@@ -138,5 +126,4 @@ Route::post('/praktikan/register', [PraktikanController::class, 'register']);
 
 
 // --------- CKEditor ------------------------
-// route upload image
 Route::post('CKeditor/upload', [CKeditorController::class, 'upload'])->name('Ckeditor.upload');

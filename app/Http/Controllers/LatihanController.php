@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Praktikum;
 use App\Models\latihan;
-use App\Models\Materi;
 use App\Models\Kisi_Kisi;
 
 use Illuminate\Http\Request;

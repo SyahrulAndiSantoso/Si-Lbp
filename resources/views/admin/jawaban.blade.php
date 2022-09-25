@@ -10,8 +10,6 @@
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="text-dark">Hasil Jawaban Praktikum</h4>
-                                {{-- <a data-toggle="modal" data-target="#modalTambah" style="cursor:pointer"
-                                    class="btn btn-success text-white ml-auto">Tambah</a> --}}
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -40,7 +38,7 @@
 
                                                 <td>
                                                     <a href="/admin/penilaian/{{$row->praktikan_id}}/{{$row->latihan_id}}"
-                                                        class=" btn btn-secondary" id="inputNilai">Penilaian</a>
+                                                        class=" btn btn-success" id="inputNilai">Penilaian</a>
                                                 </td>
                                             </tr>
                                             @endforeach

@@ -49,7 +49,11 @@
                       <a href="/dashboard" class="text-decoration-none text-dark"><img src="{{ asset('assets/img/home.png') }}" alt="" width="15px" class="me-3">Home</a>
                   </li>
                   <li>
-                      <a href="#" class="text-decoration-none text-dark"><img src="{{ asset('assets/img/profile.png') }}" alt="" width="15px" class="me-3">Profile</a>
+                    <form action="/profile" method="POST">
+                      @csrf
+                      <input type="hidden" name="id_praktikan" value="{{ Auth::guard('praktikan')->user()->id_praktikan }}">
+                      <button type="submit" class="py-2 w-100 btn text-start text-decoration-none text-dark shadow-none" style="padding: 0"><img src="{{ asset('assets/img/profile.png') }}" alt="" width="15px" class="ms-2" style="margin-right: 17px">Profile</button>
+                    </form>
                   </li>
                   <li>
                       <a href="/praktikum" class="text-decoration-none text-dark"><img src="{{ asset('assets/img/practice.png') }}" alt="" width="15px" class="me-3">Practices</a>
@@ -77,7 +81,6 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-tratransparent">
                 <div class="container-fluid">
                     <button type="button" id="sidebarCollapse" class="btn2" style="background-color: transparent;">
-                        <!-- <i class="fas fa-align-left"></i> -->
                         <div class="burger">
                           <span></span>
                           <span></span>
@@ -92,11 +95,12 @@
                         </a>
                       
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="/pengaturan">
-                                        <img class="w-15 me-2"
-                                            src="{{ asset('assets/img/icon-pengaturan.png') }}">
-                                        Pengaturan Akun
-                                    </a>
+                                <li>
+                                    <form action="/profile" method="POST">
+                                      @csrf
+                                      <input type="hidden" name="id_praktikan" value="{{ Auth::guard('praktikan')->user()->id_praktikan }}">
+                                      <button type="submit" class="dropdown-item py-2 px-3 text-start w-100 btn text-decoration-none text-dark shadow-none" style="padding: 0"><img src="{{ asset('assets/img/icon-pengaturan.png') }}" alt="" width="15px" class="w-15" style="margin-right: 11px">Pengaturan Akun</button>
+                                    </form>
                                 </li>
                                 <li><a class="dropdown-item" href="/praktikan/logout">
                                         <img class="w-15 me-2" src="{{ asset('assets/img/icon-keluar.png') }}">
@@ -110,14 +114,7 @@
               </nav>
 
     @yield('konten')
-
-    <!-- <footer class="text-center shadow p-3 mt-2 bg-body">Laboratorium Bahasa Pemrograman</footer> -->
-    {{-- <div class="w-100 bg-white shadow bottom-0">
-        <h6 class="text-center p-3 my-auto">Made With <i class="text-danger fa-solid fa-heart"></i> <span
-                class="text-primary">By Laboratorium Bahasa Pemrograman</span></h6>
-    </div> --}}
-
-    {{-- Notif --}}
+    
     <script src="{{ asset('assets/js/notif.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">

@@ -8,54 +8,59 @@
 
         <div class="row justify-content-center">
 
-            <div class="col-lg-8 col-md-12 col-sm-12 col-12">
+            <div class="col-lg-8 col-md-8 col-sm-12 col-12">
                 <p class="text-center fs-2 fw-bold mb-5">PANDUAN PENGGUNAAN APLIKASI</p>
             </div>
         </div>
 
         <div class="row justify-content-center">
             <div class="col-lg-8 col-md-12 col-sm-12 col-12">
-                <div class="rounded-pill w-100 h-75 bg-button">
-                    <p class="text-white p-auto py-3 px-3 fw-bold">1. Daftar Akun Jika Belum Memiliki Akun</p>
+                <div class="input-group mb-3">
+                  <span class="input-group-text fs-3 fw-bold bg-button text-white" style="border-radius: 10px 0 0 10px" id="basic-addon1">1</span>
+                    <div class="card form-control" style="border-radius: 0 10px 10px 0">
+                      <div class="card-body fs-18">
+                        Klik Start Now Atau Klik Practices Untuk Masuk Ke Halaman Pilih Praktikum Yang Akan Dikerjakan
+                      </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-lg-8 col-md-12 col-sm-12 col-12">
-                <div class="rounded-pill w-100 h-75 bg-button">
-                    <p class="text-white p-auto py-3 px-3 fw-bold">2. Jika Sudah Memiliki Akun Bisa Login Menggunakan Akun Tersebut</p>
+                <div class="input-group mb-3">
+                    <div class="card form-control" style="border-radius: 10px 0 0 10px">
+                      <div class="card-body fs-18">
+                        Pilih Salah Satu Praktikum Untuk Mengerjakan Soal Yang Sudah Disediakan
+                      </div>
+                    </div>
+                    <span class="input-group-text fs-3 fw-bold bg-button text-white" style="border-radius: 0 10px 10px 0" id="basic-addon1">2</span>
                 </div>
-            </div>
 
-            <div class="col-lg-8 col-md-12 col-sm-12 col-12">
-                <div class="rounded-pill w-100 h-75 bg-button">
-                    <p class="text-white p-auto py-3 px-3 fw-bold">3. Setelah Login Praktikan Dapat Melihat Dashboard praktikan</p>
+                <div class="input-group mb-3">
+                  <span class="input-group-text fs-3 fw-bold bg-button text-white" style="border-radius: 10px 0 0 10px" id="basic-addon1">3</span>
+                    <div class="card form-control" style="border-radius: 0 10px 10px 0">
+                      <div class="card-body fs-18">
+                        Pilih Soal Yang Tersedia Untuk Memulai Mengerjakan Soal
+                      </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-lg-8 col-md-12 col-sm-12 col-12">
-                <div class="rounded-pill bg-button">
-                    <p class="text-white py-lg-3 px-lg-3 py-4 px-4 fw-bold">4. Sebelum Mengerjakan Latihan Praktikan Dapat Memilih Pelajaran terlebih Dahulu Pada Menu Pilihan Pelajaran, Pilih Salah satu</p>
+                <div class="input-group mb-3">
+                    <div class="card form-control" style="border-radius: 10px 0 0 10px">
+                      <div class="card-body fs-18">
+                        Kerjakan Soal Sebelum Batas Waktu Selesai
+                      </div>
+                    </div>
+                    <span class="input-group-text fs-3 fw-bold bg-button text-white" style="border-radius: 0 10px 10px 0" id="basic-addon1">4</span>
                 </div>
-            </div>
 
-            <div class="col-lg-8 col-md-12 col-sm-12 col-12">
-                <div class="rounded-pill bg-button">
-                    <p class="text-white py-lg-3 px-lg-3 py-4 px-4 fw-bold">5. Setelah Memilih Pelajaran Praktikan Akan Masuk Ke Halaman Penjelasan, Jika ingin melanjutkan pilih lanjutkan dan jika tidak pilih kembali</p>
+                <div class="input-group mb-3">
+                  <span class="input-group-text fs-3 fw-bold bg-button text-white" style="border-radius: 10px 0 0 10px" id="basic-addon1">5</span>
+                    <div class="card form-control" style="border-radius: 0 10px 10px 0">
+                      <div class="card-body fs-18">
+                        Klik Running Terlebih Dahulu Sebelum Klik Tombol Jawab, Tombol Jawab Akan Mengakhiri Pengerjaan Soal, Pastikan Tombol Jawab Di Klik Saat Sudah Yakin Akan Jawaban Yang telah Dikerjakan
+                      </div>
+                    </div>
                 </div>
             </div>
-
-            <div class="col-lg-8 col-md-12 col-sm-12 col-12">
-                <div class="rounded-pill bg-button">
-                    <p class="text-white py-lg-3 px-lg-3 py-4 px-4 fw-bold">6. JIka praktikan memilih melanjutkan maka akan masuk ke halaman untuk mengerjakan latihan</p>
-                </div>
-            </div>
-
-            <div class="col-lg-8 col-md-12 col-sm-12 col-12">
-                <div class="rounded-pill bg-button">
-                    <p class="text-white py-lg-3 px-lg-4 px-5 py-5 fw-bold">7. Pada Halaman Pengerjaan terdapat code editor, soal dan juga hasil, jika sudah selesai menjawab soal, tekan jawab untuk mengetahui apakah jawaban benar atau salah, jika benar akan mendapatkan Exp dan jika salah maka tidak akan mendapat Exp</p>
-                </div>
-            </div>
-        </div>
+        </div>   
     </div>
 </div>
 

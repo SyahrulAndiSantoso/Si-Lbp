@@ -56,8 +56,6 @@
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-
-                            {{-- <div class="dropdown-divider"></div> --}}
                             <form action="/admin/logout" method="POST">
                                 @csrf
                                 <button class="dropdown-item has-icon text-danger">
@@ -97,7 +95,6 @@
                     </ul>
                 </aside>
             </div>
-
 
             <!-- Main Content -->
             <div class="main-content">
@@ -175,8 +172,6 @@
         Chart.defaults.global.defaultFontColor = '#858796';
 
         function number_format(number, decimals, dec_point, thousands_sep) {
-            // *     example: number_format(1234.56, 2, ',', ' ');
-            // *     return: '1 234,56'
             number = (number + '').replace(',', '').replace(' ', '');
             var n = !isFinite(+number) ? 0 : +number,
                 prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),

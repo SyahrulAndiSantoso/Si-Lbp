@@ -16,11 +16,6 @@ class PraktikumController extends Controller
         $this->PraktikumModel = new Praktikum();
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('admin.praktikum', [
@@ -29,22 +24,6 @@ class PraktikumController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        // return view('admin/praktikum');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -53,8 +32,6 @@ class PraktikumController extends Controller
             "gambar" => "required|image"
         ]);
 
-        // dd($request);
-
         $validatedData['deskripsi'] = strip_tags($request->deskripsi);
         $validatedData['gambar'] = $request->file('gambar')->store('image-storage');
 
@@ -62,23 +39,6 @@ class PraktikumController extends Controller
         return redirect('/admin/praktikum')->with('sukses tambah', 'Menambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $praktikum = Praktikum::find($id);
@@ -88,13 +48,6 @@ class PraktikumController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request)
     {
         // dd($request->all());
@@ -116,12 +69,6 @@ class PraktikumController extends Controller
         return redirect()->route('viewPraktikum')->with('sukses update', 'Mengupdate');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Request $request, $id)
     {
         if ($request->gambar) {
@@ -130,13 +77,4 @@ class PraktikumController extends Controller
         $this->PraktikumModel->find($id)->delete();
         return redirect()->route('viewPraktikum')->with('sukses hapus', 'Menghapus');
     }
-
-    // public function destroy($id)
-    // {
-    //     // if ($request->gambar) {
-    //     //     Storage::delete($request->gambar);
-    //     // }
-    //     $this->PraktikumModel->find($id)->delete();
-    //     return redirect()->route('viewPraktikum')->with('sukses hapus', 'Menghapus');
-    // }
 }

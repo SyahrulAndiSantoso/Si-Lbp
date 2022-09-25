@@ -59,7 +59,7 @@ class QuizController extends Controller
 		$response = curl_exec($curl);
 		curl_close($curl);
 		$hasil = json_decode($response, false);
-		$hasilshow = str_replace("\n", "<br>", $hasil->output); //mengganti enter dengan <br>
+		$hasilshow = str_replace("\n", "<br>", $hasil->output);
 		return $result = [
 			'hasil' => $hasil->output,
 			'hasilshow' => $hasilshow
@@ -69,9 +69,9 @@ class QuizController extends Controller
 	public function cekJawaban(Request $request)
 	{
 
-		$newLine = str_replace(array("\r", "\n"), "\\n", $request->jawaban); //mengganti enter dgn \n
-		$slash   = str_replace("\"", '\\"', $newLine); // mencari " dan mengganti dengan \\"
-		$code    = '"' . $slash . '"'; //menambahkan petik di awal dan akhir
+		$newLine = str_replace(array("\r", "\n"), "\\n", $request->jawaban);
+		$slash   = str_replace("\"", '\\"', $newLine);
+		$code    = '"' . $slash . '"';
 		$result = $this->compiler($code);
 		return $result;
 	}

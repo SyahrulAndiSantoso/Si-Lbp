@@ -56,7 +56,7 @@
           <div class="col-9 container-fluid justify-content-lg-end">
             <div class="container-fluid col d-flex justify-content-lg-end" style="margin-left: 70px">
               <li class="nav-item dropdown d-flex">
-                <img src="{{ asset('assets/img/profile.svg') }}" width="40px">
+                <img src="{{ asset('assets/img/profile2.png') }}" width="45px">
                 <a class="nav-link text-reset fs-12 fw-bold text-center" href="#" id="navbarDropdownMenuLink"
                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   {{ Auth::guard('praktikan')->user()->nama_praktikan }} <br>
@@ -66,23 +66,24 @@
                   data-bs-toggle="dropdown" aria-expanded="false"><img src="{{ asset('assets/img/down-arrow.svg') }}"
                     id="navbarDropdownMenuLink" alt="arrow" width="20px"></a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <li><a class="dropdown-item" href="/pengaturan">
-                      <img class="w-15 me-2" src="{{ asset('assets/img/icon-pengaturan.png') }}">
-                      Pengaturan Akun
-                    </a>
+                  <li>
+                    <form action="/profile" method="POST">
+                      @csrf
+                      <input type="hidden" name="id_praktikan" value="{{ Auth::guard('praktikan')->user()->id_praktikan }}">
+                        <button type="submit" class="dropdown-item py-2 px-3 fs-6 w-100 btn text-decoration-none text-dark shadow-none" style="padding: 0;">
+                          <img src="{{ asset('assets/img/icon-pengaturan.png') }}" alt="" width="15px" class="w-15" style="margin-right: 11px">Pengaturan Akun</button>
+                    </form>
                   </li>
-                  <li><a class="dropdown-item" href="/praktikan/logout">
-                      <img class="w-15 me-2" src="{{ asset('assets/img/icon-keluar.png') }}">
+                  <li>
+                    <a class="dropdown-item text-start p-0 px-3 py-2" href="/praktikan/logout">
+                      <img class="w-15 me-2 fs-5" src="{{ asset('assets/img/icon-keluar.png') }}">
                       Keluar
                     </a>
                   </li>
                 </ul>
               </li>
             </div>
-
           </div>
-
-          <!-- </div> -->
       </div>
       </ul>
     </div>
@@ -91,18 +92,6 @@
 
 
   @yield('konten')
-
-  <!-- <footer class="text-center shadow p-3 mt-2 bg-body">Laboratorium Bahasa Pemrograman</footer> -->
-  {{-- <div class="w-100 bg-white shadow bottom-0">
-    <h6 class="text-center p-3 my-auto">Made With <i class="text-danger fa-solid fa-heart"></i> <span
-        class="text-primary">By Laboratorium Bahasa Pemrograman</span></h6>
-  </div> --}}
-
-  {{-- Notif --}}
-  {{-- <script src="{{ asset('assets/js/notif.js') }}"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-  </script> --}}
 
   <!-- General JS Scripts -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"

@@ -2,39 +2,92 @@
 
 @section('konten')
 
-<div class="container d-flex justify-content-center w-100">
-    <div class="card w-75 rounded-10">
-        <div class="card-header bg-button">
-            <h3 class="text-center text-white">Pengaturan Akun</h3>
-        </div>
-        <div class="card-body">
-            <form action="" method="POST">
-                <div class="mb-3">
-                    <label class="form-label">Nama</label>
-                    <input type="text" name="nama" id="nama" class="form-control rounded-10" placeholder="Revie Nur Arsena">
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Password</label>
-                    <input type="password" name="password" id="password"  class="form-control rounded-10" placeholder="***********">
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">No Telepon</label>
-                    <input type="number" name="no_telp" id="no_telp" class="form-control rounded-10" placeholder="08123456789">
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Email</label>
-                    <input type="email" name="email" id="email" class="form-control rounded-10" placeholder="Revie@gmail.com">
-                </div>
-
-                <div class="mb-3">
-                    <button type="submit" class="btn bg-button rounded-10 p-2 text-white w-100 fs-5 shadow-sm">Ubah</button>
-                </div>
-            </form>
-        </div>
-    </div>
+@if (session()->has('sukses tambah'))
+<div class="flash-data" data-flashdata="{{ session('sukses tambah') }}" data-halaman="pengaturan">
 </div>
+@elseif(session()->has('sukses update'))
+<div class="flash-data" data-flashdata="{{ session('sukses update') }}" data-halaman="pengaturan">
+</div>
+@elseif(session()->has('sukses hapus'))
+<div class="flash-data" data-flashdata="{{ session('sukses hapus') }}" data-halaman="pengaturan">
+</div>
+@endif
+
+{{-- Notif Gagal --}}
+@error('nama_praktikum')
+<div class="flash-data" data-flashdata="Gagal" data-halaman="pengaturan">
+</div>
+@enderror
+
+@error('gambar')
+<div class="flash-data" data-flashdata="Gagal" data-halaman="pengaturan">
+</div>
+@enderror
+
+@error('deskripsi')
+<div class="flash-data" data-flashdata="Gagal" data-halaman="pengaturan">
+</div>
+@enderror
+
+<div class="row justify-content-between">
+        <div class="col-lg-3 col-5 text-end">
+            <img class="" src="{{ asset('assets/img/logo-profile.svg') }}" width="100px" alt="">
+        </div>
+        <div class="col-lg-9 col-7 my-auto">
+          <div class="lh-1">
+            <p class="text-start fs-5 fw-bold">Revie Arsena</p>
+            <p class="">Praktikan</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-9">
+          <form action="/update-profile" method="POST">
+            <input type="hidden" id="id_praktikan" name="id_praktikan" value="{{ $data->id_praktikan }}">
+              @csrf
+              <div class="mb-3 mt-3">
+                <label class="form-label">Npm</label>
+                <input type="text" class="form-control rounded-pill @error('npm') is-invalid @enderror" id="npm" name="npm" value="{{ old('npm', $data->npm) }}" required>
+                @error('npm')
+                <div class="text-danger">{{ $message }}</div>
+              @enderror
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Nama</label>
+              <input type="text" class="form-control rounded-pill @error('nama_praktikan') is-invalid @enderror" id="nama_praktikan" name="nama_praktikan" value="{{ old('nama_praktikan', $data->nama_praktikan) }}" required>
+              @error('nama_praktikan')
+              <div class="text-danger">{{ $message }}</div>
+            @enderror
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Nomer Hp</label>
+              <input type="number" class="form-control rounded-pill @error('notelp') is-invalid @enderror" id="notelp" name="notelp" value="{{ old('notelp', $data->notelp) }}" required>
+              @error('notelp')
+              <div class="text-danger">{{ $message }}</div>
+            @enderror
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control rounded-pill @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email', $data->email) }}" required>
+              @error('email')
+              <div class="text-danger">{{ $message }}</div>
+            @enderror
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input type="password" class="form-control rounded-pill @error('password') is-invalid @enderror" id="password" name="password" value="{{ old('password', $data->password) }}" required>
+              @error('npm')
+              <div class="text-danger">{{ $message }}</div>
+            @enderror
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-8 col-md-3 text-center">
+                  <button type="submit" class="btn text-white w-100 rounded-pill" style="background-color: #07689f">Simpan</button>
+                </div>
+            </div>
+          </form>
+        </div>
+      </div>
 
 @endsection

@@ -122,10 +122,7 @@
                                                         <button id="hapus" class="btn btn-danger mr-1"
                                                             onclick="if (confirm('Apakah Anda Yakin Akan Menghapus Data ? ')) confirmDelete({{$p['id_praktikum']}}); return false">Hapus
                                                         </button>
-
                                                     </form>
-                                                    {{-- <a href="/admin/praktikum/delete/{{ $p['id_praktikum'] }}"
-                                                        class="btn btn-danger">Hapus</a> --}}
                                                     <a href="/admin/edit-praktikum/{{ $p['id_praktikum'] }}"
                                                         class="btn btn-warning text-white">Edit</a>
                                                 </td>
@@ -136,11 +133,7 @@
                                 </div>
                             </div>
                         </div>
-
-
-
                     </div>
-
                 </div>
             </div>
         </div>

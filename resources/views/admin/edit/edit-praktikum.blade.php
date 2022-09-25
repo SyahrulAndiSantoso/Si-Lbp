@@ -9,7 +9,7 @@
                         <div class="col-12 col-md-12 col-lg-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="text-dark">Edit Pelajaran</h4>
+                                    <h4 class="text-dark">Edit Praktikum</h4>
                                 </div>
                                 <div class="card-body">
                                     <form action="/admin/praktikum/update" method="POST" enctype="multipart/form-data">

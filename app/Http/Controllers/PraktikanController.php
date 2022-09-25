@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Mail\sendMail;
-use App\Models\Materi;
 use App\Models\Latihan;
 use App\Models\Praktikan;
 use App\Models\AccessQuiz;
@@ -15,6 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Database\Seeders\praktikan as SeedersPraktikan;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Crypt;
 
 class PraktikanController extends Controller
 {
@@ -62,8 +62,39 @@ class PraktikanController extends Controller
             "email" => "required|email:dns",
             "password" => "required|min:8"
         ]);
+        
+        if($data->password != $request->password){
+            $validatedData['password'] = bcrypt($request->password);
+        }
+
         $data->update($validatedData);
         return redirect()->route('viewPraktikan')->with('sukses update', 'Mengupdate');
+    }
+
+    public function viewProfile(Request $request)
+    {
+        $judul = 'Profile';
+        $data = Praktikan::find($request->id_praktikan);
+        return view('praktikan.pengaturan',  compact('judul', 'data'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $data = Praktikan::find($request->id_praktikan);
+        $validatedData = $request->validate([
+            "npm" => "required|min:13|max:30",
+            "nama_praktikan" => "required|min:3",
+            "notelp" => "required|min:10|max:13",
+            "email" => "required",
+            "password" => "required|min:8"
+        ]);
+        
+        if($data->password != $request->password){
+            $validatedData['password'] = bcrypt($request->password);
+        }
+
+        $data->update($validatedData);
+        return redirect()->route('DashboardPraktikan')->with('sukses update', 'Mengupdate');
     }
 
     public function delete($id)
@@ -80,7 +111,7 @@ class PraktikanController extends Controller
             'nama_praktikan' => 'required|min:5',
             'password' => 'required|min:8',
             'notelp' => 'required|min:10|max:13',
-            'email' => 'required|email:dns'
+            'email' => 'required'
         ]);
         $validatedData['password'] = bcrypt($validatedData['password']);
         Praktikan::create($validatedData);

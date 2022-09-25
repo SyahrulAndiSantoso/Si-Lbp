@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Materi;
 use App\Models\Latihan;
 use App\Models\Dashboard;
 use App\Models\Praktikan;

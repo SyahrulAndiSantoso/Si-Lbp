@@ -12,8 +12,11 @@
       <div class="">
         <div class="row">
           <div class="col-md-6 col-12 px-5 py-4">
-            <h5 class="card-title fw-bold">Hello, Welcome Back Revie Arsena</h5>
-            <p>Lets start your New Practice</p>
+            <h5 class="card-title fw-bold ">Hello, Welcome Back Revie Arsena</h5>
+            <div class="mt-3" style="line-height: 15px">
+              <p>Lets start your New Practice</p>
+              <p>Please read the <a href="/panduan" class="text-decoration-none">guide</a> first</p>
+            </div>
             <a href="/praktikum" class="btn btn-dark px-4 mt-3">Start Now</a>
           </div>
           <div class="col-6 none">
@@ -29,73 +32,5 @@
 </div>
 </div>
 </div>
-
-{{-- <script>
-  const labels = [
-
-  ];
-
-  const data = {
-  labels: [
-  
-  ],
-  datasets: [{
-    label: 'Pemrograman Terstruktur',
-    data: [ ],
-    backgroundColor: [
-      'rgb(50, 144, 237)',
-      'rgb(119, 181, 242)',
-    ],
-    hoverOffset: 2
-  }]
-};
-
-  const config = {
-    type: 'doughnut',
-    data: data,
-    options: {}
-  };
-
-  const petruk = new Chart(
-    document.getElementById('Petruk'),
-    config
-  );
-
-</script>
-
-<script>
-  const labels1 = [
-
-  ];
-
-  const data1 = {
-  labels: [
-  
-  ],
-  datasets: [{
-    label: 'Struktur Data',
-    data: [ ],
-    backgroundColor: [
-      'rgb(50, 144, 237)',
-      'rgb(119, 181, 242)', 
-    ],
-    hoverOffset: 2
-  }]
-};
-
-  const config1 = {
-    type: 'doughnut',
-    data: data1,
-    options: {}
-  };
-
-  const strukdat = new Chart(
-    document.getElementById('Strukdat'),
-    config1
-  );
-</script>
---}}
-
-
 
 @endsection
