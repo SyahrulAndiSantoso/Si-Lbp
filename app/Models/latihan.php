@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use Database\Seeders\praktikan;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+
 
 class Latihan extends Model
 {
@@ -12,11 +15,11 @@ class Latihan extends Model
     protected $table = 'latihans';
     protected $primaryKey = 'id_latihan';
     protected $fillable = [
-        "praktikum_id",
         "materi_id",
+        "praktikum_id",
+        "nama_latihan",
         "soal",
-        "jawaban",
-        "kisi_kisi",
+        "time",
     ];
 
     public function praktikum()
@@ -29,8 +32,8 @@ class Latihan extends Model
         return $this->belongsTo(materi::class, 'materi_id', 'id_materi');
     }
 
-    public function kisi_kisi()
-    {
-        return $this->hasMany(Kisi_Kisi::class, 'kisi_kisi_id', 'id_kisi_kisi');
+    public function AccessQuiz(){
+        return $this->belongsToMany('latihan_id','id_latihan');
     }
+
 }

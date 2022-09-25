@@ -1,13 +1,18 @@
 <script>
-    ClassicEditor
-        .create(document.querySelector('#soal'))
-        .catch(error => {
-            console.error(error);
-        });
-    ClassicEditor
-        .create(document.querySelector('#jawaban'))
-        .catch(error => {
-            console.error(error);
-        });
-
+    CKEDITOR.replace('soal', {
+        filebrowserUploadUrl: "{{ route('Ckeditor.upload', ['_token' => csrf_token()]) }}",
+        filebrowserUploadMethod: 'form',
+    });
+    // CKEDITOR.replace('jawaban', {
+    //     filebrowserUploadUrl: "{{ route('Ckeditor.upload', ['_token' => csrf_token()]) }}",
+    //     filebrowserUploadMethod: 'form',
+    // });
+    CKEDITOR.replace('isi_materi', {
+        filebrowserUploadUrl: "{{ route('Ckeditor.upload', ['_token' => csrf_token()]) }}",
+        filebrowserUploadMethod: 'form',
+    });
+    CKEDITOR.replace('deskripsi', {
+        filebrowserUploadUrl: "{{ route('Ckeditor.upload', ['_token' => csrf_token()]) }}",
+        filebrowserUploadMethod: 'form',
+    });
 </script>

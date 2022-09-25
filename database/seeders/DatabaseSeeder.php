@@ -17,12 +17,14 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-        
+
         $this->call([
-            praktikum::class,
+            // SeedersMateri::class,
+            // latihan::class,
+            // AccessQuiz::class,
+            admin::class,
             praktikan::class,
-            SeedersMateri::class,
-            latihan::class,
+            praktikum::class,
         ]);
     }
 }

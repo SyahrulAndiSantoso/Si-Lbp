@@ -15,8 +15,9 @@ class CreatePraktikumsTable extends Migration
     {
         Schema::create('praktikums', function (Blueprint $table) {
             $table->bigIncrements('id_praktikum');
-            $table->string('nama_praktikum',100);
-            $table->string('panduan');
+            $table->string('nama_praktikum', 100);
+            $table->string('deskripsi');
+            $table->string('gambar')->nullable();
             $table->timestamps();
         });
     }

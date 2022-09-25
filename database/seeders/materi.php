@@ -16,10 +16,19 @@ class materi extends Seeder
      */
     public function run()
     {
-        for($i=1; $i<=10;$i++):
+        for($i=1; $i<=4;$i++):
             DB::table('materis')->insert([
-                'praktikum_id' =>$i,
-                'nama_materi' => "coba materi $i",
+                'praktikum_id' => 1,
+                'nama_materi' => "Modul-$i",
+                'isi_materi' => "<p> isi materi $i </p>",
+
+            ]);
+         endfor;
+
+         for($i=1; $i<=4;$i++):
+            DB::table('materis')->insert([
+                'praktikum_id' => 2,
+                'nama_materi' => "Modul-$i",
                 'isi_materi' => "<p> isi materi $i </p>",
 
             ]);

@@ -1,7 +1,32 @@
 @extends('layouts.main')
 
 @section('konten')
+    {{-- Notif Berhasil --}}
+    @if (session()->has('sukses tambah'))
+        <div class="flash-data" data-flashdata="{{ session('sukses tambah') }}" data-halaman="Latihan">
+        </div>
+    @elseif(session()->has('sukses update'))
+        <div class="flash-data" data-flashdata="{{ session('sukses update') }}" data-halaman="Latihan">
+        </div>
+    @elseif(session()->has('sukses hapus'))
+        <div class="flash-data" data-flashdata="{{ session('sukses hapus') }}" data-halaman="Latihan">
+        </div>
+    @endif
+    {{-- Notif Gagal --}}
+    @error('soal')
+        <div class="flash-data" data-flashdata="Gagal" data-halaman="Latihan">
+        </div>
+    @enderror
 
+    @error('jawaban')
+        <div class="flash-data" data-flashdata="Gagal" data-halaman="Latihan">
+        </div>
+    @enderror
+
+    @error('kisi_kisi')
+        <div class="flash-data" data-flashdata="Gagal" data-halaman="Latihan">
+        </div>
+    @enderror
     <!-- Modal Tambah -->
     <div class="modal fade modal-fullscreen" id="modalTambah" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -17,12 +42,18 @@
                     <form action="/latihan/store" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <label class="form-label">Soal</label>
-                            <textarea class="form-control" name="soal" id="soal" style="height: 100px"></textarea>
+                            <label class="form-label">nama Latihan</label>
+                            <input class="form-control" name="nama_latihan" id="nama_latihan" required />
+                            @error('nama_latihan')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Jawaban</label>
-                            <textarea class="form-control" name="jawaban" id="jawaban" style="height: 100px"></textarea>
+                            <label class="form-label">Soal</label>
+                            <textarea class="form-control" name="soal" id="soal" style="height: 100px" required></textarea>
+                            @error('soal')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Praktikum</label>
@@ -33,16 +64,12 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Materi</label>
-                            <select class="form-control" id="materi_id" name="materi_id">
-                                @foreach ($data_materi as $row)
-                                    <option value="{{ $row->id_materi }}">{{ $row->nama_materi }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Kisi - kisi</label>
-                            <input type="text" class="form-control" id="kisi_kisi" name="kisi_kisi">
+                            <label class="form-label">Waktu Praktikum</label>
+                            <input type="datetime-local" class="form-control @error('time') is-invalid @enderror" id="time"
+                                name="time" value="{{ old('time') }}" style="width: 10%" required>
+                            @error('time')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
@@ -71,11 +98,10 @@
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
+                                                    <th>Nama Latihan</th>
                                                     <th>Soal</th>
-                                                    <th>Jawaban</th>
                                                     <th>Praktikum</th>
-                                                    <th>Materi</th>
-                                                    <th>Kisi - Kisi</th>
+                                                    <th>Waktu praktikum Dimulai</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
@@ -83,15 +109,15 @@
                                                 @foreach ($data as $row)
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $row->soal }}</td>
-                                                        <td>{{ $row->jawaban }}</td>
+                                                        <td>{{ $row->nama_latihan }}</td>
+                                                        <td>{!! $row->soal !!}</td>
                                                         <td>{{ $row->praktikum->nama_praktikum }}</td>
-                                                        <td>{{ $row->materi->nama_materi }}</td>
-                                                        <td>{{ $row->kisi_kisi }}</td>
+                                                        <td>{{ $row->time }}</td>
                                                         <td>
                                                             <a href="/latihan/delete/{{ $row->id_latihan }}"
-                                                                class="btn btn-danger">Hapus</a>
-                                                            <a href="/latihan/view-edit/{{ $row->id_latihan }}" class="btn btn-warning text-white">Edit</a>
+                                                                class="btn btn-danger tombol-hapus">Hapus</a>
+                                                            <a href="/latihan/view-edit/{{ $row->id_latihan }}"
+                                                                class="btn btn-warning text-white">Edit</a>
                                                         </td>
                                                     </tr>
                                                 @endforeach

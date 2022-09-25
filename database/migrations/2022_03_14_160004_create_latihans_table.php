@@ -16,13 +16,11 @@ class CreateLatihansTable extends Migration
         Schema::create('latihans', function (Blueprint $table) {
             $table->bigIncrements('id_latihan');
             $table->unsignedBigInteger('praktikum_id');
-            $table->unsignedBigInteger('materi_id');
+            $table->text('nama_latihan');
             $table->text('soal');
-            $table->string('jawaban');
-            $table->string('kisi_kisi');
+            $table->string('time',255);
             $table->timestamps();
             $table->foreign('praktikum_id')->references('id_praktikum')->on('praktikums')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('materi_id')->references('id_materi')->on('materis')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

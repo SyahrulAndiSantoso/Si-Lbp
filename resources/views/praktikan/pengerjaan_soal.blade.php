@@ -1,76 +1,182 @@
-@extends('layouts.main2')
+@extends('layouts.main4')
 
 @section('konten')
 
-<div class="container-fluid">
-    <div class="container pt-5 mb-12">
-        <div class="row justify-content-center">
-            <div class="col-lg-6 col-md-12 col-sm-12 col-12">
-                <form action="" class="w-100 h-102 mt-5">
-                    <label class="fw-bold fs-5" for="">Code Editor</label>
-                    <textarea class="bg-button rounded-10 text-white w-100 h-52 shadow-sm" name="" style="font-family: consolas;">#include<iostream>
-unsing namespace std;
-    
-main() {  
-    
-}</textarea>
-                    <div class="row justify-content-lg-end justify-content-end">
-                        <button data-bs-toggle="modal" data-bs-target="#modalLevel" class="btn bg-button m-3 text-white rounded-5 fs-6 w-25 shadow-sm">Jawab</button>
-                    </div>
-                </form>
-            </div>
+<div class="container-fluid" style="padding: 0px 70px 0px 70px">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-12 col-sm-12 col-12">
+            <input type="hidden" id="timeTemp" value="{{$latihan->time}}">
+            <input type="hidden" id="idLatihan" value="{{$latihan->id_latihan}}">
 
-            <div class="col-lg-5 col-md-12 col-sm-12">
-                <label class="fw-bold fs-5 mt-5">Soal</label>
-                <div class="card w-100 rounded-10 shadow-sm mh-300 h-300">
-
-                    <div class="card-body mh-100 overflow-auto">
-                        <p class="card-text"></p>
-                    </div>
+            <ul id="example">
+                <li>
+                    <span class="days">00</span>
+                </li>
+                <li class="seperator">:</li>
+                <li>
+                    <span class="hours">00</span>
+                </li>
+                <li class="seperator">:</li>
+                <li>
+                    <span class="minutes">00</span>
+                </li>
+                <li class="seperator">:</li>
+                <li>
+                    <span class="seconds">00</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row justify-content-center g-5">
+        <div class="col-lg-7 col-md-12 col-sm-12 col-12">
+            <form action="" class="w-100 h-102 mt-5">
+                <textarea class="rounded-10 px-4 py-4 text-textarea w-100 shadow-sm" name="jawaban" id="jawaban"
+                    style="font-family: consolas; height: 605px; background: #3F3948;">#include<iostream>
+using namespace std;
+                                                
+int main() {  
+    
+    
+    return 0; 
+}
+                        </textarea>
+                <input type="hidden" class="form-control" id="input" name="input">
+                <input type="hidden" class="form-control" id="hasil" name="hasil">
+                <input type="hidden" class="form-control" value="{{ $latihan->id_latihan }}" name="id_latihan">
+                <input type="hidden" class="form-control" name="id_praktikan"
+                    value="{{ Auth::guard('praktikan')->user()->id_praktikan }}">
+                <div class="row justify-content-lg-end justify-content-end">
+                    <button id="tombol" class="btn m-3 text-dark fw-bold rounded-5 fs-6 w-25 shadow-sm"
+                        style="background: #F6EBCF">Running ></button>
+                    <button id="jawab" class="btn m-3 text-white fw-bold rounded-5 fs-6 w-25 shadow-sm"
+                        style="background: #3F3948">Jawab</button>
                 </div>
-                <label class="mt-5 fw-bold fs-5" for="">Hasil</label>
-                <div class="card w-100 rounded-10 shadow-sm mh-300 h-300">
-                    <div class="card-body mh-100 overflow-auto">
-                        <p class="card-text"></p>
-                    </div>
+
+            </form>
+        </div>
+
+        <div class="col-lg-5 col-md-12 col-sm-12">
+            <div class="card w-100 rounded-10 shadow-sm mh-375 h-375 mt-5" style="background: #F6EBCF">
+
+                <div class="card-body mh-100 overflow-auto">
+                    <p class="fw-bold fs-5">Soal</p>
+                    <p class="card-text">{!! $latihan->soal !!}</p>
+                </div>
+            </div>
+            <div class="card w-100 mt-5 rounded-10 shadow-sm mh-200 h-200" style="background: #F6EBCF">
+                <div class="card-body mh-100 overflow-auto">
+                    <p class="fw-bold fs-5">Hasil</p>
+                    <p class="card-text" id="hasil-show"></p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- The Modal -->
-<div class="modal fade" id="modalLevel" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content rounded">
-            <div class="modal-header">
-                <!-- <h5 class="modal-title" id="exampleModalToggleLabel">Modal 1</h5> -->
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p class="fs-3 fw-bold text-center">Selamat Jawaban Anda Benar !!!</p>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-check2 rounded mx-auto d-block w-50" viewBox="0 0 16 16">
-                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
-                </svg>
 
-                <div class="d-flex mb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" style="width: 20px;" fill="currentColor" class="bi bi-chevron-double-up rounded float-start w-15" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M7.646 2.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 3.707 2.354 9.354a.5.5 0 1 1-.708-.708l6-6z" />
-                        <path fill-rule="evenodd" d="M7.646 6.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 7.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z" />
-                    </svg>
-                    <h6 class="my-auto ms-2">Pemrograman Terstruktur Level</h6>
-                </div>
+<script type="text/javascript">
+    $(document).ready(function() {
 
+            $("#tombol").click(function() {
 
+                $("#hasil-show").html("Loading ......");
 
-                <div class="progress w-100 rounded-pill">
-                    <div class="progress-bar bg-warning rounded-pill" role="progressbar" style="width: 10%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-                <br><br><br>
-                <a class="btn btn-primary mt-5 rounded-5 position-absolute bottom-0 end-0 m-3" href="#">Lanjutkan</a>
-            </div>
-        </div>
-    </div>
-</div>
+            });
+
+        });
+
+</script>
+<script>
+    //wait for page load to initialize script
+        $(document).ready(function() {
+            //listen for form submission
+            $('form').on('submit', function(e) {
+                //prevent form from submitting and leaving page
+                e.preventDefault();
+
+                // AJAX 
+                $.ajax({
+                    method: 'get', //type of submit
+                    cache: false, //important or else you might get wrong data returned to you
+                    url: "{{ route('CekJawaban', ['_token' => csrf_token()]) }}", //destination
+                    datatype: "html", //expected data format from process.php
+                    data: $('form').serialize(), //target your form's data and serialize for a POST
+                    success: function(result) { // data is the var which holds the output of your process.php
+                        // locate the div with #result and fill it with returned data from process.php 
+                        console.log(result);
+                        $('#hasil').val(result.hasil);
+                        $('#hasil-show').html(result.hasilshow);
+                        
+                    }
+                });
+            });
+        });
+
+</script>
+
+<script>
+    $('#jawab').on('click', function() {
+    $.ajax({
+            method: 'post',
+            cache: false,
+            url: "{{ route('autoSave') }}",
+            datatype: "html",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                'jawaban' : $("#jawaban").val(),
+                'idLatihan' : $("#idLatihan").val(),
+                'hasil' : $("#hasil").val(),
+      
+            },
+            success: function(result) {
+                console.log(result);
+                window.location.href = "/dashboard";
+             }
+        });
+    });
+
+</script>
+<script type="text/javascript" src="{{ asset('assets/js/jquery.countdown.min.js') }}"></script>
+{{-- auto save jika waktu habis --}}
+<script class="source" type="text/javascript">
+    let now = new Date();
+    let day = now.getDate();
+    let month = now.getMonth() + 1;
+    let year = now.getFullYear() + 1;
+
+    let nextyear = $("#timeTemp").val();
+
+    $("#example").countdown(
+      {
+        date: nextyear, // TODO Date format: 07/27/2017 17:00:00
+        offset: +7, // TODO Your Timezone Offset
+        day: "Day",
+        days: "Days",
+        hideOnComplete: true,
+      },
+      function (container) {
+        alert("Times is Over!");
+       
+        
+        $.ajax({
+            method: 'post',
+            cache: false,
+            url: "{{ route('autoSave') }}",
+            datatype: "html",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                'jawaban' : $("#jawaban").val(),
+                'idLatihan' : $("#idLatihan").val(),
+                'hasil' :  $('#hasil').val()
+      
+            },
+            success: function(result) {
+                console.log(result);
+                window.location.href = "/dashboard";
+             }
+        });
+      }
+    );
+</script>
 
 @endsection
