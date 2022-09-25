@@ -12,7 +12,7 @@ class Praktikum extends Model
     protected $guarded = ['id_praktikum'];
 
     public function latihan(){
-        return $this->hasMany(latihan::class,'praktikum_id','id_praktikum');
+        return $this->hasMany(latihan::class,'latihan_id','id_latihan');
     }
 
     public function AccessQuiz(){
