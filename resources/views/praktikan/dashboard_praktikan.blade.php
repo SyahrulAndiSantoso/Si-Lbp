@@ -12,7 +12,8 @@
       <div class="">
         <div class="row">
           <div class="col-md-6 col-12 px-5 py-4">
-            <h5 class="card-title fw-bold">Hello, Welcome Back Revie Arsena</h5>
+            <h5 class="card-title fw-bold">Hello, Welcome Back {{ Auth::guard('praktikan')->user()->nama_praktikan }}
+            </h5>
             <p>Lets start your New Practice</p>
             <a href="/praktikum" class="btn btn-dark px-4 mt-3">Start Now</a>
           </div>
